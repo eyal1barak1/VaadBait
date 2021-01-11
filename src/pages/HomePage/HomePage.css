@@ -1,0 +1,7 @@
+.homePageTitle{
+    text-align: center;
+}
+
+.homePageTitle > p{
+    text-align: center;  
+}

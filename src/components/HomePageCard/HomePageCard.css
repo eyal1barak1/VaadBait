@@ -1,0 +1,8 @@
+.c-home-page-card{
+    height: 100%;
+}
+
+.c-home-page-card img{
+    height: 200px;
+    object-fit: cover;
+}

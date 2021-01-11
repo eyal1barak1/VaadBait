@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "name": "Shakshuka",
+        "desc": "Eggs dish with tomato sauce",
+        "img": "https://u.a7.org/pictures/828/828603.jpg",
+        "userId": 1
+    },
+    {
+        "id": 2,
+        "name": "Meatballs",
+        "desc": "Balls of meat",
+        "img": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/italian-meatballs-329-horizontal-2-1545406095.jpg",
+        "userId": 1
+    },
+    {
+        "id": 3,
+        "name": "Spicy Shakshuka",
+        "desc": "Eggs dish with tomato sauce",
+        "img": "https://u.a7.org/pictures/828/828603.jpg",
+        "userId": 2
+    },
+    {
+        "id": 4,
+        "name": "Spicy Meatballs",
+        "desc": "Balls of meat",
+        "img": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/italian-meatballs-329-horizontal-2-1545406095.jpg",
+        "userId": 2
+    }
+]

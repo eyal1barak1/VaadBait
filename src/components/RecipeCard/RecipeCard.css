@@ -1,0 +1,13 @@
+
+.c-recipe-card {
+    height: 100%;
+}
+
+.c-recipe-card > .card {
+    height: 100%;
+}
+
+.c-recipe-card > .card img {
+    height: 250px;
+    object-fit: cover;
+}
