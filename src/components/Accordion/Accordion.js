@@ -26,7 +26,7 @@ class Panel extends React.Component {
 
     componentDidMount() {
         window.setTimeout(() => {
-            
+
             const el = ReactDOM.findDOMNode(this);
             const height = el.querySelector('.panel__inner').scrollHeight;
             this.setState({
@@ -35,22 +35,34 @@ class Panel extends React.Component {
         }, 333);
     }
 
+    componentDidUpdate(prevProps) {
+        window.setTimeout(() => {
+
+            const el = ReactDOM.findDOMNode(this);
+            const height = el.querySelector('.panel__inner').scrollHeight;
+            this.setState({
+                height,
+            });
+        }, 333);
+    }
+
+
     messageRead() {
         this.props.activateTab();
         this.setState({ isRead: true })
     }
 
     render() {
-       
+
         const { panel, content, activeTab, index } = this.props;
         const { height, isRead } = this.state;
         const isActive = activeTab === index;
         const innerStyle = { height: `${isActive ? height : 0}px` }
-        
+
         return (
             <div className='panel' role='tabpanel' aria-expanded={isActive}>
-                <ButtonComponent activateTab={this.messageRead} label={panel.props.message.title} isRead={isRead || isActive} />              
-                <div className='panel__inner' style={innerStyle} aria-hidden={!isActive}>               
+                <ButtonComponent activateTab={this.messageRead} label={panel.props.message.title} isRead={isRead || isActive} />
+                <div className='panel__inner' style={innerStyle} aria-hidden={!isActive}>
                     <p className='panel__content'> {panel}</p>
                 </div>
             </div>
@@ -79,7 +91,7 @@ class CustomAccordion extends React.Component {
     }
 
     render() {
-       
+
         const { panels } = this.props;
         const { activeTab } = this.state;
         return (
