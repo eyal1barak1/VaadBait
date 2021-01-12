@@ -1,13 +1,13 @@
 
-.c-recipe-card {
+.c-vote-card {
     height: 100%;
 }
 
-.c-recipe-card > .card {
+.c-vote-card > .card {
     height: 100%;
 }
 
-.c-recipe-card > .card img {
+.c-vote-card > .card img {
     height: 250px;
     object-fit: cover;
 }

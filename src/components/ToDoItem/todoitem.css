@@ -1,0 +1,46 @@
+ .todoitem {
+     position: relative;
+     margin-bottom: 0.25rem;
+     padding: 0.5rem 2rem 0.5rem 0.5rem;
+     border-top: 1px solid #ccc;
+ }
+
+ .todoitem.done .form-check-label {
+     color: #999;
+     text-decoration: line-through;
+ }
+
+ .todoitem.highlight {
+     border-color: #ff2968;
+     background-color: #ff8fb0;
+ }
+
+ .todoitem.highlight:last-child {
+     border-color: #ff2968;
+ }
+
+ .todoitem:last-child {
+     border-bottom: 1px solid #ccc;
+ }
+
+ .todoitem .hover-button {
+     position: absolute;
+     top: 0.5rem;
+     right: 0.5rem;
+ }
+
+ .todoitem .form-check-label {
+     width: 100%;
+ }
+
+ .todoitem .form-check-label .form-check-input {
+     margin-right: 2rem;
+ }
+
+ .todoitem:hover .hover-button {
+     visibility: visible;
+ }
+
+ .todoitem .hover-button {
+     visibility: hidden;
+ }

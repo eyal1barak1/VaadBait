@@ -1,6 +1,14 @@
-
 .p-recipes .heading {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.b-new-message {
+    position: relative; 
+    height: 40px;
+}
+.b-new-message > button{
+    position: absolute;
+    right: 0;
 }

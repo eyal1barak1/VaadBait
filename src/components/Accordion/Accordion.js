@@ -21,10 +21,12 @@ class Panel extends React.Component {
         };
 
         this.messageRead = this.messageRead.bind(this);
+        this.inputRef = React.createRef();
     }
 
     componentDidMount() {
         window.setTimeout(() => {
+            
             const el = ReactDOM.findDOMNode(this);
             const height = el.querySelector('.panel__inner').scrollHeight;
             this.setState({
@@ -33,24 +35,23 @@ class Panel extends React.Component {
         }, 333);
     }
 
-    messageRead(){
+    messageRead() {
         this.props.activateTab();
-        this.setState({isRead: true})
+        this.setState({ isRead: true })
     }
 
     render() {
-        const { label, content, activeTab, index, activateTab } = this.props;
+       
+        const { panel, content, activeTab, index } = this.props;
         const { height, isRead } = this.state;
         const isActive = activeTab === index;
-        const innerStyle = {height: `${isActive ? height : 0}px` }
-
+        const innerStyle = { height: `${isActive ? height : 0}px` }
+        
         return (
             <div className='panel' role='tabpanel' aria-expanded={isActive}>
-                <ButtonComponent activateTab={this.messageRead} label={label} isRead={isRead || isActive} />
-                <div className='panel__inner' style={innerStyle} aria-hidden={!isActive}>
-                    <p className='panel__content'> {content}</p>
-                    <HomePageCard></HomePageCard>
-                    
+                <ButtonComponent activateTab={this.messageRead} label={panel.props.message.title} isRead={isRead || isActive} />              
+                <div className='panel__inner' style={innerStyle} aria-hidden={!isActive}>               
+                    <p className='panel__content'> {panel}</p>
                 </div>
             </div>
         );
@@ -78,13 +79,18 @@ class CustomAccordion extends React.Component {
     }
 
     render() {
-
+       
         const { panels } = this.props;
         const { activeTab } = this.state;
         return (
             <div className='accordion' role='tablist'>
                 {panels.map((panel, index) =>
-                    <Panel key={index} activeTab={activeTab} index={index} {...panel} activateTab={this.activateTab.bind(null, index)} />
+                    <Panel
+                        key={index}
+                        activeTab={activeTab}
+                        index={index}
+                        panel={panel}
+                        activateTab={this.activateTab.bind(null, index)} />
                 )}
             </div>
         );

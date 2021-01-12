@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
-import NewRecipeModal from "../../components/NewRecipeModal/NewRecipeModal";
-import RecipeCard from "../../components/RecipeCard/RecipeCard";
+import NewRecipeModal from "../../components/NewMessageModal/NewMessageModal";
+import RecipeCard from "../../components/MessageCard/MessageCard";
 import HoaNavbr from "../../components/HOANavbar/HOANavbr";
 import './RecipesPage.css'
+import NewMessageModal from "../../components/NewMessageModal/NewMessageModal";
 
 function RecipesPage(props) {
-    const {activeUser, onLogout, recipes, addRecipe} = props;
+    const {activeUser, onLogout, recipes, addMessage} = props;
     const [showModal, setShowModal] = useState(false);
 
     if (!activeUser) {
@@ -30,7 +31,7 @@ function RecipesPage(props) {
                     {recipesView}
                 </Row>
             </Container>
-            <NewRecipeModal show={showModal} handleClose={() => setShowModal(false)} addRecipe={addRecipe}/>
+            <NewMessageModal show={showModal} handleClose={() => setShowModal(false)} addMessage={addMessage}/>
         </div>
     )
 

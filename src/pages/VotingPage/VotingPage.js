@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
-import NewRecipeModal from "../../components/NewRecipeModal/NewRecipeModal";
-import RecipeCard from "../../components/RecipeCard/RecipeCard";
+import NewRecipeModal from "../../components/NewMessageModal/NewMessageModal";
+import VoteCard from "../../components/VoteCard/VoteCard";
 import HoaNavbr from "../../components/HOANavbar/HOANavbr";
 import './VotingPage.css'
+import NewVoteModal from "../../components/NewVoteModal/NewVoteModal";
 
 function VotingPage(props) {
-    const {activeUser, onLogout, recipes, addRecipe} = props;
+    const {activeUser, onLogout, votings, addVote} = props;
     const [showModal, setShowModal] = useState(false);
 
     if (!activeUser) {
@@ -16,21 +17,21 @@ function VotingPage(props) {
 
 
 
-    const recipesView = recipes.map(recipe => <Col key={recipe.id} lg={3} md={6}><RecipeCard recipe={recipe}/></Col>)
+    const voteView = votings.map(vote => <Col key={vote.id} lg={3} md={6}><VoteCard vote={vote}/></Col>)
 
     return (
-        <div className="p-recipes">
+        <div className="p-votes">
             <HoaNavbr activeUser={activeUser} onLogout={onLogout}/>
             <Container>
                 <div className="heading">
                     <h1>{activeUser.fname}'s Recipes</h1>
-                    <Button variant="link" onClick={() => setShowModal(true)}>New Recipe</Button>
+                    <Button variant="link" onClick={() => setShowModal(true)}>New Vote</Button>
                 </div>
                 <Row>
-                    {recipesView}
+                    {voteView}
                 </Row>
             </Container>
-            <NewRecipeModal show={showModal} handleClose={() => setShowModal(false)} addRecipe={addRecipe}/>
+            <NewVoteModal show={showModal} handleClose={() => setShowModal(false)} addVote={addVote}/>
         </div>
     )
 

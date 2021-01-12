@@ -1,61 +1,31 @@
 import { useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
-import NewRecipeModal from "../../components/NewRecipeModal/NewRecipeModal";
-import RecipeCard from "../../components/RecipeCard/RecipeCard";
+import NewMessageModal from "../../components/NewMessageModal/NewMessageModal";
+import MessageCard from "../../components/MessageCard/MessageCard";
 import HoaNavbr from "../../components/HOANavbar/HOANavbr";
 import './MessagesPage.css'
 import CustomAccordion from "../../components/Accordion/Accordion";
+import FilterMessage from "../../components/FilterMessage/FilterMessage";
 
 function MessagesPage(props) {
-    const {activeUser, onLogout, recipes, addRecipe} = props;
+    const { activeUser, onLogout, messages, addMessage } = props;
     const [showModal, setShowModal] = useState(false);
 
     if (!activeUser) {
-        return <Redirect to="/"/>
+        return <Redirect to="/" />
     }
 
-    const panels = [
-        {
-            label: 'Seriously, Don\'t Use Icon Fonts',
-            content: 'Icons are everywhere. These "little miracle workers" (as John Hicks described them) help us reinforce meaning in the interfaces we design and build. Their popularity in web design has never been greater; the conciseness and versatility of pictograms in particular make them a lovely fit for displays large and small. But icons on the web have had their fair share of challenges.',
-        },
-        {
-            label: 'Screen Readers Actually Read That Stuff',
-            content: 'Most assistive devices will read aloud text inserted via CSS, and many of the Unicode characters icon fonts depend on are no exception. Best-case scenario, your "favorite" icon gets read aloud as "black favorite star." Worse-case scenario, it\'s read as "unpronounceable" or skipped entirely.',
-        },	
-        {
-            label: 'They Fail Poorly and Often',
-            content: 'When your icon font fails, the browser treats it like any other font and replaces it with a fallback. Best-case scenario, you\'ve chosen your fallback characters carefully and something weird-looking but communicative still loads. Worse-case scenario (and far more often), the user sees something completely incongruous, usually the dreaded "missing character" glyph.',
-        },
-        {
-            label: 'They\'re a Nightmare if You\'re Dyslexic',
-            content: 'Many dyslexic people find it helpful to swap out a website\'s typeface for something like OpenDyslexic. But icon fonts get replaced as well, which makes for a frustratingly broken experience.',
-        },
-        {
-            label: 'There\'s Already a Better Way',
-            content: 'SVG is awesome for icons! It\'s a vector image format with optional support for CSS, JavaScript, reusability, accessibility and a bunch more. It was made for this sort of thing.'
-        },
-    ];
 
-
-    const recipesView = recipes.map(recipe => <Col key={recipe.id} lg={3} md={6}><RecipeCard recipe={recipe}/></Col>)
+    const messagesView = messages.map(message => <MessageCard message={message} />)
 
     return (
-        <div className="p-recipes">
-            <HoaNavbr activeUser={activeUser} onLogout={onLogout}/>
-            <Button variant="link" onClick={() => setShowModal(true)}>New Recipe</Button>
-            <CustomAccordion panels={panels}></CustomAccordion>
-            <Container>
-                <div className="heading">
-                    <h1>{activeUser.fname}'s Recipes</h1>
-                    
-                </div>
-                <Row>
-                    {recipesView}
-                </Row>
-            </Container>
-            <NewRecipeModal show={showModal} handleClose={() => setShowModal(false)} addRecipe={addRecipe}/>
+        <div className="p-messages">
+            <HoaNavbr activeUser={activeUser} onLogout={onLogout} />
+            <FilterMessage></FilterMessage>
+            <div className="b-new-message"><Button variant="link" onClick={() => setShowModal(true)}>New Message</Button></div>
+            <CustomAccordion panels={messagesView}></CustomAccordion>
+            <NewMessageModal show={showModal} handleClose={() => setShowModal(false)} addMessage={addMessage} />
         </div>
     )
 

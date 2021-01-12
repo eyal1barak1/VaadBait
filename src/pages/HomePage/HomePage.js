@@ -1,7 +1,5 @@
 import { Col, Container, Jumbotron, Row } from "react-bootstrap";
 import HoaNavbr from "../../components/HOANavbar/HOANavbr";
-import image1 from '../../Images/transparency.jpg';
-
 import HomePageCard from "../../components/HomePageCard/HomePageCard";
 
 import "./HomePage.css"
