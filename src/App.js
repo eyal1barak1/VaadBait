@@ -16,8 +16,8 @@ function App() {
   const [users, setUsers] = useState(jsonUsers);        // HACK ALERT: holding all users as state only because this is a JSON based application (no server side)
   const [activeUser, setActiveUser] = useState(jsonUsers[0]);   // During development it's conveient to be logged in by default
   const [messages, setMessages] = useState(jsonMessages);  // HACK ALERT: holding all recipes as state only because this is a JSON based application (no server side)
-  const [votings, setVotings] = useState(jsonMessages);
   const [messageItems, setMessageItems] = useState([]);
+  const [votings, setVotings] = useState(jsonMessages);
   const [reRender, setReRender] = useState(false);
   let date = new Date();
 
@@ -31,7 +31,7 @@ function App() {
   // }
 
 
-
+  //============== loging/logout==================
   function handleLogout() {
     setActiveUser(null);
   }
@@ -40,6 +40,7 @@ function App() {
     setActiveUser(loggedinUser);
   }
 
+  //============== Messages ==================
   function addMessage(title, details, priority, img) {
     const newMessage = {
       id: Date.now(),
@@ -48,6 +49,7 @@ function App() {
       priority,
       img,
       userId: activeUser.id,
+      building: activeUser.building,
       isRead: false,
       date: date,
     }
@@ -55,12 +57,12 @@ function App() {
     setMessages(messages.concat(newMessage));
   }
 
-  function updateMessage(messageId) {
+  function updateMessage(messageId, activeUserId) {
     const found = messages.find(element => element.id === messageId);
     const index = messages.indexOf(found);
     if (index > -1) {
-      messages[index].isRead = true;
-      setMessages(messages);
+      messages[index].isRead.push(activeUserId);
+      setMessages([...messages]);
     }
   }
 
@@ -69,26 +71,12 @@ function App() {
     const index = messages.indexOf(found);
     if (index > -1) {
       messages.splice(index, 1);
-      setMessages(messages);
-      setReRender(!reRender);
+      setMessages([...messages]);
     }
   }
-  const activeUserMessages = activeUser ? messages.filter(message => message.userId === activeUser.id) : [];
+  const activeUserMessages = activeUser ? messages.filter(message => message.building === activeUser.building) : [];
 
-  function addVote(title, details, priority, img) {
-    const newVote = {
-      id: votings[votings.length - 1].id + 1,
-      title,
-      details,
-      priority,
-      img,
-      userId: activeUser.id
-    }
 
-    setVotings(votings.concat(newVote));
-  }
-
-  const activeUserVoting = activeUser ? votings.filter(voting => voting.userId === activeUser.id) : [];
 
   function addMessageItems(newItem) {
     setMessageItems(messageItems.concat(newItem));
@@ -113,7 +101,6 @@ function App() {
         if (nameA > nameB) {
           return 1;
         }
-
         // names must be equal
         return 0;
         // return a.priority.toUpperCase() < b.priority.toUpperCase() ? -1 : 1;
@@ -123,7 +110,32 @@ function App() {
   }
 
 
+  //============== Voting ==================
+  function addVote(title, details, options, endDate) {
+    const newVote = {
+      id: Date.now(),
+      title,
+      details,
+      options,
+      endDate,
+      userId: activeUser.id,
+      building: activeUser.id,
+    }
 
+    setVotings(votings.concat(newVote));
+  }
+
+  const activeUserVoting = activeUser ? votings.filter(voting => voting.building === activeUser.building) : [];
+
+  function updateVote(voteId) {
+
+    const found = votings.find(element => element.id === voteId);
+    const index = votings.indexOf(found);
+    if (index > -1) {
+      votings[index].options = true;
+      setMessages(votings);
+    }
+  }
 
 
   return (
@@ -135,12 +147,16 @@ function App() {
         <Route exact path="/login"><LoginPage activeUser={activeUser} users={users} onLogin={handleLogin} /></Route>
         <Route exact path="/signup"><SignupPage activeUser={activeUser} /></Route>
 
-        <Route exact path="/messages"><MessagesPage activeUser={activeUser} onLogout={handleLogout}
-          messages={activeUserMessages} updateMessage={updateMessage} SortMsg={SortMsg} removeMessage={removeMessage}
-          addMessage={addMessage} addMessageItems={addMessageItems} message_items={messageItems}
-        /></Route>
-        <Route exact path="/voting"><VotingPage activeUser={activeUser} onLogout={handleLogout}
-          votings={activeUserVoting} addVote={addVote} /></Route>
+        <Route exact path="/messages">
+          <MessagesPage activeUser={activeUser} onLogout={handleLogout}
+            messages={activeUserMessages} updateMessage={updateMessage} SortMsg={SortMsg} removeMessage={removeMessage}
+            addMessage={addMessage} addMessageItems={addMessageItems} message_items={messageItems} />
+        </Route>
+
+        <Route exact path="/voting">
+          <VotingPage activeUser={activeUser} onLogout={handleLogout} votings={activeUserVoting} addVote={addVote}
+            updateVote={updateVote} />
+        </Route>
       </Switch>
     </HashRouter>
 

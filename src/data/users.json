@@ -5,7 +5,8 @@
         "lname": "Channes",
         "email": "nir@nir.com",
         "pwd": "123",
-        "role": "committee"
+        "role": "committee",
+        "building":"blue"
     },
     {
         "id": 2,
@@ -13,6 +14,25 @@
         "lname": "Doe",
         "email": "john@john.com",
         "pwd": "123",
-        "role": "tenant"
+        "role": "tenant",
+        "building":"blue"
+    },
+    {
+        "id": 3,
+        "fname": "Sara",
+        "lname": "Doe",
+        "email": "a@a.com",
+        "pwd": "123",
+        "role": "tenant",
+        "building":"red"
+    },
+    {
+        "id": 4,
+        "fname": "Gary",
+        "lname": "Doe",
+        "email": "b@b.com",
+        "pwd": "123",
+        "role": "committee",
+        "building":"red"
     }
 ]

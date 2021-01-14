@@ -57,7 +57,7 @@ class Panel extends React.Component {
         const el = ReactDOM.findDOMNode(this);
         const height = el.querySelector('.panel__inner').scrollHeight;
 
-        this.setState({ height:height });
+        this.setState({ height: height });
     };
 
 
@@ -78,11 +78,11 @@ class Panel extends React.Component {
         const { height, isRead } = this.state;
         const isActive = activeTab === index;
         const innerStyle = { height: `${isActive ? height : 0}px` }
-        
+
         return (
             <div className='panel' role='tabpanel' aria-expanded={isActive}>
-                <ButtonComponent activateTab={this.messageRead} label={panel.props.message.title} 
-                isRead={panel.props.message.isRead || isActive} updateMessage={updateMessage} id={panel.props.message.id}/>
+                <ButtonComponent activateTab={this.messageRead} label={panel.props.message.title}
+                    isRead={panel.props.message.isRead || isActive} updateMessage={updateMessage} id={panel.props.message.id} />
                 <div className='panel__inner' style={innerStyle} aria-hidden={!isActive}>
                     <p className='panel__content'> {panel}</p>
                 </div>
@@ -94,7 +94,7 @@ class Panel extends React.Component {
 
 
 
-class CustomAccordion extends React.Component {
+class CustomAccordion2 extends React.Component {
     constructor(props) {
         super(props);
 
@@ -123,12 +123,44 @@ class CustomAccordion extends React.Component {
                         activeTab={activeTab}
                         index={index}
                         panel={panel}
-                        activateTab={this.activateTab.bind(null, index)} 
-                        updateMessage={updateMessage}/>
+                        activateTab={this.activateTab.bind(null, index)}
+                        updateMessage={updateMessage} />
                 )}
             </div>
         );
     }
+}
+
+
+function CustomAccordion(props) {
+
+    const { panels, updateMessage } = props;
+    const unReadMsgSrc = "https://cdn3.iconfinder.com/data/icons/mailing-2/96/notification_unread_mail_message_96-512.png";
+    const readMsgSrc = "https://icon-library.com/images/read-message-icon/read-message-icon-10.jpg";
+
+    function SetStateOnClick(messageId, activeUserId) {
+        updateMessage(messageId, activeUserId);
+    }
+
+    return (
+        <Accordion variant="success">
+            {panels.map((panel, index) =>
+                <Card key={index}>
+                    <Accordion.Toggle className="accordionHeader"
+                        onClick={() => SetStateOnClick(panel.props.message.id, panel.props.activeUser.id)}
+                        as={Card.Header} eventKey={index.toString()} >
+                        {panel.props.message.title}
+                        <img className="readImage" width="20" height="20"
+                            src={panel.props.message.isRead.includes(panel.props.activeUser.id) ? readMsgSrc : unReadMsgSrc} >
+                        </img>
+                    </Accordion.Toggle>
+                    <Accordion.Collapse eventKey={index.toString()}>
+                        <Card.Body>{panel}</Card.Body>
+                    </Accordion.Collapse>
+                </Card>
+            )}
+        </Accordion>
+    )
 }
 
 export default CustomAccordion;

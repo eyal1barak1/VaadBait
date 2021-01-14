@@ -85,3 +85,14 @@ body {
 .panel:not(:last-child) {
   margin-bottom: 3px;
 }
+
+
+.accordionHeader{
+  position: relative;
+}
+
+.readImage{
+  position: absolute;
+  right: 40px;
+  /* margin-left: 90%; */
+}

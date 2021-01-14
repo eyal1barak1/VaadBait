@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Modal, Form, Col, Row, Image, DropdownButton, Dropdown } from "react-bootstrap";
+import { Button, Modal, Form, Col, Row } from "react-bootstrap";
 
 
 function NewVoteModal(props) {
@@ -22,6 +22,10 @@ function NewVoteModal(props) {
 
         // 2) cleanup (clean all field + close the modal)
         closeModal();
+    }
+
+    function SetEndDate(e){
+        console.log(e);
     }
 
     return (
@@ -55,24 +59,25 @@ function NewVoteModal(props) {
                         </Form.Label>
                         <Col sm={10}>
                             <Form.Control as="select" onChange={e => SetPriority(e.target.value)}>
-                                <option selected> Info</option>
+                                <option > Info</option>
                                 <option >Important</option>
                             </Form.Control>
                         </Col>
                     </Form.Group>
 
-
-                    <Form.Group as={Row} controlId="formHorizontalImage">
+                    <Form.Group as={Row} controlId="formHorizontalEndDate">
                         <Form.Label column sm={2}>
-                            Image URL
+                            End Date
                         </Form.Label>
-                        <Col sm={8}>
-                            <Form.Control type="text" placeholder="Image URL" value={imgURL} onChange={e => setImgURL(e.target.value)} />
-                        </Col>
                         <Col sm={2}>
-                            <Image width="100" height="100" src={imgURL} />
+                            <Form.Control type="date" onChange={e => SetEndDate(e.target.value)}>    
+                            </Form.Control>
                         </Col>
                     </Form.Group>
+
+                    
+
+                    
                 </Form>
 
             </Modal.Body>
