@@ -6,7 +6,8 @@
         "priority": "Info",
         "img": "https://u.a7.org/pictures/828/828603.jpg",
         "userId": 1,
-        "userRole": "Committee"
+        "isRead" : false,
+        "date" : "2023-03-09T22:18:26.625Z"
     },
     {
         "id": 2,
@@ -15,7 +16,8 @@
         "priority": "Info",
         "img": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/italian-meatballs-329-horizontal-2-1545406095.jpg",
         "userId": 1,
-        "userRole": "Committee"
+        "isRead" : false,
+        "date" : "2020-06-09T22:18:26.625Z"
     },
     {
         "id": 3,
@@ -24,7 +26,8 @@
         "priority": "Important",
         "img": "https://u.a7.org/pictures/828/828603.jpg",
         "userId": 2,
-        "userRole": "Tenant"
+        "isRead" : false,
+        "date" : "2020-02-09T22:18:26.625Z"
     },
     {
         "id": 4,
@@ -33,6 +36,7 @@
         "priority": "Info",
         "img": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/italian-meatballs-329-horizontal-2-1545406095.jpg",
         "userId": 2,
-        "userRole": "Tenant"
+        "isRead" : false,
+        "date" : "2018-03-09T22:18:26.625Z"
     }
 ]

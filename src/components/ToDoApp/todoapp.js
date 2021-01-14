@@ -5,10 +5,10 @@ import TodoList from '../ToDoList/todolist'
 import './todoapp.css';
 
 
-function TodoApp() {
-
+function TodoApp(props) {
+  const {message, message_items, addMessageItems} = props;
   const [text, setText] = useState("");
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(message_items);
   const [allitems, setAllItems] = useState([]);
 
 
@@ -21,26 +21,17 @@ function TodoApp() {
     var newItem = {
       id: Date.now(),
       text: text,
-      done: false
+      done: false,
+      messageid: message.id
     };
 
     setItems(items.concat(newItem));
-    setAllItems(allitems.concat(newItem));
+    // setAllItems(allitems.concat(newItem));
     setText("");
+    addMessageItems(newItem);
 
   }
-  function markItemCompleted(itemId) {
-    var updatedItems = items.map(item => {
-      if (itemId === item.id)
-        item.done = !item.done;
-
-      return item;
-    });
-
-    // State Updates are Merged
-    setItems([].concat(updatedItems));
-
-  }
+  
   function handleDeleteItem(itemId) {
     var updatedItems = allitems.filter(item => {
       return item.id !== itemId;
@@ -51,24 +42,10 @@ function TodoApp() {
 
   }
 
-  function filterAll() {
-    setItems([].concat(allitems));
-  }
-
-  function filterActive() {
-    var updatedItems = allitems.filter(item => {
-      return item.done === false;
-    });
-
-    setItems([].concat(updatedItems));
-  }
-  function filterCompleted() {
-    var updatedItems = allitems.filter(item => {
-      return item.done === true;
-    });
-
-    setItems([].concat(updatedItems));
-  }
+  
+  
+  
+  const activeMessageComments = message_items.filter(message_item => message_item.messageid === message.id);
 
   return (
     <div>
@@ -76,7 +53,7 @@ function TodoApp() {
       
       <div className="row">
         <div className="col-md-4">
-          <TodoList items={items} onItemCompleted={markItemCompleted} onDeleteItem={handleDeleteItem} />
+          <TodoList items={activeMessageComments}  onDeleteItem={handleDeleteItem} />
         </div>
       </div>
       <form className="row"> 

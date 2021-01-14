@@ -4,13 +4,15 @@
         "fname": "Nir",
         "lname": "Channes",
         "email": "nir@nir.com",
-        "pwd": "123"
+        "pwd": "123",
+        "role": "committee"
     },
     {
         "id": 2,
         "fname": "John",
         "lname": "Doe",
         "email": "john@john.com",
-        "pwd": "123"      
+        "pwd": "123",
+        "role": "tenant"
     }
 ]

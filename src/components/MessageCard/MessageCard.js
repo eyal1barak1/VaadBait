@@ -1,18 +1,22 @@
-import { Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import TodoApp from '../ToDoApp/todoapp'
 import './MessageCard.css'
 
 
 function MessageCard(props) {
-    const { message } = props;
+    const { message, addMessageItems, message_items, removeMessage, activeUserRole} = props;
+
+    function removeMessageById() {
+        removeMessage(message.id);
+    }
     return (
         <div className="c-message-card">
             <Container fluid>
                 <Row>
-                    <Col sm={8}>
+                    <Col sm={6}>
                         <Row>
                             <Col sm={2}>
-                                <img width="100" height="100" src={message.img} ></img>
+                                <img className="message-image" src={message.img} ></img>
                             </Col>
                             <Col sm={10}>
                                 <div className="message-details">
@@ -28,12 +32,16 @@ function MessageCard(props) {
                         </Row>
                     </Col>
                     <Col sm={4}>
-                        <TodoApp></TodoApp>
+                        <TodoApp message={message} message_items={message_items} addMessageItems={addMessageItems}></TodoApp>
+                    </Col>
+                    <Col style={{ visibility:  activeUserRole === "committee" ? "visible" : "hidden"}} className="message-card-buttons" sm={2}>
+                        <Button className="b-update" variant="info">Update</Button>
+                        <Button onClick={removeMessageById} className="b-delete" variant="danger">Delete</Button>
                     </Col>
                 </Row>
             </Container>
 
-        </div>
+        </div >
     );
 }
 

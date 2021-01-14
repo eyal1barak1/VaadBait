@@ -55,7 +55,7 @@ function NewMessageModal(props) {
                         </Form.Label>
                         <Col sm={10}>
                             <Form.Control as="select" onChange={e => SetPriority(e.target.value)}>
-                                <option selected> Info</option>
+                                <option > Info</option>
                                 <option >Important</option>
                             </Form.Control>
                         </Col>

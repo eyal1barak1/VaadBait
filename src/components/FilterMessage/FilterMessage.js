@@ -1,70 +1,76 @@
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { Container, Row, Col, InputGroup, FormControl, Form, Dropdown, DropdownButton } from 'react-bootstrap';
 import axios from 'axios';
 import "./FilterMessage.css"
 
 
 
-function FilterMessage() {
+function FilterMessage(props) {
 
-    const [ActorsData, setActorsData] = useState([]);
+    const { messages, filterMessages, SortMsg } = props;
+    const [messagesData, setMessagesData] = useState(messages);
     const [filteredText, setFilteredText] = useState("");
-    const filteredActors = ActorsData.filter(actor =>
-        actor.first_name.toLowerCase().includes(filteredText.toLowerCase()) ||
-        actor.last_name.toLowerCase().includes(filteredText.toLowerCase()));
+    const [messageAdded, setMessageAdded] = useState(false);
+    let filteredMessages = messagesData.filter(message =>
+        message.title.toLowerCase().includes(filteredText.toLowerCase()) ||
+        message.details.toLowerCase().includes(filteredText.toLowerCase()));
+    const [priorityFilter, setPriorityFilter] = useState("");
+    filteredMessages = filteredMessages.filter(message =>
+        message.priority.toLowerCase().includes(priorityFilter.toLowerCase()));
 
-    // let ActorCardsarr = filteredActors.map(actor => <ActorCard actor={actor} />);
-    let temp_actor_arr = [];
-
-    // useEffect(() => {
-
-    //     axios.get("actors.json").then(res => {
-    //         setActorsData(res.data.map(single_actor => new ActorModel(single_actor)));
-    //     });
-    // }, []);
-
-    function compareFirst() {
-        var checkBox = document.getElementById("first");
-        if (checkBox.checked === true) {
-            ActorsData.sort(function (a, b) {
-                var x = a.first_name.toLowerCase();
-                var y = b.first_name.toLowerCase();
-                if (x < y) { return -1; }
-                if (x > y) { return 1; }
-                return 0;
-            });
-            ActorsData.forEach(item => temp_actor_arr.push(item));
-            setActorsData(temp_actor_arr);
-        }
-    }
-    function compareLast() {
-        var checkBox = document.getElementById("last");
-        if (checkBox.checked === true) {
-            ActorsData.sort(function (a, b) {
-                var x = a.last_name.toLowerCase();
-                var y = b.last_name.toLowerCase();
-                if (x < y) { return -1; }
-                if (x > y) { return 1; }
-                return 0;
-            });
-            ActorsData.forEach(item => temp_actor_arr.push(item));
-            setActorsData(temp_actor_arr);
-        }
+    // Make sure to add the new message before Rerender
+    if (messages !== messagesData) {
+        setMessagesData(messages);
+        setMessageAdded(!messageAdded);
     }
 
-    function compareAge() {
-        var checkBox = document.getElementById("age");
-        if (checkBox.checked === true) {
-            ActorsData.sort(function (a, b) { return a.calculateAge() - b.calculateAge() });
-            ActorsData.forEach(item => temp_actor_arr.push(item));
-            setActorsData(temp_actor_arr);
-        }
-    }
+    useEffect(() => {
+        filterMessages(filteredMessages);
+    }, [filteredText, priorityFilter, messageAdded]);
+
+
+
 
     function Filter(eventKey, event) {
-        console.log(event.target.innerHTML);
+        if (event.target.innerHTML === "No Filter") {
+            setPriorityFilter("");
+        }
+        else {
+            setPriorityFilter(event.target.innerHTML);
+        }
+
+    }
+
+    function Sort(e) {
+        if (e.target.id === "date") {
+            filteredMessages.sort(function (a, b) {
+                const firstDate = Date.parse(a.date);
+                const secondDate = Date.parse(b.date);
+
+                return secondDate - firstDate;
+            });
+        }
+        else {
+            filteredMessages.sort(function (a, b) {
+                var nameA = a.priority.toUpperCase(); // ignore upper and lowercase
+                var nameB = b.priority.toUpperCase(); // ignore upper and lowercase
+                if (nameA < nameB) {
+                    return -1;
+                }
+                if (nameA > nameB) {
+                    return 1;
+                }
+
+                // names must be equal
+                return 0;
+                // return a.priority.toUpperCase() < b.priority.toUpperCase() ? 1 : -1;
+            });
+        }
+        filterMessages(filteredMessages);
+        SortMsg(e.target.id);
     }
     return (
         <Container>
@@ -73,7 +79,7 @@ function FilterMessage() {
                     <InputGroup size="sm" className="mb-3" onChange={e => setFilteredText(e.target.value)} value={filteredText}>
                         <InputGroup.Prepend>
                             <InputGroup.Text>
-                                <FontAwesomeIcon icon="search" />
+                                <FontAwesomeIcon icon={faSearch} />
                             </InputGroup.Text>
                         </InputGroup.Prepend>
                         <FormControl placeholder="Filter by Text Title and Details"
@@ -83,13 +89,14 @@ function FilterMessage() {
                 <Col>
 
                     <DropdownButton onSelect={Filter} size="sm" variant="warning" id="dropdown-basic-button" title="Filter by Priority">
+                        <Dropdown.Item >No Filter</Dropdown.Item>
                         <Dropdown.Item >Info</Dropdown.Item>
                         <Dropdown.Item >Important</Dropdown.Item>
                     </DropdownButton>
 
                 </Col>
                 <Col>
-                    <Form.Group className="filter-field" controlId="formBasicCheckboxFirst">
+                    <Form.Group onChange={Sort} className="filter-field" controlId="formBasicCheckboxFirst">
                         <Form.Label >Sort By:</Form.Label>
                         <Form.Check inline id="date" type="radio" label="Date" name="sort" />
                         <Form.Check inline id="priority" type="radio" label="Priority" name="sort" />

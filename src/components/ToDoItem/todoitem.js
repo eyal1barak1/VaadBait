@@ -7,6 +7,7 @@ function ToDoItem(props) {
     const { id, onItemCompleted, onDeleteItem, completed, text } = props;
     var itemClass = "form-check todoitem " + (completed ? "done" : "undone");
     var added_item;
+    
     function markCompleted(event) {
         onItemCompleted(id);
     }

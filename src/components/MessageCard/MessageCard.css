@@ -1,39 +1,51 @@
-
 .c-messages-card {
     height: 100%;
 }
 
-.c-messages-card > .card {
+.c-messages-card>.card {
     height: 100%;
 }
 
-.c-messages-card > .card img {
+.c-messages-card>.card img {
     height: 250px;
     object-fit: cover;
 }
 
-
-.message-details > label {
+.message-details>label {
     /* Other styling... */
     text-align: right;
     clear: both;
-    float:left;
-    margin-right:5px;
+    float: left;
+    margin-right: 5px;
 }
 
-
-.message-details > p{
+.message-details>p {
     max-width: 600px;
 }
-.message-priority > label {
+
+.message-priority>label {
     /* Other styling... */
     text-align: right;
     clear: both;
-    float:left;
-    margin-right:5px;
+    float: left;
+    margin-right: 5px;
 }
 
-
-.message-priority > p{
+.message-priority>p {
     max-width: 600px;
+}
+
+.b-update {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.b-delete {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.message-image{
+    width: 100%;
+    height: 100%;
 }
