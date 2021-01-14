@@ -6,7 +6,7 @@ import './todoapp.css';
 
 
 function TodoApp(props) {
-  const {message, message_items, addMessageItems} = props;
+  const {message, message_items, addMessageItems, activeUser} = props;
   const [text, setText] = useState("");
   const [items, setItems] = useState(message_items);
   const [allitems, setAllItems] = useState([]);
@@ -53,12 +53,12 @@ function TodoApp(props) {
       
       <div className="row">
         <div className="col-md-4">
-          <TodoList items={activeMessageComments}  onDeleteItem={handleDeleteItem} />
+          <TodoList items={activeMessageComments}  onDeleteItem={handleDeleteItem} activeUser={activeUser}/>
         </div>
       </div>
       <form className="row"> 
         <div>
-          <input type="text" className="form-control" onChange={handleTextChange} value={text} />
+          <input type="text" placeholder="Add Comment" className="form-control" onChange={handleTextChange} value={text} />
         </div>
         <div >
           <button className="add-btn btn btn-primary" style={{ visibility: "hidden" }} onClick={handleAddItem}></button>

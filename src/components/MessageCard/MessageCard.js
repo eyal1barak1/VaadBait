@@ -4,7 +4,7 @@ import './MessageCard.css'
 
 
 function MessageCard(props) {
-    const { message, addMessageItems, message_items, removeMessage, activeUserRole} = props;
+    const { message, addMessageItems, message_items, removeMessage, activeUser} = props;
 
     function removeMessageById() {
         removeMessage(message.id);
@@ -32,9 +32,10 @@ function MessageCard(props) {
                         </Row>
                     </Col>
                     <Col sm={4}>
-                        <TodoApp message={message} message_items={message_items} addMessageItems={addMessageItems}></TodoApp>
+                        <TodoApp message={message} message_items={message_items} 
+                        addMessageItems={addMessageItems} activeUser={activeUser}></TodoApp>
                     </Col>
-                    <Col style={{ visibility:  activeUserRole === "committee" ? "visible" : "hidden"}} className="message-card-buttons" sm={2}>
+                    <Col style={{ visibility:  activeUser.role === "committee" ? "visible" : "hidden"}} className="message-card-buttons" sm={2}>
                         <Button className="b-update" variant="info">Update</Button>
                         <Button onClick={removeMessageById} className="b-delete" variant="danger">Delete</Button>
                     </Col>

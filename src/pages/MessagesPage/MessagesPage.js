@@ -32,7 +32,7 @@ function MessagesPage(props) {
 
 
     const messagesView = filteredMessages.map(message => <MessageCard message={message} message_items={message_items}
-        addMessageItems={addMessageItems} removeMessage={removeMessage} activeUserRole={activeUser.role}/>)
+        addMessageItems={addMessageItems} removeMessage={removeMessage} activeUser={activeUser}/>)
 
     return (
         <div className="p-messages">

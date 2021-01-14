@@ -4,7 +4,7 @@ import './todoitem.css';
 
 function ToDoItem(props) {
 
-    const { id, onItemCompleted, onDeleteItem, completed, text } = props;
+    const { id, onItemCompleted, onDeleteItem, completed, text, activeUser } = props;
     var itemClass = "form-check todoitem " + (completed ? "done" : "undone");
     var added_item;
     
@@ -28,11 +28,11 @@ function ToDoItem(props) {
         }
     }, []);
 
-
+    debugger;
     return (
         <li className={itemClass} ref={li => added_item = li}>
             <label className="form-check-label">
-                 asas:{text}
+                 {activeUser.fname}:{text}
             </label>
         </li>
     )
