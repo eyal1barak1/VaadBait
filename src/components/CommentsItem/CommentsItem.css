@@ -1,6 +1,6 @@
  .todoitem {
      position: relative;
-     margin-bottom: 0.25rem;
+     /* margin-bottom: 0.25rem; */
      padding: 0.5rem 2rem 0.5rem 0.5rem;
      border-top: 1px solid #ccc;
  }
@@ -30,7 +30,7 @@
  }
 
  .todoitem .form-check-label {
-     width: 100%;
+     /* width: 100%; */
  }
 
  .todoitem .form-check-label .form-check-input {

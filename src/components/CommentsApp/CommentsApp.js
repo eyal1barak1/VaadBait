@@ -1,11 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import TodoList from '../ToDoList/todolist'
-import './todoapp.css';
+import CommentsList from '../CommentsList/CommentsList'
+import './CommentsApp.css';
 
 
-function TodoApp(props) {
+function CommentsApp(props) {
   const {message, message_items, addMessageItems, activeUser} = props;
   const [text, setText] = useState("");
   const [items, setItems] = useState(message_items);
@@ -22,7 +22,9 @@ function TodoApp(props) {
       id: Date.now(),
       text: text,
       done: false,
-      messageid: message.id
+      messageid: message.id,
+      userFname: activeUser.fname,
+      userLname: activeUser.lname,
     };
 
     setItems(items.concat(newItem));
@@ -52,8 +54,8 @@ function TodoApp(props) {
       <h3>Comments:</h3>
       
       <div className="row">
-        <div className="col-md-4">
-          <TodoList items={activeMessageComments}  onDeleteItem={handleDeleteItem} activeUser={activeUser}/>
+        <div>
+          <CommentsList items={activeMessageComments}  onDeleteItem={handleDeleteItem} activeUser={activeUser}/>
         </div>
       </div>
       <form className="row"> 
@@ -69,4 +71,4 @@ function TodoApp(props) {
   )
 }
 
-export default TodoApp;
+export default CommentsApp;

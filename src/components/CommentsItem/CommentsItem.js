@@ -1,10 +1,10 @@
 import React from 'react';
 import { useEffect } from 'react';
-import './todoitem.css';
+import './CommentsItem.css';
 
-function ToDoItem(props) {
+function CommentsItem(props) {
 
-    const { id, onItemCompleted, onDeleteItem, completed, text, activeUser } = props;
+    const { id, onItemCompleted, onDeleteItem, completed, text, activeUser, fname, lname } = props;
     var itemClass = "form-check todoitem " + (completed ? "done" : "undone");
     var added_item;
     
@@ -31,10 +31,10 @@ function ToDoItem(props) {
     return (
         <li className={itemClass} ref={li => added_item = li}>
             <label className="form-check-label">
-                 {activeUser.fname}:{text}
+                 {fname + " " + lname + ": " + text}:
             </label>
         </li>
     )
 }
 
-export default ToDoItem;
+export default CommentsItem;

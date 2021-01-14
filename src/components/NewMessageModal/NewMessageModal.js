@@ -8,6 +8,7 @@ function NewMessageModal(props) {
     const [details, setDetails] = useState("");
     const [priority, SetPriority] = useState("Info");
     const [imgURL, setImgURL] = useState("");
+    const placeHolderImage = "https://www.arde.co.il/wp-content/uploads/2014/06/default-placeholder.png";
 
     function closeModal() {
         setTitle("");
@@ -70,7 +71,7 @@ function NewMessageModal(props) {
                             <Form.Control type="text" placeholder="Image URL" value={imgURL} onChange={e => setImgURL(e.target.value)} />
                         </Col>
                         <Col sm={2}>
-                            <Image width="100" height="100" src={imgURL} />
+                            <Image width="100" height="100" src={imgURL === "" ? placeHolderImage : imgURL} />
                         </Col>
                     </Form.Group>
                 </Form>

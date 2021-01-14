@@ -4,3 +4,13 @@
     justify-content: space-between;
     align-items: center;
 }
+
+
+.b-new-vote {
+    position: relative; 
+    height: 40px;
+}
+.b-new-vote > button{
+    position: absolute;
+    right: 0;
+}

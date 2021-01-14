@@ -74,10 +74,6 @@ function NewVoteModal(props) {
                             </Form.Control>
                         </Col>
                     </Form.Group>
-
-                    
-
-                    
                 </Form>
 
             </Modal.Body>

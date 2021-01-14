@@ -5,7 +5,7 @@ import NewMessageModal from "../../components/NewMessageModal/NewMessageModal";
 import MessageCard from "../../components/MessageCard/MessageCard";
 import HoaNavbr from "../../components/HOANavbar/HOANavbr";
 import './MessagesPage.css'
-import CustomAccordion from "../../components/Accordion/Accordion";
+import MessagesAccordion from "../../components/Accordion/MessagesAccordion";
 import FilterMessage from "../../components/FilterMessage/FilterMessage";
 
 function MessagesPage(props) {
@@ -39,7 +39,7 @@ function MessagesPage(props) {
             <div className="b-new-message" style={{ visibility: activeUser.role === "committee" ? "visible" : "hidden" }}>
                 <Button variant="link" onClick={() => setShowModal(true)}>New Message</Button>
             </div>
-            <CustomAccordion panels={messagesView} updateMessage={updateMessage}></CustomAccordion>
+            <MessagesAccordion panels={messagesView} updateMessage={updateMessage} />
             <NewMessageModal show={showModal} handleClose={() => setShowModal(false)} addMessage={addMessage} />
         </div>
     )

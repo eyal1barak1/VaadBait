@@ -1,11 +1,8 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
-import { useState, useEffect } from 'react'
-import Component from 'react'
 import { Accordion, Card } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import HomePageCard from "../HomePageCard/HomePageCard"
-import "./Accordion.css"
+import "./MessagesAccordion.css"
 import ButtonComponent from '../ButtonComponent/ButtonComponent';
 
 
@@ -132,7 +129,7 @@ class CustomAccordion2 extends React.Component {
 }
 
 
-function CustomAccordion(props) {
+function MessagesAccordion(props) {
 
     const { panels, updateMessage } = props;
     const unReadMsgSrc = "https://cdn3.iconfinder.com/data/icons/mailing-2/96/notification_unread_mail_message_96-512.png";
@@ -150,7 +147,7 @@ function CustomAccordion(props) {
                         onClick={() => SetStateOnClick(panel.props.message.id, panel.props.activeUser.id)}
                         as={Card.Header} eventKey={index.toString()} >
                         {panel.props.message.title}
-                        <img className="readImage" width="20" height="20"
+                        <img className="readImage" width="20" height="20"          
                             src={panel.props.message.isRead.includes(panel.props.activeUser.id) ? readMsgSrc : unReadMsgSrc} >
                         </img>
                     </Accordion.Toggle>
@@ -163,4 +160,4 @@ function CustomAccordion(props) {
     )
 }
 
-export default CustomAccordion;
+export default MessagesAccordion;

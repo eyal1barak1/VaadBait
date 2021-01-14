@@ -18,17 +18,8 @@ function App() {
   const [messages, setMessages] = useState(jsonMessages);  // HACK ALERT: holding all recipes as state only because this is a JSON based application (no server side)
   const [messageItems, setMessageItems] = useState([]);
   const [votings, setVotings] = useState(jsonMessages);
-  const [reRender, setReRender] = useState(false);
   let date = new Date();
 
-
-  // function usePrevious(value) {
-  //   const ref = useRef();
-  //   useEffect(() => {
-  //     ref.current = value;
-  //   });
-  //   return ref.current;
-  // }
 
 
   //============== loging/logout==================
@@ -50,7 +41,7 @@ function App() {
       img,
       userId: activeUser.id,
       building: activeUser.building,
-      isRead: false,
+      isRead: [],
       date: date,
     }
 

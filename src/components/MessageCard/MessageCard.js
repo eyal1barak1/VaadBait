@@ -1,5 +1,5 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
-import TodoApp from '../ToDoApp/todoapp'
+import CommentsApp from '../CommentsApp/CommentsApp'
 import './MessageCard.css'
 
 
@@ -13,7 +13,7 @@ function MessageCard(props) {
         <div className="c-message-card">
             <Container fluid>
                 <Row>
-                    <Col sm={6}>
+                    <Col sm={4}>
                         <Row>
                             <Col sm={2}>
                                 <img className="message-image" src={message.img} ></img>
@@ -31,11 +31,12 @@ function MessageCard(props) {
                             </Col>
                         </Row>
                     </Col>
-                    <Col sm={4}>
-                        <TodoApp message={message} message_items={message_items} 
-                        addMessageItems={addMessageItems} activeUser={activeUser}></TodoApp>
+                    <Col sm={6}>
+                        <CommentsApp message={message} message_items={message_items} 
+                        addMessageItems={addMessageItems} activeUser={activeUser}></CommentsApp>
                     </Col>
-                    <Col style={{ visibility:  activeUser.role === "committee" ? "visible" : "hidden"}} className="message-card-buttons" sm={2}>
+                    <Col style={{ visibility:  activeUser.role === "committee" ? "visible" : "hidden"}} 
+                    className="message-card-buttons" sm={2}>
                         <Button className="b-update" variant="info">Update</Button>
                         <Button onClick={removeMessageById} className="b-delete" variant="danger">Delete</Button>
                     </Col>
