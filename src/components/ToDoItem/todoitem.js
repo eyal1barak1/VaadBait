@@ -28,7 +28,6 @@ function ToDoItem(props) {
         }
     }, []);
 
-    debugger;
     return (
         <li className={itemClass} ref={li => added_item = li}>
             <label className="form-check-label">
