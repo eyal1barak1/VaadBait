@@ -10,7 +10,7 @@ import FilterMessage from "../../components/FilterMessage/FilterMessage";
 
 function MessagesPage(props) {
     const { activeUser, onLogout, messages, addMessage, message_items, addMessageItems,
-        updateMessage, SortMsg, removeMessage } = props;
+        updateMessage, SortMsg, removeMessage, updateMessageContent } = props;
     const [messagesData, setMessagesData] = useState(messages);
     const [showModal, setShowModal] = useState(false);
     const [filteredMessages, setFilterdMessages] = useState([]);
@@ -28,7 +28,8 @@ function MessagesPage(props) {
     }
 
     const messagesView = filteredMessages.map(message => <MessageCard message={message} message_items={message_items}
-        addMessageItems={addMessageItems} removeMessage={removeMessage} activeUser={activeUser} />)
+        addMessageItems={addMessageItems} 
+        removeMessage={removeMessage} activeUser={activeUser} updateMessageContent={updateMessageContent}/>)
 
     return (
         <div className="p-messages">
@@ -40,7 +41,7 @@ function MessagesPage(props) {
                 <Button variant="link" onClick={() => setShowModal(true)}>New Message</Button>
             </div>
             <MessagesAccordion panels={messagesView} updateMessage={updateMessage} />
-            <NewMessageModal show={showModal} handleClose={() => setShowModal(false)} addMessage={addMessage} />
+            <NewMessageModal isUpdate="false" show={showModal} handleClose={() => setShowModal(false)} addMessage={addMessage} />
         </div>
     )
 

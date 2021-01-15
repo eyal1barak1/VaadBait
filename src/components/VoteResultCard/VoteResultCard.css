@@ -1,17 +1,17 @@
-.c-messages-card {
+.c-votes-card {
     height: 100%;
 }
 
-.c-messages-card>.card {
+.c-votes-card>.card {
     height: 100%;
 }
 
-.c-messages-card>.card img {
+.c-votes-card>.card img {
     height: 250px;
     object-fit: cover;
 }
 
-.message-details>label {
+.vote-details>label {
     /* Other styling... */
     text-align: right;
     clear: both;
@@ -19,11 +19,11 @@
     margin-right: 5px;
 }
 
-.message-details>p {
+.vote-details>p {
     max-width: 600px;
 }
 
-.message-priority>label {
+.vote-priority>label {
     /* Other styling... */
     text-align: right;
     clear: both;
@@ -31,21 +31,21 @@
     margin-right: 5px;
 }
 
-.message-priority>p {
+.vote-priority>p {
     max-width: 600px;
 }
 
-.b-update-button {
+.b-update {
     margin-top: 20px;
     margin-left: 20px;
 }
 
-.b-delete-button {
+.b-delete {
     margin-top: 20px;
     margin-left: 20px;
 }
 
-.message-image{
+.vote-image{
     width: 100%;
     height: 100%;
 }

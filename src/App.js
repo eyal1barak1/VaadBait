@@ -17,7 +17,7 @@ function App() {
   const [activeUser, setActiveUser] = useState(jsonUsers[0]);   // During development it's conveient to be logged in by default
   const [messages, setMessages] = useState(jsonMessages);  // HACK ALERT: holding all recipes as state only because this is a JSON based application (no server side)
   const [messageItems, setMessageItems] = useState([]);
-  const [votings, setVotings] = useState(jsonMessages);
+  const [votings, setVotings] = useState(jsonVotings);
   let date = new Date();
 
 
@@ -62,6 +62,18 @@ function App() {
     const index = messages.indexOf(found);
     if (index > -1) {
       messages.splice(index, 1);
+      setMessages([...messages]);
+    }
+  }
+
+  function updateMessageContent(title, details, priority, img, messageId){
+    const found = messages.find(element => element.id === messageId);
+    const index = messages.indexOf(found);
+    if (index > -1) {
+      messages[index].title = title;
+      messages[index].details = details;
+      messages[index].priority = priority;
+      messages[index].img = img;
       setMessages([...messages]);
     }
   }
@@ -141,7 +153,8 @@ function App() {
         <Route exact path="/messages">
           <MessagesPage activeUser={activeUser} onLogout={handleLogout}
             messages={activeUserMessages} updateMessage={updateMessage} SortMsg={SortMsg} removeMessage={removeMessage}
-            addMessage={addMessage} addMessageItems={addMessageItems} message_items={messageItems} />
+            addMessage={addMessage} addMessageItems={addMessageItems} 
+            message_items={messageItems} updateMessageContent={updateMessageContent}/>
         </Route>
 
         <Route exact path="/voting">

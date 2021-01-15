@@ -3,7 +3,7 @@ import { Button, Modal, Form, Col, Row, Image } from "react-bootstrap";
 
 
 function NewMessageModal(props) {
-    const { show, handleClose, addMessage } = props;
+    const { show, handleClose, addMessage, updateMessage, isUpdate, messageId, updateMessageContent } = props;
     const [title, setTitle] = useState("");
     const [details, setDetails] = useState("");
     const [priority, SetPriority] = useState("Info");
@@ -22,6 +22,12 @@ function NewMessageModal(props) {
         addMessage(title, details, priority, imgURL);
 
         // 2) cleanup (clean all field + close the modal)
+        closeModal();
+    }
+
+    function handleUpdateMessage() {
+        updateMessageContent(title, details, priority, imgURL, messageId);
+
         closeModal();
     }
 
@@ -61,8 +67,6 @@ function NewMessageModal(props) {
                             </Form.Control>
                         </Col>
                     </Form.Group>
-
-
                     <Form.Group as={Row} controlId="formHorizontalImage">
                         <Form.Label column sm={2}>
                             Image URL
@@ -77,14 +81,23 @@ function NewMessageModal(props) {
                 </Form>
 
             </Modal.Body>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={closeModal}>
-                    Cancel
-                </Button>
-                <Button variant="primary" onClick={handleAddMessage}>
-                    Create Message
-                </Button>
-            </Modal.Footer>
+            <div>
+                {isUpdate === "true" ?
+                    <Modal.Footer>
+                        <Button variant="primary" onClick={handleUpdateMessage}>
+                            Update Message
+                        </Button>
+                    </Modal.Footer>
+                    :
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={closeModal}>
+                            Cancel
+                        </Button>
+                        <Button variant="primary" onClick={handleAddMessage}>
+                            Create Message
+                    </  Button>
+                    </Modal.Footer>}
+            </div>
         </Modal>
     );
 }

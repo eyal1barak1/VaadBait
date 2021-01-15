@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
-import NewRecipeModal from "../../components/NewMessageModal/NewMessageModal";
-import VoteCard from "../../components/VoteCard/VoteCard";
+
 import HoaNavbr from "../../components/HOANavbar/HOANavbr";
 import './VotingPage.css'
 import NewVoteModal from "../../components/NewVoteModal/NewVoteModal";
 import VotesAccordion from "../../components/Accordion/VotesAccordion";
+import ActiveVoteCard from "../../components/ActiveVoteCard/ActiveVoteCard";
 
 function VotingPage(props) {
-    const { activeUser, onLogout, votings, addVote, updateVote } = props;
+    const { activeUser, onLogout, votings, addVote, updateVote, addVoteItems, vote_items } = props;
     const [showModal, setShowModal] = useState(false);
     const [votesData, setvotesData] = useState(votings);
     const [filteredVotings, setFilterdVotings] = useState([]);
@@ -28,7 +28,8 @@ function VotingPage(props) {
 
 
 
-    const voteView = votings.map(vote => <VoteCard vote={vote} />)
+    const activeVoteView = votings.map(vote => <ActiveVoteCard vote={vote} addVoteItems={addVoteItems}
+        vote_items={vote_items} activeUser={activeUser}/>)
 
     return (
         <div className="p-votes">
@@ -40,7 +41,7 @@ function VotingPage(props) {
                         <div className="b-new-vote" style={{ visibility: activeUser.role === "committee" ? "visible" : "hidden" }}>
                             <Button variant="link" onClick={() => setShowModal(true)}>New Vote</Button>
                         </div>
-                        <VotesAccordion panels={voteView} updateVote={updateVote} />
+                        <VotesAccordion panels={activeVoteView} updateVote={updateVote} />
                     </Col>
                     <Col>
                         <h1>Voting Results</h1>
