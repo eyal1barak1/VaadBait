@@ -27,7 +27,7 @@ export default class PieChart extends React.PureComponent {
             <Paper>
                 <Chart className="test" data={chartData}>
                     <PieSeries valueField="area" argumentField="country" />
-                    <Title text="Voting Precentage" />
+                    <Title text={this.props.title} />
                     <Animation />
                 </Chart>
             </Paper>

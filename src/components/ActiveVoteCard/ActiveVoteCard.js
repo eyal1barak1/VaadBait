@@ -6,7 +6,7 @@ import './ActiveVoteCard.css'
 
 
 function ActiveVoteCard(props) {
-    const { vote, addVoteItems, vote_items, activeUser, updateEndDate } = props;
+    const { vote, activeUser, updateEndDate } = props;
     const [showDateModal, setShowDateModal] = useState(false);
     const [chosenOption, setChosenOption] = useState("");
 

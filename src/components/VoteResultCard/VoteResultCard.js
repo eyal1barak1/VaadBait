@@ -40,8 +40,11 @@ function VoteResultCard(props) {
                                 </div>
                             </Row>
                         </Col>
-                        <Col sm={6}>
-                            <PieChart data={data}></PieChart>
+                        <Col sm={4}>
+                            <PieChart data={data} title="Results"></PieChart>
+                        </Col>
+                        <Col sm={4}>
+                            <PieChart data={data} title="Voting Precentage"></PieChart>
                         </Col>
                     </Row>
                 </Container>

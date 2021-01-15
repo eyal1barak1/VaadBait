@@ -35,8 +35,7 @@ function VotingPage(props) {
 
     //Filter Only NonActive votes
     const nonActiveVotes = votings.filter(vote => vote.voteStatus !== "active"); 
-    const nonActiveVoteView = nonActiveVotes.map(vote => <VoteResultCard vote={vote} 
-        vote_items={vote_items} activeUser={activeUser} updateEndDate={updateEndDate}/>)    
+    const nonActiveVoteView = nonActiveVotes.map(vote => <VoteResultCard vote={vote} activeUser={activeUser} />)    
 
     return (
         <div className="p-votes">
