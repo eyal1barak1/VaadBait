@@ -40,7 +40,7 @@ function NewMessageModal(props) {
                 <Form>
                     <Form.Group as={Row} controlId="formHorizontalTitle">
                         <Form.Label column sm={2}>
-                            Title
+                            Title:
                         </Form.Label>
                         <Col sm={10}>
                             <Form.Control type="text" placeholder="Message Title" value={title} onChange={e => setTitle(e.target.value)} />
@@ -49,7 +49,7 @@ function NewMessageModal(props) {
 
                     <Form.Group as={Row} controlId="formHorizontalDetails">
                         <Form.Label column sm={2}>
-                            Details
+                            Details:
                         </Form.Label>
                         <Col sm={10}>
                             <Form.Control as="textarea" rows={3} type="text" placeholder="Message Details" value={details} onChange={e => setDetails(e.target.value)} />
@@ -58,7 +58,7 @@ function NewMessageModal(props) {
 
                     <Form.Group as={Row} controlId="formHorizontalPriority">
                         <Form.Label column sm={2}>
-                            Priority
+                            Priority:
                         </Form.Label>
                         <Col sm={10}>
                             <Form.Control as="select" onChange={e => SetPriority(e.target.value)}>
@@ -69,7 +69,7 @@ function NewMessageModal(props) {
                     </Form.Group>
                     <Form.Group as={Row} controlId="formHorizontalImage">
                         <Form.Label column sm={2}>
-                            Image URL
+                            Image URL:
                         </Form.Label>
                         <Col sm={8}>
                             <Form.Control type="text" placeholder="Image URL" value={imgURL} onChange={e => setImgURL(e.target.value)} />

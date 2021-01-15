@@ -1,48 +1,50 @@
-import { Button, Col, Container, Row } from "react-bootstrap";
-import CommentsApp from '../CommentsApp/CommentsApp'
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { useState } from "react";
+import DateModal from "../DateModal/DateModal";
+import PieChart from "../PieChart/PieChart";
 import './VoteResultCard.css'
 
 
 function VoteResultCard(props) {
-    const { message, addMessageItems, message_items, removeMessage, activeUser} = props;
+    const { vote, activeUser } = props;
 
-    function removeMessageById() {
-        removeMessage(message.id);
-    }
+    var endDate = vote.endDate.substring(0, 16);
+    endDate = endDate.replace("T", " ");
+
+    const data = [
+        { country: 'Russia', area: 12 },
+        { country: 'Canada', area: 7 },
+        { country: 'USA', area: 7 },
+        { country: 'China', area: 7 },
+        { country: 'Brazil', area: 6 },
+        { country: 'Australia', area: 5 },
+        { country: 'India', area: 2 },
+        { country: 'Others', area: 55 },
+    ];
+
     return (
-        <div className="c-message-card">
-            <Container fluid>
-                <Row>
-                    <Col sm={4}>
-                        <Row>
-                            <Col sm={2}>
-                                <img className="message-image" src={message.img} ></img>
-                            </Col>
-                            <Col sm={10}>
-                                <div className="message-details">
+        <div className="c-vote-card">
+                <Container fluid>
+                    <Row>
+                        <Col >
+                            <Row>
+                                <div className="vote-details">
                                     <label>Details: </label>
-                                    <p>{message.details}</p>
+                                    <p>{vote.details}</p>
                                 </div>
-
-                                <div className="message-priority">
-                                    <label>Priority: </label>
-                                    <p>{message.priority}</p>
+                            </Row>
+                            <Row>
+                                <div className="vote-end-date">
+                                    <label>End date: </label>
+                                    <p>{endDate}</p>
                                 </div>
-                            </Col>
-                        </Row>
-                    </Col>
-                    <Col sm={6}>
-                        <CommentsApp message={message} message_items={message_items} 
-                        addMessageItems={addMessageItems} activeUser={activeUser}></CommentsApp>
-                    </Col>
-                    <Col style={{ visibility:  activeUser.role === "committee" ? "visible" : "hidden"}} 
-                    className="message-card-buttons" sm={2}>
-                        <Button className="b-update" variant="info">Update</Button>
-                        <Button onClick={removeMessageById} className="b-delete" variant="danger">Delete</Button>
-                    </Col>
-                </Row>
-            </Container>
-
+                            </Row>
+                        </Col>
+                        <Col sm={6}>
+                            <PieChart data={data}></PieChart>
+                        </Col>
+                    </Row>
+                </Container>
         </div >
     );
 }

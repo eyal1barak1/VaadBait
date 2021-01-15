@@ -66,7 +66,7 @@ function App() {
     }
   }
 
-  function updateMessageContent(title, details, priority, img, messageId){
+  function updateMessageContent(title, details, priority, img, messageId) {
     const found = messages.find(element => element.id === messageId);
     const index = messages.indexOf(found);
     if (index > -1) {
@@ -109,7 +109,7 @@ function App() {
         // return a.priority.toUpperCase() < b.priority.toUpperCase() ? -1 : 1;
       });
     }
-    setMessages(messages);
+    setMessages([...messages]);
   }
 
 
@@ -122,7 +122,9 @@ function App() {
       options,
       endDate,
       userId: activeUser.id,
-      building: activeUser.id,
+      building: activeUser.building,
+      voteStatus: "active",
+      result:"",
     }
 
     setVotings(votings.concat(newVote));
@@ -130,13 +132,12 @@ function App() {
 
   const activeUserVoting = activeUser ? votings.filter(voting => voting.building === activeUser.building) : [];
 
-  function updateVote(voteId) {
-
+  function updateEndDate(voteId, updatedEndDate) {
     const found = votings.find(element => element.id === voteId);
     const index = votings.indexOf(found);
     if (index > -1) {
-      votings[index].options = true;
-      setMessages(votings);
+      votings[index].endDate = updatedEndDate;
+      setVotings(votings);
     }
   }
 
@@ -153,13 +154,13 @@ function App() {
         <Route exact path="/messages">
           <MessagesPage activeUser={activeUser} onLogout={handleLogout}
             messages={activeUserMessages} updateMessage={updateMessage} SortMsg={SortMsg} removeMessage={removeMessage}
-            addMessage={addMessage} addMessageItems={addMessageItems} 
-            message_items={messageItems} updateMessageContent={updateMessageContent}/>
+            addMessage={addMessage} addMessageItems={addMessageItems}
+            message_items={messageItems} updateMessageContent={updateMessageContent} />
         </Route>
 
         <Route exact path="/voting">
           <VotingPage activeUser={activeUser} onLogout={handleLogout} votings={activeUserVoting} addVote={addVote}
-            updateVote={updateVote} />
+            updateEndDate={updateEndDate} />
         </Route>
       </Switch>
     </HashRouter>

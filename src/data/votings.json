@@ -5,7 +5,10 @@
         "details": "Eggs dish with tomato sauce",
         "userId": 1,
         "building":"blue",
-        "endDate" : "2023-03-09T22:18:26.625Z"
+        "options": [],
+        "voteStatus": "active",
+        "endDate" : "2023-03-09T22:18:26.625Z",
+        "result":""
     },
     {
         "id": 2,
@@ -13,7 +16,10 @@
         "details": "Balls of meat",
         "userId": 1,
         "building":"blue",
-        "endDate" : "2021-02-09T21:14:26.625Z"
+        "options": [],
+        "voteStatus": "active",
+        "endDate" : "2021-02-09T21:14:26.625Z",
+        "result":""
     },
     {
         "id": 3,
@@ -21,7 +27,10 @@
         "details": "Eggs dish with tomato sauce",
         "userId": 2,
         "building":"red",
-        "endDate" : "2019-05-12T22:10:26.625Z"
+        "options": [],
+        "voteStatus": "active",
+        "endDate" : "2019-05-12T22:10:26.625Z",
+        "result":""
     },
     {
         "id": 4,
@@ -29,6 +38,31 @@
         "details": "Balls of meat",
         "userId": 2,
         "building":"blue",
-        "endDate" : "2016-03-09T13:19:26.625Z"
+        "options": [],
+        "voteStatus": "active",
+        "endDate" : "2016-03-09T13:19:26.625Z",
+        "result":""
+    },
+    {
+        "id": 5,
+        "title": "Spicy Bla Bla",
+        "details": "Some detaild food ",
+        "userId": 2,
+        "building":"blue",
+        "options": [],
+        "voteStatus": "not active",
+        "endDate" : "2014-08-09T13:19:26.625Z",
+        "result":""
+    },
+    {
+        "id": 6,
+        "title": "Another food",
+        "details": "Another detaild food ",
+        "userId": 2,
+        "building":"red",
+        "options": [],
+        "voteStatus": "not active",
+        "endDate" : "2012-07-12T13:19:26.625Z",
+        "result":""
     }
 ]

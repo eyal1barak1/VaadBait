@@ -1,19 +1,23 @@
-const { Modal, Form } = require("react-bootstrap");
 import { useState } from "react";
+const { Modal, Form, Button, Col, Row } = require("react-bootstrap");
 
-function DateModal() {
-    const [smShow, setSmShow] = useState(false);
+function DateModal(props) {
+    const { show, handleClose, handleUpdateEndDate } = props;
+    const [endDate, setEndDate] = useState(new Date());
 
+    function UpdateEndDate() {
 
-    function UpdateEndDate(date) {
-
+        let date = new Date(endDate);
+        let jsonStr = JSON.stringify(date);
+        var dateStr = JSON.parse(jsonStr);  
+        handleUpdateEndDate(dateStr);
+        handleClose();
     }
 
     return (
         <>
-            <Button onClick={() => setSmShow(true)}>Small modal</Button>
-
-            <Modal size="sm" show={smShow} onHide={() => setSmShow(false)}
+            {/* <Button onClick={() => setSmShow(true)}>Small modal</Button> */}
+            <Modal size="sm" show={show} onHide={handleClose}
                 aria-labelledby="example-modal-sizes-title-sm"
             >
                 <Modal.Header closeButton>
@@ -23,15 +27,20 @@ function DateModal() {
                 </Modal.Header>
                 <Modal.Body>
                     <Form.Group as={Row} controlId="formHorizontalEndDate">
-                        <Form.Label column sm={2}>
-                            End Date
+                        <Form.Label column >
+                            Choose End Date:
                         </Form.Label>
-                        <Col sm={2}>
-                            <Form.Control type="date" onChange={e => UpdateEndDate(e.target.value)}>
+                        <Col>
+                            <Form.Control type="date" value={endDate} onChange={e => setEndDate(e.target.value)}>
                             </Form.Control>
                         </Col>
                     </Form.Group>
                 </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={UpdateEndDate}>
+                        Update End Date
+                        </Button>
+                </Modal.Footer>
             </Modal>
 
         </>

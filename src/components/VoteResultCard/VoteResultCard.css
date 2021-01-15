@@ -12,32 +12,36 @@
 }
 
 .vote-details>label {
-    /* Other styling... */
+   
     text-align: right;
     clear: both;
     float: left;
     margin-right: 5px;
 }
 
-.vote-details>p {
-    max-width: 600px;
+.vote-details{
+    width: 100%;
 }
 
-.vote-priority>label {
-    /* Other styling... */
+.vote-end-date{
+    width: 100%;
+}
+
+
+.vote-end-date>label {
     text-align: right;
     clear: both;
     float: left;
     margin-right: 5px;
 }
 
-.vote-priority>p {
-    max-width: 600px;
+.vote-button{
+    margin-top: 40px;
 }
 
 .b-update {
-    margin-top: 20px;
-    margin-left: 20px;
+ margin: 0;
+ margin-top: 30px;
 }
 
 .b-delete {
