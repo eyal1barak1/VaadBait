@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1,
+        "title": "Shakshuka",
+        "details": "Eggs dish with tomato sauce",
+        "userId": 1,
+        "building":"blue",
+        "endDate" : "2023-03-09T22:18:26.625Z"
+    },
+    {
+        "id": 2,
+        "title": "Meatballs",
+        "details": "Balls of meat",
+        "userId": 1,
+        "building":"blue",
+        "endDate" : "2021-02-09T21:14:26.625Z"
+    },
+    {
+        "id": 3,
+        "title": "Spicy Shakshuka",
+        "details": "Eggs dish with tomato sauce",
+        "userId": 2,
+        "building":"red",
+        "endDate" : "2019-05-12T22:10:26.625Z"
+    },
+    {
+        "id": 4,
+        "title": "Spicy Meatballs",
+        "details": "Balls of meat",
+        "userId": 2,
+        "building":"blue",
+        "endDate" : "2016-03-09T13:19:26.625Z"
+    }
+]

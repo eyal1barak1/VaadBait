@@ -7,12 +7,9 @@ import './VotingPage.css'
 import NewVoteModal from "../../components/NewVoteModal/NewVoteModal";
 import VotesAccordion from "../../components/Accordion/VotesAccordion";
 import ActiveVoteCard from "../../components/ActiveVoteCard/ActiveVoteCard";
-import VoteResultCard from "../../components/VoteResultCard/VoteResultCard"
-import VoteResultFilter from "../../components/VoteResultFilter/VoteResultFilter";
 
 function VotingPage(props) {
-    const { activeUser, onLogout, votings, addVote,
-        addVoteItems, vote_items, updateEndDate } = props;
+    const { activeUser, onLogout, votings, addVote, updateVote, addVoteItems, vote_items } = props;
     const [showModal, setShowModal] = useState(false);
     const [votesData, setvotesData] = useState(votings);
     const [filteredVotings, setFilterdVotings] = useState([]);
@@ -29,14 +26,10 @@ function VotingPage(props) {
         setFilterdVotings(filteredVotingsVar);
     }
 
-    //Filter Only Active votes
-    const activeVotes = votings.filter(vote => vote.voteStatus === "active");
-    const activeVoteView = activeVotes.map(vote => <ActiveVoteCard vote={vote} addVoteItems={addVoteItems}
-        vote_items={vote_items} activeUser={activeUser} updateEndDate={updateEndDate} />)
 
-    //Filter Only NonActive votes
-    const nonActiveVotes = filteredVotings.filter(vote => vote.voteStatus !== "active");
-    const nonActiveVoteView = nonActiveVotes.map(vote => <VoteResultCard vote={vote} activeUser={activeUser} />)
+
+    const activeVoteView = votings.map(vote => <ActiveVoteCard vote={vote} addVoteItems={addVoteItems}
+        vote_items={vote_items} activeUser={activeUser}/>)
 
     return (
         <div className="p-votes">
@@ -48,12 +41,13 @@ function VotingPage(props) {
                         <div className="b-new-vote" style={{ visibility: activeUser.role === "committee" ? "visible" : "hidden" }}>
                             <Button variant="link" onClick={() => setShowModal(true)}>New Vote</Button>
                         </div>
-                        <VotesAccordion panels={activeVoteView} isResaultAccordion="false" />
+                        <VotesAccordion panels={activeVoteView} updateVote={updateVote} />
                     </Col>
                     <Col>
                         <h1>Voting Results</h1>
-                        <VoteResultFilter votes={votesData} filterVotings={filterVotings} />
-                        <VotesAccordion panels={nonActiveVoteView} isResaultAccordion="true" />
+                        {/* <FilterMessage votes={votesData} filterVotings={filterVotings}
+                            SortMsg={SortMsg}>
+                        </FilterMessage> */}
                     </Col>
                 </Row>
             </Container>

@@ -1,17 +1,14 @@
-
-.p-votes .heading {
+.p-recipes .heading {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-
-.b-new-vote {
+.b-new-message {
     position: relative; 
     height: 40px;
-    margin-bottom: 7px;
 }
-.b-new-vote > button{
+.b-new-message > button{
     position: absolute;
     right: 0;
 }

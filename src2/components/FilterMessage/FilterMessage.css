@@ -1,0 +1,8 @@
+.filter-field {
+    display: flex;
+    align-items: end;
+}
+
+.filter-field > .form-label{
+    margin-right: 10px;
+}

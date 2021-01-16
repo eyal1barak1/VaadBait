@@ -1,0 +1,51 @@
+.c-votes-card {
+    height: 100%;
+}
+
+.c-votes-card>.card {
+    height: 100%;
+}
+
+.c-votes-card>.card img {
+    height: 250px;
+    object-fit: cover;
+}
+
+.vote-details>label {
+    /* Other styling... */
+    text-align: right;
+    clear: both;
+    float: left;
+    margin-right: 5px;
+}
+
+.vote-details>p {
+    max-width: 600px;
+}
+
+.vote-priority>label {
+    /* Other styling... */
+    text-align: right;
+    clear: both;
+    float: left;
+    margin-right: 5px;
+}
+
+.vote-priority>p {
+    max-width: 600px;
+}
+
+.b-update {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.b-delete {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.vote-image{
+    width: 100%;
+    height: 100%;
+}

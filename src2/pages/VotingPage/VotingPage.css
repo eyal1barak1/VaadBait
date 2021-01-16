@@ -9,7 +9,6 @@
 .b-new-vote {
     position: relative; 
     height: 40px;
-    margin-bottom: 7px;
 }
 .b-new-vote > button{
     position: absolute;
