@@ -6,21 +6,10 @@ import './VoteResultCard.css'
 
 
 function VoteResultCard(props) {
-    const { vote, activeUser } = props;
+    const { vote, activeUser, votesPieData } = props;
 
     var endDate = vote.endDate.substring(0, 16);
     endDate = endDate.replace("T", " ");
-
-    const data = [
-        { country: 'Russia', area: 12 },
-        { country: 'Canada', area: 7 },
-        { country: 'USA', area: 7 },
-        { country: 'China', area: 7 },
-        { country: 'Brazil', area: 6 },
-        { country: 'Australia', area: 5 },
-        { country: 'India', area: 2 },
-        { country: 'Others', area: 55 },
-    ];
 
     return (
         <div className="c-vote-card">
@@ -41,10 +30,10 @@ function VoteResultCard(props) {
                             </Row>
                         </Col>
                         <Col sm={4}>
-                            <PieChart data={data} title="Results"></PieChart>
+                            <PieChart data={votesPieData} title="Results"></PieChart>
                         </Col>
                         <Col sm={4}>
-                            <PieChart data={data} title="Voting Precentage"></PieChart>
+                            <PieChart data={votesPieData} title="Voting Precentage"></PieChart>
                         </Col>
                     </Row>
                 </Container>

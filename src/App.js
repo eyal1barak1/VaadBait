@@ -18,7 +18,16 @@ function App() {
   const [messages, setMessages] = useState(jsonMessages);  // HACK ALERT: holding all recipes as state only because this is a JSON based application (no server side)
   const [messageItems, setMessageItems] = useState([]);
   const [votings, setVotings] = useState(jsonVotings);
+  const data = [
+    { voteSubject: 'Russia', nVotes: 12 },
+    { voteSubject: 'Canada', nVotes: 7 },
+    { voteSubject: 'USA', nVotes: 7 },
+    { voteSubject: 'China', nVotes: 7 },
+    { voteSubject: 'Brazil', nVotes: 6 },
+  ];
+  const [votesPieData, setVotesPieData] = useState(data);
   let date = new Date();
+
 
 
 
@@ -124,11 +133,20 @@ function App() {
       userId: activeUser.id,
       building: activeUser.building,
       voteStatus: "active",
-      result:"",
+      result: "",
     }
 
     setVotings(votings.concat(newVote));
   }
+
+  function CheckDateAndUpdateVoteStat(voteItem, index) {
+    var now = new Date();
+    var itemsEndDate = new Date(voteItem.endDate);
+    
+    voteItem.voteStatus = now >= itemsEndDate ? "not active" : "active";
+  }
+
+  votings.forEach(CheckDateAndUpdateVoteStat);
 
   const activeUserVoting = activeUser ? votings.filter(voting => voting.building === activeUser.building) : [];
 
@@ -137,8 +155,12 @@ function App() {
     const index = votings.indexOf(found);
     if (index > -1) {
       votings[index].endDate = updatedEndDate;
-      setVotings(votings);
+      setVotings([...votings]);
     }
+  }
+
+  function AddUsersVote(chosenOption) {
+
   }
 
 
@@ -160,7 +182,7 @@ function App() {
 
         <Route exact path="/voting">
           <VotingPage activeUser={activeUser} onLogout={handleLogout} votings={activeUserVoting} addVote={addVote}
-            updateEndDate={updateEndDate} />
+            updateEndDate={updateEndDate} votesPieData={votesPieData} AddUsersVote={AddUsersVote} />
         </Route>
       </Switch>
     </HashRouter>

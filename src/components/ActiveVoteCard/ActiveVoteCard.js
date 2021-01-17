@@ -6,32 +6,23 @@ import './ActiveVoteCard.css'
 
 
 function ActiveVoteCard(props) {
-    const { vote, activeUser, updateEndDate } = props;
+    const { vote, activeUser, updateEndDate, votesPieData, AddUsersVote } = props;
     const [showDateModal, setShowDateModal] = useState(false);
-    const [chosenOption, setChosenOption] = useState("");
+    const [chosenOption, setChosenOption] = useState(vote.options[0]);
+    let i = 0;
 
     var endDate = vote.endDate.substring(0, 16);
     endDate = endDate.replace("T", " ");
 
-    const data = [
-        { country: 'Russia', area: 12 },
-        { country: 'Canada', area: 7 },
-        { country: 'USA', area: 7 },
-        { country: 'China', area: 7 },
-        { country: 'Brazil', area: 6 },
-        { country: 'Australia', area: 5 },
-        { country: 'India', area: 2 },
-        { country: 'Others', area: 55 },
-    ];
 
-    let options = vote.options.map(option => <option>{option}</option>)
+    let options = vote.options.map(option => <option key={i++}>{option}</option>)
 
     function handleUpdateEndDate(updatedEndDate) {
         updateEndDate(vote.id, updatedEndDate);
     }
 
     function handleVote() {
-
+        AddUsersVote(chosenOption);
     }
     return (
         <div className="c-vote-card">
@@ -54,13 +45,13 @@ function ActiveVoteCard(props) {
                             </Row>
                         </Col>
                         <Col sm={6}>
-                            <PieChart data={data}></PieChart>
+                            <PieChart data={votesPieData}></PieChart>
                         </Col>
                     </Row>
                 </Container>
                 :
                 <Form>
-                    <Form.Group as={Row} controlId="formHorizontalPriority">
+                    <Form.Group as={Row} controlId={"formHorizontalVote" + i + vote.title}>
                         <Form.Label column sm={2}>
                             Your Vote:
                         </Form.Label>
@@ -70,6 +61,10 @@ function ActiveVoteCard(props) {
                             </Form.Control>
                             <div className="vote-button">
                                 <Button variant="warning" onClick={handleVote}>Submit Vote</Button>
+                                <div className="vote-end-date">
+                                    <label>Vote end at: </label>
+                                    <p>{endDate}</p>
+                                </div>
                             </div>
                         </Col>
                     </Form.Group>

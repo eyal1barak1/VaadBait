@@ -12,7 +12,7 @@ import VoteResultFilter from "../../components/VoteResultFilter/VoteResultFilter
 
 function VotingPage(props) {
     const { activeUser, onLogout, votings, addVote,
-        addVoteItems, vote_items, updateEndDate } = props;
+        addVoteItems, vote_items, updateEndDate, votesPieData, AddUsersVote } = props;
     const [showModal, setShowModal] = useState(false);
     const [votesData, setvotesData] = useState(votings);
     const [filteredVotings, setFilterdVotings] = useState([]);
@@ -32,11 +32,13 @@ function VotingPage(props) {
     //Filter Only Active votes
     const activeVotes = votings.filter(vote => vote.voteStatus === "active");
     const activeVoteView = activeVotes.map(vote => <ActiveVoteCard vote={vote} addVoteItems={addVoteItems}
-        vote_items={vote_items} activeUser={activeUser} updateEndDate={updateEndDate} />)
+        vote_items={vote_items} activeUser={activeUser} updateEndDate={updateEndDate} votesPieData={votesPieData} 
+        AddUsersVote={AddUsersVote}/>)
 
     //Filter Only NonActive votes
     const nonActiveVotes = filteredVotings.filter(vote => vote.voteStatus !== "active");
-    const nonActiveVoteView = nonActiveVotes.map(vote => <VoteResultCard vote={vote} activeUser={activeUser} />)
+    const nonActiveVoteView = nonActiveVotes.map(vote => <VoteResultCard vote={vote} activeUser={activeUser} 
+        votesPieData={votesPieData}/>)
 
     return (
         <div className="p-votes">

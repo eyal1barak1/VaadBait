@@ -12,20 +12,20 @@ function VoteResultFilter(props) {
     const { votes, filterVotings } = props;
     const [votesData, setVotesData] = useState(votes);
     const [filteredText, setFilteredText] = useState("");
-    
+    const [voteAdded, setvoteAddedAdded] = useState(false);
     let filteredVotes = votesData.filter(vote =>
         vote.title.toLowerCase().includes(filteredText.toLowerCase()) ||
         vote.details.toLowerCase().includes(filteredText.toLowerCase()));
 
     // Make sure to add the new message before Rerender
     if (votes !== votesData) {
-        setVotesData([...votes]);
-        
+        setVotesData(votes);
+        setvoteAddedAdded(!voteAdded);
     }
 
     useEffect(() => {
         filterVotings(filteredVotes);
-    }, [filteredText]);
+    }, [filteredText, voteAdded]);
 
     
     return (
