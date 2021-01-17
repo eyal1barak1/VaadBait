@@ -9,6 +9,7 @@ import jsonMessages from './data/messages.json';
 import jsonVotings from './data/votings.json';
 import MessagesPage from './pages/MessagesPage/MessagesPage';
 import VotingPage from './pages/VotingPage/VotingPage';
+import TenantsPage from './pages/TenantsPage/TenantsPage';
 
 
 
@@ -30,8 +31,32 @@ function App() {
   }
 
 
-  function AddCommittee(newCommittee) {
-    setUsers(users.concat(newCommittee));
+  // Users
+  function AddUser(newUser) {
+    setUsers(users.concat(newUser));
+  }
+
+  function removeTenant(userId) {
+    const found = users.find(element => element.id === userId);
+    const index = users.indexOf(found);
+    if (index > -1) {
+      users.splice(index, 1);
+      setUsers([...users]);
+    }
+  }
+  
+
+  function updateTenantContent(fname, lname, email, building, pwd, userId) {
+    const found = users.find(element => element.id === userId);
+    const index = users.indexOf(found);
+    if (index > -1) {
+      users[index].fname = fname;
+      users[index].lname = lname;
+      users[index].email = email;
+      users[index].building = building;
+      users[index].pwd = pwd;
+      setMessages([...users]);
+    }
   }
 
   //============== Messages ==================
@@ -174,7 +199,9 @@ function App() {
       <Switch>
         <Route exact path="/"><HomePage activeUser={activeUser} onLogout={handleLogout} /></Route>
         <Route exact path="/login"><LoginPage activeUser={activeUser} users={users} onLogin={handleLogin} /></Route>
-        <Route exact path="/signup"><SignupPage activeUser={activeUser} users={users} AddCommittee={AddCommittee} onLogin={handleLogin}/></Route>
+        <Route exact path="/signup"><SignupPage activeUser={activeUser} users={users} AddCommittee={AddUser} onLogin={handleLogin}/></Route>
+        <Route exact path="/tenants"><TenantsPage activeUser={activeUser} tenants={users} onLogin={handleLogin}
+        removeTenant={removeTenant}  updateTenantContent={updateTenantContent} addTenant={AddUser}/></Route>
 
         <Route exact path="/messages">
           <MessagesPage activeUser={activeUser} onLogout={handleLogout}

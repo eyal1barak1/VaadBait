@@ -13,6 +13,7 @@ function HoaNavbr(props) {
                 <Nav className="mr-auto">
                     {activeUser ? <Nav.Link href="#/messages">Messages</Nav.Link> : null}
                     {activeUser ? <Nav.Link href="#/voting">Voting</Nav.Link> : null}
+                    {activeUser ? <Nav.Link href="#/tenants">Tenants</Nav.Link> : null}
                 </Nav>
                 <Nav className="ml-auto">
                     {activeUser ? null : <Nav.Link href="#/login">Login</Nav.Link>}

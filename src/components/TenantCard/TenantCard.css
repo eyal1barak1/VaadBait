@@ -1,0 +1,51 @@
+.c-tenants-card {
+    height: 100%;
+}
+
+.c-tenants-card>.card {
+    height: 100%;
+}
+
+.c-tenants-card>.card img {
+    height: 250px;
+    object-fit: cover;
+}
+
+.tenant-details>label {
+    /* Other styling... */
+    text-align: right;
+    clear: both;
+    float: left;
+    margin-right: 5px;
+}
+
+.tenant-details>p {
+    max-width: 600px;
+}
+
+.tenant-priority>label {
+    /* Other styling... */
+    text-align: right;
+    clear: both;
+    float: left;
+    margin-right: 5px;
+}
+
+.tenant-priority>p {
+    max-width: 600px;
+}
+
+.b-update-button {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.b-delete-button {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.tenant-image{
+    width: 100%;
+    height: 100%;
+}
