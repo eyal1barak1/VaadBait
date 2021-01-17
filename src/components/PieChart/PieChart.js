@@ -1,35 +1,9 @@
 import * as React from 'react';
-
-
 import { Pie } from "react-chartjs-2";
 import './PieChart.css'
 import { Card, Container } from 'react-bootstrap';
 
 
-
-// export default class PieChart extends React.PureComponent {
-//     constructor(props) {
-//         super(props);
-
-//         this.state = {
-//             data: this.props.data,
-//         };
-//     }
-
-//     render() {
-//         const { data: chartData } = this.state;
-
-//         return (
-//             <Paper>
-//                 <Chart className="pieChart" data={chartData}>
-//                     <PieSeries valueField="nVotes" argumentField="voteSubject" />
-//                     <Title text={this.props.title} />
-//                     <Animation />
-//                 </Chart>
-//             </Paper>
-//         );
-//     }
-// }
 
 function getPieColors(numOfOptions) {
     let colors = {

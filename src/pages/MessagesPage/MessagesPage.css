@@ -1,9 +1,3 @@
-.p-recipes .heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 .b-new-message {
     position: relative; 
     height: 40px;

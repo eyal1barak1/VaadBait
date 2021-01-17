@@ -23,7 +23,7 @@ function NewVoteModal(props) {
     }
 
     function handleAddVote() {
-        // 1) triggers addRecipe at App that will then add this recipe to its recipes state
+        // 1) triggers addVote at App that will then add this vote to its votes state
         let date = new Date(endDate);
         let jsonStr = JSON.stringify(date);
         var dateStr = JSON.parse(jsonStr);  

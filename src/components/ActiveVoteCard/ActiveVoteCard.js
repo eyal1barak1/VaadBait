@@ -6,7 +6,7 @@ import './ActiveVoteCard.css'
 
 
 function ActiveVoteCard(props) {
-    const { vote, activeUser, updateEndDate, votesPieData, AddUsersVote } = props;
+    const { vote, activeUser, updateEndDate, AddUsersVote } = props;
     const [showDateModal, setShowDateModal] = useState(false);
     const [chosenOption, setChosenOption] = useState(vote.options[0]);
     let i = 0;
@@ -45,7 +45,7 @@ function ActiveVoteCard(props) {
                             </Row>
                         </Col>
                         <Col sm={6}>
-                            <PieChart data={votesPieData} title="Results" vote={vote}/>
+                            <PieChart title="Results" vote={vote}/>
                         </Col>
                     </Row>
                 </Container>

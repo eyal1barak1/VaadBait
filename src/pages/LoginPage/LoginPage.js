@@ -16,7 +16,7 @@ function LoginPage(props) {
         // email and pws exists in the users array)
         const userFound = users.find(user => user.email.toLowerCase() === email.toLowerCase() && user.pwd === pwd);
         if (userFound) {
-            // Trigger onLogin event prop + update redirect state so we will redirect to recipes page
+            // Trigger onLogin event prop + update redirect state so we will redirect to messages page
             onLogin(userFound);
             setRedirectToMessages(true);
         } else {

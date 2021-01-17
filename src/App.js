@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useState } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/HomePage/HomePage';
@@ -9,24 +9,16 @@ import jsonMessages from './data/messages.json';
 import jsonVotings from './data/votings.json';
 import MessagesPage from './pages/MessagesPage/MessagesPage';
 import VotingPage from './pages/VotingPage/VotingPage';
-// import PieChart from './components/PieChart/PieChart';
-import PieChart from './components/PieChart/PieChart';
-import { Pie } from "react-chartjs-2";
+
 
 
 
 function App() {
   const [users, setUsers] = useState(jsonUsers);        // HACK ALERT: holding all users as state only because this is a JSON based application (no server side)
   const [activeUser, setActiveUser] = useState(jsonUsers[0]);   // During development it's conveient to be logged in by default
-  const [messages, setMessages] = useState(jsonMessages);  // HACK ALERT: holding all recipes as state only because this is a JSON based application (no server side)
+  const [messages, setMessages] = useState(jsonMessages);  // HACK ALERT: holding all messages as state only because this is a JSON based application (no server side)
   const [messageItems, setMessageItems] = useState([]);
   const [votings, setVotings] = useState(jsonVotings);
-
-
-  const [votesPieData, setVotesPieData] = useState([]);
-
-
-
 
   //============== loging/logout==================
   function handleLogout() {
@@ -35,6 +27,11 @@ function App() {
 
   function handleLogin(loggedinUser) {
     setActiveUser(loggedinUser);
+  }
+
+
+  function AddCommittee(newCommittee) {
+    setUsers(users.concat(newCommittee));
   }
 
   //============== Messages ==================
@@ -162,7 +159,7 @@ function App() {
   function AddUsersVote(chosenOption, voteId, userId) {
     const found = votings.find(element => element.id === voteId);
     const index = votings.indexOf(found);
-    
+
     if (index > -1) {
       votings[index].votesPieData[userId] = chosenOption;
       setVotings([...votings]);
@@ -177,7 +174,7 @@ function App() {
       <Switch>
         <Route exact path="/"><HomePage activeUser={activeUser} onLogout={handleLogout} /></Route>
         <Route exact path="/login"><LoginPage activeUser={activeUser} users={users} onLogin={handleLogin} /></Route>
-        <Route exact path="/signup"><SignupPage activeUser={activeUser} /></Route>
+        <Route exact path="/signup"><SignupPage activeUser={activeUser} users={users} AddCommittee={AddCommittee} onLogin={handleLogin}/></Route>
 
         <Route exact path="/messages">
           <MessagesPage activeUser={activeUser} onLogout={handleLogout}
@@ -188,7 +185,7 @@ function App() {
 
         <Route exact path="/voting">
           <VotingPage activeUser={activeUser} onLogout={handleLogout} votings={activeUserVoting} addVote={addVote}
-            updateEndDate={updateEndDate} votesPieData={votesPieData} AddUsersVote={AddUsersVote} />
+            updateEndDate={updateEndDate} AddUsersVote={AddUsersVote} />
         </Route>
       </Switch>
     </HashRouter>

@@ -6,12 +6,10 @@ import './VoteResultCard.css'
 
 
 function VoteResultCard(props) {
-    const { vote, activeUser, votesPieData } = props;
+    const { vote, activeUser } = props;
 
     var endDate = vote.endDate.substring(0, 16);
     endDate = endDate.replace("T", " ");
-
-    console.log(votesPieData);
 
     return (
         <div className="c-vote-card">
@@ -32,10 +30,10 @@ function VoteResultCard(props) {
                         </Row>
                     </Col>
                     <Col sm={4}>
-                        <PieChart data={votesPieData} title="Results" vote={vote} />
+                        <PieChart title="Results" vote={vote} />
                     </Col>
                     <Col sm={4}>
-                        <PieChart data={votesPieData} title="Voting Precentage" vote={vote} />
+                        <PieChart title="Voting Precentage" vote={vote} />
                     </Col>
                 </Row>
             </Container>

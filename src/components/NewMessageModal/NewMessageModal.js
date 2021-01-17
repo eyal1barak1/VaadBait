@@ -18,7 +18,7 @@ function NewMessageModal(props) {
     }
 
     function handleAddMessage() {
-        // 1) triggers addRecipe at App that will then add this recipe to its recipes state
+        // 1) triggers addMessage at App that will then add this message to its messages state
         addMessage(title, details, priority, imgURL);
 
         // 2) cleanup (clean all field + close the modal)
