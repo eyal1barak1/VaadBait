@@ -22,7 +22,7 @@ function ActiveVoteCard(props) {
     }
 
     function handleVote() {
-        AddUsersVote(chosenOption);
+        AddUsersVote(chosenOption, vote.id, activeUser.id);
     }
     return (
         <div className="c-vote-card">
@@ -45,7 +45,7 @@ function ActiveVoteCard(props) {
                             </Row>
                         </Col>
                         <Col sm={6}>
-                            <PieChart data={votesPieData}></PieChart>
+                            <PieChart data={votesPieData} title="Results" vote={vote}/>
                         </Col>
                     </Row>
                 </Container>

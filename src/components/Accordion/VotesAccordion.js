@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Accordion, Card, Col, Row } from "react-bootstrap";
 import './VotesAccordion.css'
 
 function VotesAccordion(props) {
 
     const { panels, isResaultAccordion } = props;
-
+    
     return (
-        <Accordion variant="success">
+        <Accordion>
             {panels.map((panel, index) =>
                 <Card key={index}>
                     <Accordion.Toggle className="accordionHeader" as={Card.Header} eventKey={index.toString()} >

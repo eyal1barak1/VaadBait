@@ -16,6 +16,7 @@ function VotingPage(props) {
     const [showModal, setShowModal] = useState(false);
     const [votesData, setvotesData] = useState(votings);
     const [filteredVotings, setFilterdVotings] = useState([]);
+    const [reRender, setReRender] = useState(false);
 
     if (votings !== votesData) {
         setvotesData(votings);
@@ -32,13 +33,14 @@ function VotingPage(props) {
     //Filter Only Active votes
     const activeVotes = votings.filter(vote => vote.voteStatus === "active");
     const activeVoteView = activeVotes.map(vote => <ActiveVoteCard vote={vote} addVoteItems={addVoteItems}
-        vote_items={vote_items} activeUser={activeUser} updateEndDate={updateEndDate} votesPieData={votesPieData} 
-        AddUsersVote={AddUsersVote}/>)
+        vote_items={vote_items} activeUser={activeUser} updateEndDate={updateEndDate} votesPieData={votesPieData}
+        AddUsersVote={AddUsersVote} />)
 
     //Filter Only NonActive votes
     const nonActiveVotes = filteredVotings.filter(vote => vote.voteStatus !== "active");
-    const nonActiveVoteView = nonActiveVotes.map(vote => <VoteResultCard vote={vote} activeUser={activeUser} 
-        votesPieData={votesPieData}/>)
+    const nonActiveVoteView = nonActiveVotes.map(vote => <VoteResultCard vote={vote} activeUser={activeUser}
+        votesPieData={votesPieData} />)
+
 
     return (
         <div className="p-votes">

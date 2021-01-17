@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/HomePage/HomePage';
@@ -9,6 +9,9 @@ import jsonMessages from './data/messages.json';
 import jsonVotings from './data/votings.json';
 import MessagesPage from './pages/MessagesPage/MessagesPage';
 import VotingPage from './pages/VotingPage/VotingPage';
+// import PieChart from './components/PieChart/PieChart';
+import PieChart from './components/PieChart/PieChart';
+import { Pie } from "react-chartjs-2";
 
 
 
@@ -18,15 +21,9 @@ function App() {
   const [messages, setMessages] = useState(jsonMessages);  // HACK ALERT: holding all recipes as state only because this is a JSON based application (no server side)
   const [messageItems, setMessageItems] = useState([]);
   const [votings, setVotings] = useState(jsonVotings);
-  const data = [
-    { voteSubject: 'Russia', nVotes: 12 },
-    { voteSubject: 'Canada', nVotes: 7 },
-    { voteSubject: 'USA', nVotes: 7 },
-    { voteSubject: 'China', nVotes: 7 },
-    { voteSubject: 'Brazil', nVotes: 6 },
-  ];
-  const [votesPieData, setVotesPieData] = useState(data);
-  let date = new Date();
+
+
+  const [votesPieData, setVotesPieData] = useState([]);
 
 
 
@@ -51,7 +48,7 @@ function App() {
       userId: activeUser.id,
       building: activeUser.building,
       isRead: [],
-      date: date,
+      date: new Date(),
     }
 
     setMessages(messages.concat(newMessage));
@@ -115,7 +112,6 @@ function App() {
         }
         // names must be equal
         return 0;
-        // return a.priority.toUpperCase() < b.priority.toUpperCase() ? -1 : 1;
       });
     }
     setMessages([...messages]);
@@ -134,19 +130,23 @@ function App() {
       building: activeUser.building,
       voteStatus: "active",
       result: "",
+      votesPieData: {}
     }
 
     setVotings(votings.concat(newVote));
   }
 
+  // Check the end Date And Update Vote Status
   function CheckDateAndUpdateVoteStat(voteItem, index) {
     var now = new Date();
     var itemsEndDate = new Date(voteItem.endDate);
-    
+
     voteItem.voteStatus = now >= itemsEndDate ? "not active" : "active";
   }
 
   votings.forEach(CheckDateAndUpdateVoteStat);
+
+  //
 
   const activeUserVoting = activeUser ? votings.filter(voting => voting.building === activeUser.building) : [];
 
@@ -159,8 +159,14 @@ function App() {
     }
   }
 
-  function AddUsersVote(chosenOption) {
-
+  function AddUsersVote(chosenOption, voteId, userId) {
+    const found = votings.find(element => element.id === voteId);
+    const index = votings.indexOf(found);
+    
+    if (index > -1) {
+      votings[index].votesPieData[userId] = chosenOption;
+      setVotings([...votings]);
+    }
   }
 
 

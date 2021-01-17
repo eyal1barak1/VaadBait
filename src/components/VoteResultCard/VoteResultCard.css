@@ -1,15 +1,12 @@
 .c-votes-card {
     height: 100%;
+
 }
 
 .c-votes-card>.card {
     height: 100%;
 }
 
-.c-votes-card>.card img {
-    height: 250px;
-    object-fit: cover;
-}
 
 .vote-details>label {
    

@@ -31,7 +31,7 @@ function CommentsItem(props) {
     return (
         <li className={itemClass} ref={li => added_item = li}>
             <label className="form-check-label">
-                 {fname + " " + lname + ": " + text}:
+                 {fname + " " + lname + ": " + text}
             </label>
         </li>
     )
