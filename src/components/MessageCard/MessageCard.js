@@ -8,6 +8,7 @@ import './MessageCard.css'
 function MessageCard(props) {
     const { message, addMessageItems, message_items, removeMessage, activeUser, updateMessageContent} = props;
     const [showModal, setShowModal] = useState(false);
+    const placeHolderImage = "https://cdn3.iconfinder.com/data/icons/ui-thick-outline-5-of-5/100/ui_09_of_10_-14-512.png";
 
     function removeMessageById() {
         removeMessage(message.id);
@@ -16,12 +17,12 @@ function MessageCard(props) {
         <div className="c-message-card">
             <Container fluid>
                 <Row>
-                    <Col sm={4}>
+                    <Col sm={6}>
                         <Row>
-                            <Col sm={2}>
-                                <img className="message-image" src={message.img} ></img>
+                            <Col sm={5}>
+                                <img className="message-image" src={message.img === "" ? placeHolderImage : message.img} ></img>
                             </Col>
-                            <Col sm={10}>
+                            <Col sm={7}>
                                 <div className="message-details">
                                     <label>Details: </label>
                                     <p>{message.details}</p>
@@ -34,7 +35,7 @@ function MessageCard(props) {
                             </Col>
                         </Row>
                     </Col>
-                    <Col sm={6}>
+                    <Col sm={4}>
                         <CommentsApp message={message} message_items={message_items} 
                         addMessageItems={addMessageItems} activeUser={activeUser}></CommentsApp>
                     </Col>

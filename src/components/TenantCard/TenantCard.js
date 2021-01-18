@@ -7,6 +7,7 @@ import './TenantCard.css'
 function TenantCard(props) {
     const { tenant, removeTenant, activeUser, updateTenantContent} = props;
     const [showModal, setShowModal] = useState(false);
+    const placeHolderImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4tJDcJYnlhTCuciLukYiHdpeS9XL5wGGHSg&usqp=CAU";
 
     function removeTenantById() {
         removeTenant(tenant.id);
@@ -15,12 +16,12 @@ function TenantCard(props) {
         <div className="c-tenant-card">
             <Container fluid>
                 <Row>
-                    <Col sm={4}>
+                    <Col sm={10}>
                         <Row>
-                            <Col sm={2}>
-                                <img className="tenant-image" src={tenant.img} ></img>
+                            <Col sm={4}>
+                                <img className="tenant-image" src={tenant.img === "" ? placeHolderImage : tenant.img} ></img>
                             </Col>
-                            <Col sm={10}>
+                            <Col sm={8}>
                                 <div className="tenant-name">
                                     <label>Name: </label>
                                     <p>{tenant.fname + " " + tenant.lname}</p>
