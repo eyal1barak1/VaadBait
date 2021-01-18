@@ -62,10 +62,8 @@ function FilterMessage(props) {
                 if (nameA > nameB) {
                     return 1;
                 }
-
                 // names must be equal
                 return 0;
-                // return a.priority.toUpperCase() < b.priority.toUpperCase() ? 1 : -1;
             });
         }
         filterMessages(filteredMessages);
@@ -96,7 +94,7 @@ function FilterMessage(props) {
                 </Col>
                 <Col>
                     <Form.Group onChange={Sort} className="filter-field" controlId="formBasicCheckboxFirst">
-                        <Form.Label >Sort By:</Form.Label>
+                        <div className="sortByLabel"><Form.Label >Sort By:</Form.Label></div>
                         <Form.Check inline id="date" type="radio" label="Date" name="sort" />
                         <Form.Check inline id="priority" type="radio" label="Priority" name="sort" />
                     </Form.Group>

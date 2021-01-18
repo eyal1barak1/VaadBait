@@ -3,7 +3,7 @@ import { Button, Modal, Form, Col, Row, Image } from "react-bootstrap";
 
 
 function NewMessageModal(props) {
-    const { show, handleClose, addMessage, updateMessage, isUpdate, messageId, updateMessageContent } = props;
+    const { show, handleClose, addMessage, isUpdate, messageId, updateMessageContent } = props;
     const [title, setTitle] = useState("");
     const [details, setDetails] = useState("");
     const [priority, SetPriority] = useState("Info");

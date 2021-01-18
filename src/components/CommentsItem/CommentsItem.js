@@ -4,16 +4,9 @@ import './CommentsItem.css';
 
 function CommentsItem(props) {
 
-    const { id, onItemCompleted, onDeleteItem, completed, text, activeUser, fname, lname } = props;
+    const { completed, text, fname, lname } = props;
     var itemClass = "form-check todoitem " + (completed ? "done" : "undone");
     var added_item;
-    
-    function markCompleted(event) {
-        onItemCompleted(id);
-    }
-    function deleteItem(event) {
-        onDeleteItem(id);
-    }
 
     useEffect(() => {
         if (added_item) {

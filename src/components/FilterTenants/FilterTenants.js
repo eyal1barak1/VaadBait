@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { Container, Row, Col, InputGroup, FormControl } from 'react-bootstrap';
-import "./FilterTenants.css"
+
 
 
 
