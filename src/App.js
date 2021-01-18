@@ -113,7 +113,7 @@ function App() {
     setMessageItems(messageItems.concat(newItem));
   }
 
-  function SortMsg(sortBy) {
+  function SortMessages(sortBy) {
     if (sortBy === "date") {
       messages.sort(function (a, b) {
         const firstDate = Date.parse(a.date);
@@ -205,7 +205,7 @@ function App() {
 
         <Route exact path="/messages">
           <MessagesPage activeUser={activeUser} onLogout={handleLogout}
-            messages={activeUserMessages} updateMessage={updateMessage} SortMsg={SortMsg} removeMessage={removeMessage}
+            messages={activeUserMessages} updateMessage={updateMessage} SortMessages={SortMessages} removeMessage={removeMessage}
             addMessage={addMessage} addMessageItems={addMessageItems}
             message_items={messageItems} updateMessageContent={updateMessageContent} />
         </Route>
