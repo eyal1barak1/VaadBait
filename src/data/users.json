@@ -6,7 +6,8 @@
         "email": "nir@nir.com",
         "pwd": "123",
         "role": "committee",
-        "building":"blue"
+        "building":"blue", 
+        "img":""
     },
     {
         "id": 2,
@@ -15,7 +16,8 @@
         "email": "john@john.com",
         "pwd": "123",
         "role": "tenant",
-        "building":"blue"
+        "building":"blue",
+        "img":""
     },
     {
         "id": 3,
@@ -24,7 +26,8 @@
         "email": "e@e.com",
         "pwd": "123",
         "role": "tenant",
-        "building":"blue"
+        "building":"blue",
+        "img":""
     },
     {
         "id": 4,
@@ -33,7 +36,8 @@
         "email": "a@a.com",
         "pwd": "123",
         "role": "tenant",
-        "building":"red"
+        "building":"red",
+        "img":""
     },
     {
         "id": 5,
@@ -42,6 +46,7 @@
         "email": "b@b.com",
         "pwd": "123",
         "role": "committee",
-        "building":"red"
+        "building":"red",
+        "img":""
     }
 ]

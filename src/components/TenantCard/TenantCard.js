@@ -5,7 +5,7 @@ import './TenantCard.css'
 
 
 function TenantCard(props) {
-    const { tenant, removeTenant, activeUser, updateTenantContent} = props;
+    const { tenant, removeTenant, updateTenantContent} = props;
     const [showModal, setShowModal] = useState(false);
     const placeHolderImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4tJDcJYnlhTCuciLukYiHdpeS9XL5wGGHSg&usqp=CAU";
 

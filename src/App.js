@@ -201,7 +201,7 @@ function App() {
         <Route exact path="/login"><LoginPage activeUser={activeUser} users={users} onLogin={handleLogin} /></Route>
         <Route exact path="/signup"><SignupPage activeUser={activeUser} users={users} AddCommittee={AddUser} onLogin={handleLogin}/></Route>
         <Route exact path="/tenants"><TenantsPage activeUser={activeUser} tenants={users} onLogin={handleLogin}
-        removeTenant={removeTenant}  updateTenantContent={updateTenantContent} addTenant={AddUser}/></Route>
+        removeTenant={removeTenant}  updateTenantContent={updateTenantContent} addTenant={AddUser} onLogout={handleLogout}/></Route>
 
         <Route exact path="/messages">
           <MessagesPage activeUser={activeUser} onLogout={handleLogout}

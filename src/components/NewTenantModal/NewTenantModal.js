@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Modal, Form } from "react-bootstrap";
+import { Button, Modal, Form, Col, Image, Row } from "react-bootstrap";
 
 
 function NewTenantModal(props) {
@@ -9,6 +9,9 @@ function NewTenantModal(props) {
     const [fname, setfname] = useState("Eyal");
     const [lname, setlname] = useState("Barak");
     const [building, setBuilding] = useState("Einstein");
+    const [img, setImg] = useState("");
+    const placeHolderImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4tJDcJYnlhTCuciLukYiHdpeS9XL5wGGHSg&usqp=CAU";
+
 
     function closeModal() {
         setEmail("");
@@ -16,6 +19,7 @@ function NewTenantModal(props) {
         setfname([]);
         setlname("");
         setBuilding("");
+        setImg("");
         handleClose();
     }
 
@@ -28,6 +32,7 @@ function NewTenantModal(props) {
             pwd,
             role: "tenant",
             building,
+            img,
         }
 
         addTenant(newCommittee);
@@ -38,7 +43,7 @@ function NewTenantModal(props) {
 
 
     function handleUpdateTenant() {
-        updateTenantContent(fname, lname, email, building, pwd, userId);
+        updateTenantContent(fname, lname, email, building, pwd, img, userId);
 
         closeModal();
     }
@@ -69,6 +74,19 @@ function NewTenantModal(props) {
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" placeholder="Password" value={pwd} onChange={e => setPwd(e.target.value)} />
                     </Form.Group>
+                    <Form.Group controlId="formHorizontalImage">
+                        <Form.Label>
+                            Image URL
+                        </Form.Label>
+                        <Row>
+                            <Col sm={10}>
+                                <Form.Control type="text" placeholder="Image URL" value={img} onChange={e => setImg(e.target.value)} />
+                            </Col>
+                            <Col sm={2}>
+                                <Image width="100" height="100" src={img === "" ? placeHolderImage : img} />
+                            </Col>
+                        </Row>
+                    </Form.Group>
                     <Form.Group controlId="formBasicbuilding">
                         <Form.Label>Building/Condomium Community Name</Form.Label>
                         <Form.Control type="text" placeholder="Building/Condomium Community Name" value={building} onChange={e => setBuilding(e.target.value)} />
@@ -88,7 +106,7 @@ function NewTenantModal(props) {
                             Cancel
                         </Button>
                         <Button variant="primary" onClick={handleAddTennant}>
-                        Add Tenant
+                            Add Tenant
                     </  Button>
                     </Modal.Footer>}
             </div>
