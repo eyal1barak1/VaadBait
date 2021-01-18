@@ -9,30 +9,13 @@ import "./VoteResultFilter.css"
 
 function VoteResultFilter(props) {
 
-    const { votes, filterVotings } = props;
-    const [votesData, setVotesData] = useState(votes);
-    const [filteredText, setFilteredText] = useState("");
-    const [voteAdded, setvoteAddedAdded] = useState(false);
-    let filteredVotes = votesData.filter(vote =>
-        vote.title.toLowerCase().includes(filteredText.toLowerCase()) ||
-        vote.details.toLowerCase().includes(filteredText.toLowerCase()));
-
-    // Make sure to add the new message before Rerender
-    if (votes !== votesData) {
-        setVotesData(votes);
-        setvoteAddedAdded(!voteAdded);
-    }
-
-    useEffect(() => {
-        filterVotings(filteredVotes);
-    }, [filteredText, voteAdded]);
-
+    const { filteredText, onFilterChange } = props;
     
     return (
         <Container>
             <Row>
                 <Col >
-                    <InputGroup size="sm" className="mb-3" onChange={e => setFilteredText(e.target.value)} value={filteredText}>
+                    <InputGroup size="sm" className="mb-3" onChange={e => onFilterChange(e)} value={filteredText}>
                         <InputGroup.Prepend>
                             <InputGroup.Text>
                                 <FontAwesomeIcon icon={faSearch} />

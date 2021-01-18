@@ -10,21 +10,18 @@ import NewTenantModal from "../../components/NewTenantModal/NewTenantModal";
 
 function TenantsPage(props) {
     const { activeUser, onLogout, tenants, addTenant, removeTenant, updateTenantContent } = props;
-    const [tenantsData, setTenantsData] = useState(tenants);
     const [showModal, setShowModal] = useState(false);
-    const [filteredTenants, setFilterdTenants] = useState([]);
-
-    if (tenants !== tenantsData) {
-        setTenantsData(tenants);
-    }
+    const [filteredText, setFilteredText] = useState("");
 
     if (!activeUser) {
         return <Redirect to="/" />
     }
 
-    function filterTenants(filteredTenantsVar) {
-        setFilterdTenants(filteredTenantsVar);
-    }
+    let filteredTenants = tenants.filter(tenant =>
+        tenant.fname.toLowerCase().includes(filteredText.toLowerCase()) ||
+        tenant.lname.toLowerCase().includes(filteredText.toLowerCase()) ||
+        tenant.email.toLowerCase().includes(filteredText.toLowerCase())
+    );
 
     const TenantView = filteredTenants.map(tenant => <TenantCard tenant={tenant}
         removeTenant={removeTenant} activeUser={activeUser} updateTenantContent={updateTenantContent} />)
@@ -32,7 +29,7 @@ function TenantsPage(props) {
     return (
         <div className="p-messages">
             <HoaNavbr activeUser={activeUser} onLogout={onLogout} />
-            <FilterTenants tenants={tenantsData} filterTenants={filterTenants} />
+            <FilterTenants filteredText={filteredText} onFilterChange={e => setFilteredText(e.target.value)}/>
             <div className="b-new-message">
                 <Button variant="link" onClick={() => setShowModal(true)}>New Tenant</Button>
             </div>

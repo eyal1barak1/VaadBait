@@ -9,31 +9,13 @@ import { Container, Row, Col, InputGroup, FormControl } from 'react-bootstrap';
 
 function FilterTenants(props) {
 
-    const { tenants, filterTenants } = props;
-    const [tenantsData, setTenantsData] = useState(tenants);
-    const [filteredText, setFilteredText] = useState("");
-    const [tenantAdded, setMessageAdded] = useState(false);
-    let filteredTenants = tenantsData.filter(tenant =>
-        tenant.fname.toLowerCase().includes(filteredText.toLowerCase()) ||
-        tenant.lname.toLowerCase().includes(filteredText.toLowerCase()) ||
-        tenant.email.toLowerCase().includes(filteredText.toLowerCase())
-    );
-
-    // Make sure to add the new message before Rerender
-    if (tenants !== tenantsData) {
-        setTenantsData(tenants);
-        setMessageAdded(!tenantAdded);
-    }
-
-    useEffect(() => {
-        filterTenants(filteredTenants);
-    }, [filteredText, tenantAdded]);
-
+    const { filteredText, onFilterChange } = props;
+    
     return (
         <Container>
             <Row>
-                <Col xs={8}>
-                    <InputGroup size="sm" className="mb-3" onChange={e => setFilteredText(e.target.value)} value={filteredText}>
+                <Col >
+                    <InputGroup size="sm" className="mb-3" onChange={e => onFilterChange(e)} value={filteredText}>
                         <InputGroup.Prepend>
                             <InputGroup.Text>
                                 <FontAwesomeIcon icon={faSearch} />
@@ -44,9 +26,9 @@ function FilterTenants(props) {
                     </InputGroup>
                 </Col>
             </Row>
-           
         </Container>
     );
+   
 }
 
 export default FilterTenants;
