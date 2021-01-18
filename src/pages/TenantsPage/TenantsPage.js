@@ -4,8 +4,6 @@ import { Redirect } from "react-router-dom";
 import TenantCard from "../../components/TenantCard/TenantCard";
 import HoaNavbr from "../../components/HOANavbar/HOANavbr";
 import './TenantsPage.css'
-import MessagesAccordion from "../../components/Accordion/MessagesAccordion";
-
 import FilterTenants from "../../components/FilterTenants/FilterTenants";
 import TenantsAccordion from "../../components/Accordion/TenantsAccordion";
 import NewTenantModal from "../../components/NewTenantModal/NewTenantModal";

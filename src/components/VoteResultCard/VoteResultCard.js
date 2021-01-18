@@ -1,12 +1,10 @@
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import { useState } from "react";
-import DateModal from "../DateModal/DateModal";
+import {   Container,Col, Row } from "react-bootstrap";
 import PieChart from "../PieChart/PieChart";
 import './VoteResultCard.css'
 
 
 function VoteResultCard(props) {
-    const { vote, activeUser } = props;
+    const { vote } = props;
 
     var endDate = vote.endDate.substring(0, 16);
     endDate = endDate.replace("T", " ");

@@ -25,9 +25,9 @@ function getPieColors(numOfOptions) {
     ]
    
     for (let i = 0; i < numOfOptions; ++i) {
-        let red = Math.floor(Math.random() * 256).toString();
-        let green = Math.floor(Math.random() * 256).toString();
-        let blue = Math.floor(Math.random() * 256).toString();
+        // let red = Math.floor(Math.random() * 256).toString();
+        // let green = Math.floor(Math.random() * 256).toString();
+        // let blue = Math.floor(Math.random() * 256).toString();
         let pieColor = colorsArray[i%colorsArray.length] + `0.2)`;
         let pieColorBorder = colorsArray[i%colorsArray.length] + `1)`;
         // let pieColor = `rgba(${red},${green},${blue},0.2)`;

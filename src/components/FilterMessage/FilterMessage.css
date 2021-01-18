@@ -1,8 +1,12 @@
 .filter-field {
     display: flex;
-    align-items: end;
+    /* align-items: end; */
 }
 
-.filter-field > .form-label{
+.sortByLabel {
+    height: 22px;
+}
+
+.filter-field>.form-label {
     margin-right: 10px;
 }

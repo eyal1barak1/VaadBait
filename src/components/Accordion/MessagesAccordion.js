@@ -1,4 +1,3 @@
-import ReactDOM from 'react-dom'
 import React from 'react'
 import { Accordion, Card } from "react-bootstrap";
 import "./MessagesAccordion.css"
@@ -22,7 +21,7 @@ function MessagesAccordion(props) {
                         onClick={() => SetStateOnClick(panel.props.message.id, panel.props.activeUser.id)}
                         as={Card.Header} eventKey={index.toString()} >
                         {panel.props.message.title}
-                        <img className="readImage" width="20" height="20"          
+                        <img alt="messageImg" className="readImage" width="20" height="20"          
                             src={panel.props.message.isRead.includes(panel.props.activeUser.id) ? readMsgSrc : unReadMsgSrc} >
                         </img>
                     </Accordion.Toggle>

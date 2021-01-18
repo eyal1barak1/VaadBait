@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import CommentsList from '../CommentsList/CommentsList'
 import './CommentsApp.css';
 

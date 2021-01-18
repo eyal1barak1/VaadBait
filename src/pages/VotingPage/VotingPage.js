@@ -16,7 +16,6 @@ function VotingPage(props) {
     const [showModal, setShowModal] = useState(false);
     const [votesData, setvotesData] = useState(votings);
     const [filteredVotings, setFilterdVotings] = useState([]);
-    const [reRender, setReRender] = useState(false);
 
     if (votings !== votesData) {
         setvotesData(votings);
