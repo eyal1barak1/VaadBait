@@ -6,7 +6,7 @@ import MessageCard from "../../components/MessageCard/MessageCard";
 import HoaNavbr from "../../components/HOANavbar/HOANavbr";
 import './MessagesPage.css'
 import MessagesAccordion from "../../components/Accordion/MessagesAccordion";
-import FilterMessage from "../../components/FilterMessage/FilterMessage";
+import FilterContent from "../../components/FilterContent/FilterContent";
 
 function MessagesPage(props) {
     const { activeUser, onLogout, messages, addMessage, message_items, addMessageItems,
@@ -46,9 +46,8 @@ function MessagesPage(props) {
     return (
         <div className="p-messages">
             <HoaNavbr activeUser={activeUser} onLogout={onLogout} />
-            <FilterMessage filteredText={filteredText} onFilterChange={e => setFilteredText(e.target.value)}
-                priorityFilter={priorityFilter} FilterPriority={FilterPriority} Sort={SortMessages}>
-            </FilterMessage>
+            <FilterContent isMessagesPage={true} filteredText={filteredText} onFilterChange={e => setFilteredText(e.target.value)}
+                priorityFilter={priorityFilter} FilterPriority={FilterPriority} Sort={SortMessages}/>
             <div className="b-new-message" style={{ visibility: activeUser.role === "committee" ? "visible" : "hidden" }}>
                 <Button variant="link" onClick={() => setShowModal(true)}>New Message</Button>
             </div>

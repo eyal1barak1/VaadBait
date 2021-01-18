@@ -8,7 +8,7 @@ import NewVoteModal from "../../components/NewVoteModal/NewVoteModal";
 import VotesAccordion from "../../components/Accordion/VotesAccordion";
 import ActiveVoteCard from "../../components/ActiveVoteCard/ActiveVoteCard";
 import VoteResultCard from "../../components/VoteResultCard/VoteResultCard"
-import VoteResultFilter from "../../components/VoteResultFilter/VoteResultFilter";
+import FilterContent from "../../components/FilterContent/FilterContent";
 
 function VotingPage(props) {
     const { activeUser, onLogout, votings, addVote,
@@ -50,7 +50,7 @@ function VotingPage(props) {
                     </Col>
                     <Col>
                         <h1>Voting Results</h1>
-                        <VoteResultFilter filteredText={filteredText} onFilterChange={e => setFilteredText(e.target.value)} />
+                        <FilterContent isMessagesPage={false} filteredText={filteredText} onFilterChange={e => setFilteredText(e.target.value)} />
                         <VotesAccordion panels={nonActiveVoteView} isResaultAccordion="true" />
                     </Col>
                 </Row>
