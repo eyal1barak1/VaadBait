@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import TenantCard from "../../components/TenantCard/TenantCard";
@@ -7,21 +7,43 @@ import './TenantsPage.css'
 import TenantsAccordion from "../../components/Accordion/TenantsAccordion";
 import NewTenantModal from "../../components/NewTenantModal/NewTenantModal";
 import FilterContent from "../../components/FilterContent/FilterContent";
+import UserModel from "../../model/UserModel";
+import Parse from 'parse';
 
 function TenantsPage(props) {
-    const { activeUser, onLogout, tenants, addTenant, removeTenant, updateTenantContent } = props;
+    const { activeUser, onLogout, addTenant, removeTenant, updateTenantContent } = props;
     const [showModal, setShowModal] = useState(false);
     const [filteredText, setFilteredText] = useState("");
-
-    if (!activeUser) {
-        return <Redirect to="/" />
-    }
-
+    const [tenants, setTenants] = useState([]);
     let filteredTenants = tenants.filter(tenant =>
         tenant.fname.toLowerCase().includes(filteredText.toLowerCase()) ||
         tenant.lname.toLowerCase().includes(filteredText.toLowerCase()) ||
         tenant.email.toLowerCase().includes(filteredText.toLowerCase())
     );
+    
+
+    useEffect(() => {
+        async function fetchData() {
+            const ParseTenants = Parse.Object.extend('User');
+            const query = new Parse.Query(ParseTenants);
+            // console.log(Parse.User.current().attributes.building);
+            query.equalTo("role", "committee");
+            const parseTenants = await query.find();
+            setTenants(parseTenants.map(parseTenants => new UserModel(parseTenants)));
+        }
+
+        if (activeUser) {
+            fetchData()
+        }
+    }, [activeUser])
+
+    if (!activeUser) {
+        return <Redirect to="/" />
+    }
+
+    
+    
+    
 
     const TenantView = filteredTenants.map(tenant => <TenantCard tenant={tenant}
         removeTenant={removeTenant} activeUser={activeUser} updateTenantContent={updateTenantContent} />)

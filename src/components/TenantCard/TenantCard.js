@@ -12,6 +12,7 @@ function TenantCard(props) {
     function removeTenantById() {
         removeTenant(tenant.id);
     }
+ 
     return (
         <div className="c-tenant-card">
             <Container fluid>
@@ -19,7 +20,7 @@ function TenantCard(props) {
                     <Col sm={10}>
                         <Row>
                             <Col sm={4}>
-                                <img alt="tenantImg" className="tenant-image" src={tenant.img === "" ? placeHolderImage : tenant.img} ></img>
+                                <img alt="tenantImg" className="tenant-image" src={typeof tenant.img === 'undefined' ? placeHolderImage : tenant.img} ></img>
                             </Col>
                             <Col sm={8}>
                                 <div className="tenant-name">

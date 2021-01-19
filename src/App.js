@@ -36,7 +36,7 @@ function App() {
 
   // Users
   function AddUser(newUser) {
-    setUsers(users.concat(newUser));
+    // setUsers(users.concat(newUser));
   }
 
   function removeTenant(userId) {
@@ -78,35 +78,35 @@ function App() {
   //   setMessages(messages.concat(newMessage));
   // }
 
-  function updateMessage(messageId, activeUserId) {
-    const found = messages.find(element => element.id === messageId);
-    const index = messages.indexOf(found);
-    if (index > -1) {
-      messages[index].isRead.push(activeUserId);
-      setMessages([...messages]);
-    }
-  }
+  // function updateMessage(messageId, activeUserId) {
+  //   const found = messages.find(element => element.id === messageId);
+  //   const index = messages.indexOf(found);
+  //   if (index > -1) {
+  //     messages[index].isRead.push(activeUserId);
+  //     setMessages([...messages]);
+  //   }
+  // }
 
-  function removeMessage(messageId) {
-    const found = messages.find(element => element.id === messageId);
-    const index = messages.indexOf(found);
-    if (index > -1) {
-      messages.splice(index, 1);
-      setMessages([...messages]);
-    }
-  }
+  // function removeMessage(messageId) {
+  //   const found = messages.find(element => element.id === messageId);
+  //   const index = messages.indexOf(found);
+  //   if (index > -1) {
+  //     messages.splice(index, 1);
+  //     setMessages([...messages]);
+  //   }
+  // }
 
-  function updateMessageContent(title, details, priority, img, messageId) {
-    const found = messages.find(element => element.id === messageId);
-    const index = messages.indexOf(found);
-    if (index > -1) {
-      messages[index].title = title;
-      messages[index].details = details;
-      messages[index].priority = priority;
-      messages[index].img = img;
-      setMessages([...messages]);
-    }
-  }
+  // function updateMessageContent(title, details, priority, img, messageId) {
+  //   const found = messages.find(element => element.id === messageId);
+  //   const index = messages.indexOf(found);
+  //   if (index > -1) {
+  //     messages[index].title = title;
+  //     messages[index].details = details;
+  //     messages[index].priority = priority;
+  //     messages[index].img = img;
+  //     setMessages([...messages]);
+  //   }
+  // }
   const activeUserMessages = activeUser ? messages.filter(message => message.building === activeUser.building) : [];
 
 
@@ -206,7 +206,7 @@ function App() {
 
         <Route exact path="/messages">
           <MessagesPage activeUser={activeUser} onLogout={handleLogout}
-            messages={activeUserMessages} updateMessage={updateMessage} SortMessages={SortMessages} removeMessage={removeMessage}
+            messages={activeUserMessages}  SortMessages={SortMessages} 
             addMessageItems={addMessageItems}
             message_items={messageItems} updateMessageContent={updateMessageContent} />
         </Route>

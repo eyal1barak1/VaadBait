@@ -11,8 +11,7 @@ import Parse from 'parse';
 import MessageModel from "../../model/MessageModel";
 
 function MessagesPage(props) {
-    const { activeUser, onLogout, message_items, addMessageItems,
-        updateMessage, SortMessages, removeMessage, updateMessageContent } = props;
+    const { activeUser, onLogout, message_items, addMessageItems } = props;
     const [showModal, setShowModal] = useState(false);
     const [filteredText, setFilteredText] = useState("");
     const [priorityFilter, setPriorityFilter] = useState("");
@@ -47,26 +46,98 @@ function MessagesPage(props) {
         newMessage.set('priority', priority);
         newMessage.set('date', new Date().toString());
         newMessage.set('isRead', []);
-        newMessage.set('building', Parse.User.current().attributes.building);
-
-        var user = Parse.User.current();
-        var relation = user.relation('userId');
-        relation.add(Parse.User.current()); // Post is a Parse Object
-        
-        // newMessage.set('userId', relation);
-
+        newMessage.set('building', Parse.User.current().attributes.building);        
+        var relation = newMessage.relation("userId");
+        relation.add(Parse.User.current()); 
         const parseMessage = await newMessage.save();
         setMessages(messages.concat(new MessageModel(parseMessage)));
     }
 
-    function updateMessage2(messageId, activeUserId) {
-        const found = messages.find(element => element.id === messageId);
-        const index = messages.indexOf(found);
-        if (index > -1) {
-            messages[index].isRead.push(activeUserId);
-            setMessages([...messages]);
-        }
+    function updateMessage(messageId, activeUserId) {
+        const Message = Parse.Object.extend('Message');
+        const query = new Parse.Query(Message);
+
+        query.get(messageId).then((object) => {
+            object.set('isRead', [1, activeUserId]);
+            object.save().then((response) => {
+                const found = messages.find(element => element.id === messageId);
+                const index = messages.indexOf(found);
+                messages[index].isRead.push(activeUserId);
+                setMessages([...messages]);
+                console.log('Updated Message Read status', response);
+            }, (error) => {
+                console.error('Error while updating Message', error);
+            });
+        });
     }
+
+    function removeMessage(messageId) {
+        const Message = Parse.Object.extend('Message');
+        const query = new Parse.Query(Message);
+        query.get(messageId).then((object) => {
+            object.destroy().then((response) => {
+                const found = messages.find(element => element.id === messageId);
+                const index = messages.indexOf(found);
+                messages.splice(index, 1);
+                setMessages([...messages]);
+                console.log('Deleted Message', response);
+            }, (error) => {
+                console.error('Error while deleting Message', error);
+            });
+        });
+    }
+
+    function updateMessageContent(title, details, priority, img, messageId) {
+
+        const Message = Parse.Object.extend('Message');
+        const query = new Parse.Query(Message);
+
+        query.get(messageId).then((object) => {
+            object.set('title', title);
+            object.set('details', details);
+            object.set('priority', priority);
+            object.set('img', img);
+
+            object.save().then((response) => {
+                const found = messages.find(element => element.id === messageId);
+                const index = messages.indexOf(found);
+                messages[index].title = title;
+                messages[index].details = details;
+                messages[index].priority = priority;
+                messages[index].img = img;
+                setMessages([...messages]);
+                console.log('Updated Message ', response);
+            }, (error) => {
+                console.error('Error while updating Message', error);
+            });
+        });
+    }
+
+    function SortMessages(sortBy) {
+        if (sortBy === "date") {
+          messages.sort(function (a, b) {
+            const firstDate = Date.parse(a.date);
+            const secondDate = Date.parse(b.date);
+    
+            return secondDate - firstDate;
+          });
+        }
+        else {
+          messages.sort(function (a, b) {
+            var nameA = a.priority.toUpperCase(); // ignore upper and lowercase
+            var nameB = b.priority.toUpperCase(); // ignore upper and lowercase
+            if (nameA < nameB) {
+              return -1;
+            }
+            if (nameA > nameB) {
+              return 1;
+            }
+            // names must be equal
+            return 0;
+          });
+        }
+        setMessages([...messages]);
+      }
 
     if (!activeUser) {
         return <Redirect to="/" />

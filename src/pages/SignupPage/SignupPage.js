@@ -14,16 +14,9 @@ function SignupPage(props) {
 
     const [redirectToMessages, setRedirectToMessages] = useState(false);
     const { users, onLogin, AddCommittee } = props;
-    let loggedInNewUser;
 
-    function logIn() {
-        // Create a new instance of the user class
-        var user = Parse.User.logIn(email, pwd).then(function (user) {
-            console.log('User created successful with name: ' + user.get("username") + ' and email: ' + user.get("email"));
-        }).catch(function (error) {
-            console.log("Error: " + error.code + " " + error.message);
-        });
-    }
+
+    
     function SignUp() {
 
         const newUser = new Parse.User();
