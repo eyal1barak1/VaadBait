@@ -4,8 +4,6 @@ import './App.css';
 import HomePage from './pages/HomePage/HomePage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import SignupPage from './pages/SignupPage/SignupPage';
-import jsonUsers from './data/users.json';
-import jsonMessages from './data/messages.json';
 import jsonVotings from './data/votings.json';
 import MessagesPage from './pages/MessagesPage/MessagesPage';
 import VotingPage from './pages/VotingPage/VotingPage';
@@ -16,10 +14,8 @@ import UserModel from './model/UserModel';
 
 
 function App() {
-  const [users, setUsers] = useState(jsonUsers);        // HACK ALERT: holding all users as state only because this is a JSON based application (no server side)
   const [activeUser, setActiveUser] = useState(
     Parse.User.current() ? new UserModel(Parse.User.current()) : null);   // During development it's conveient to be logged in by default
-  const [messages, setMessages] = useState(jsonMessages);  // HACK ALERT: holding all messages as state only because this is a JSON based application (no server side)
   const [messageItems, setMessageItems] = useState([]);
   const [votings, setVotings] = useState(jsonVotings);
 
@@ -33,114 +29,9 @@ function App() {
     setActiveUser(loggedinUser);
   }
 
-
-  // Users
-  function AddUser(newUser) {
-    // setUsers(users.concat(newUser));
-  }
-
-  function removeTenant(userId) {
-    const found = users.find(element => element.id === userId);
-    const index = users.indexOf(found);
-    if (index > -1) {
-      users.splice(index, 1);
-      setUsers([...users]);
-    }
-  }
-
-
-  function updateTenantContent(fname, lname, email, building, pwd, userId) {
-    const found = users.find(element => element.id === userId);
-    const index = users.indexOf(found);
-    if (index > -1) {
-      users[index].fname = fname;
-      users[index].lname = lname;
-      users[index].email = email;
-      users[index].building = building;
-      users[index].pwd = pwd;
-      setMessages([...users]);
-    }
-  }
-
-  //============== Messages ==================
-  // function addMessage(title, details, priority, img) {
-  //   const newMessage = {
-  //     id: Date.now(),
-  //     title,
-  //     details,
-  //     priority,
-  //     img,
-  //     building: activeUser.building,
-  //     isRead: [],
-  //     date: new Date(),
-  //   }
-
-  //   setMessages(messages.concat(newMessage));
-  // }
-
-  // function updateMessage(messageId, activeUserId) {
-  //   const found = messages.find(element => element.id === messageId);
-  //   const index = messages.indexOf(found);
-  //   if (index > -1) {
-  //     messages[index].isRead.push(activeUserId);
-  //     setMessages([...messages]);
-  //   }
-  // }
-
-  // function removeMessage(messageId) {
-  //   const found = messages.find(element => element.id === messageId);
-  //   const index = messages.indexOf(found);
-  //   if (index > -1) {
-  //     messages.splice(index, 1);
-  //     setMessages([...messages]);
-  //   }
-  // }
-
-  // function updateMessageContent(title, details, priority, img, messageId) {
-  //   const found = messages.find(element => element.id === messageId);
-  //   const index = messages.indexOf(found);
-  //   if (index > -1) {
-  //     messages[index].title = title;
-  //     messages[index].details = details;
-  //     messages[index].priority = priority;
-  //     messages[index].img = img;
-  //     setMessages([...messages]);
-  //   }
-  // }
-  const activeUserMessages = activeUser ? messages.filter(message => message.building === activeUser.building) : [];
-
-
-
   function addMessageItems(newItem) {
     setMessageItems(messageItems.concat(newItem));
   }
-
-  // function SortMessages(sortBy) {
-  //   if (sortBy === "date") {
-  //     messages.sort(function (a, b) {
-  //       const firstDate = Date.parse(a.date);
-  //       const secondDate = Date.parse(b.date);
-
-  //       return secondDate - firstDate;
-  //     });
-  //   }
-  //   else {
-  //     messages.sort(function (a, b) {
-  //       var nameA = a.priority.toUpperCase(); // ignore upper and lowercase
-  //       var nameB = b.priority.toUpperCase(); // ignore upper and lowercase
-  //       if (nameA < nameB) {
-  //         return -1;
-  //       }
-  //       if (nameA > nameB) {
-  //         return 1;
-  //       }
-  //       // names must be equal
-  //       return 0;
-  //     });
-  //   }
-  //   setMessages([...messages]);
-  // }
-
 
   //============== Voting ==================
   function addVote(title, details, options, endDate) {
@@ -199,14 +90,12 @@ function App() {
     <HashRouter>
       <Switch>
         <Route exact path="/"><HomePage activeUser={activeUser} onLogout={handleLogout} /></Route>
-        <Route exact path="/login"><LoginPage activeUser={activeUser} users={users} onLogin={handleLogin} /></Route>
-        <Route exact path="/signup"><SignupPage activeUser={activeUser} users={users} AddCommittee={AddUser} onLogin={handleLogin} /></Route>
-        <Route exact path="/tenants"><TenantsPage activeUser={activeUser} tenants={users} onLogin={handleLogin}
-          removeTenant={removeTenant} updateTenantContent={updateTenantContent} addTenant={AddUser} onLogout={handleLogout} /></Route>
+        <Route exact path="/login"><LoginPage activeUser={activeUser}  onLogin={handleLogin} /></Route>
+        <Route exact path="/signup"><SignupPage activeUser={activeUser}  onLogin={handleLogin} /></Route>
+        <Route exact path="/tenants"><TenantsPage activeUser={activeUser} onLogin={handleLogin} onLogout={handleLogout} /></Route>
 
         <Route exact path="/messages">
-          <MessagesPage activeUser={activeUser} onLogout={handleLogout}
-            messages={activeUserMessages}  addMessageItems={addMessageItems}
+          <MessagesPage activeUser={activeUser} onLogout={handleLogout} addMessageItems={addMessageItems}
             message_items={messageItems} />
         </Route>
 

@@ -16,9 +16,11 @@ function SignupPage(props) {
     const { users, onLogin, AddCommittee } = props;
 
 
-    
-    function SignUp() {
 
+    function SignUp() {
+        var acl = new Parse.ACL();
+        acl.setPublicReadAccess(true);
+        
         const newUser = new Parse.User();
         newUser.set('username', fname);
         newUser.set('email', email);
@@ -30,6 +32,7 @@ function SignupPage(props) {
         newUser.set('password', pwd);
 
         newUser.signUp().then((newUser) => {
+            acl.setWriteAccess(Parse.User.current().id, true);
             onLogin(new UserModel(newUser));
             setRedirectToMessages(true);
         }).catch(error => {

@@ -4,7 +4,7 @@ import Parse from 'parse';
 import UserModel from "../../model/UserModel";
 
 function NewTenantModal(props) {
-    const { show, handleClose, addTenant, userId, isUpdate, updateTenantContent } = props;
+    const { show, handleClose, addTenant, userId, tenants, isUpdate, updateTenantContent } = props;
     const [email, setEmail] = useState("eyal@barak.com");
     const [pwd, setPwd] = useState("123");
     const [fname, setfname] = useState("Eyal");
@@ -26,7 +26,7 @@ function NewTenantModal(props) {
 
     function handleAddTennant() {
 
-        const user = new Parse.User()
+        const user = new Parse.User();
         user.set('username', fname);
         user.set('email', email);
         user.set('fname', fname);
@@ -35,22 +35,26 @@ function NewTenantModal(props) {
         user.set('img', img);
         user.set('role', "tenant");
         user.set('password', pwd);
-        var sessionToken = Parse.User.current();
-
-        user.signUp(null, {
-            success: function (user) {
-                //right now i have successfully signed up a new "tenant" and am actually logged in as that tenant
-                Parse.User.become(sessionToken).then(function (user) {
-                    // The current user is now set back to the comittee.
-                    // Continue doing what you want
-                }, function (error) {
-                    // The token could not be validated.
-                    alert('error');
-                });
-            },
-            error: function (user, error) {
-            }
-        });   
+        var sessionToken = Parse.User.current().get("sessionToken");
+        
+        user.signUp().then((user) => {
+            // This lines enable read and write for the added tenat
+            var userACL = new Parse.ACL(user);
+               userACL.setPublicWriteAccess(true);
+               userACL.setPublicReadAccess(true);
+               user.setACL(userACL);
+               user.save();
+            Parse.User.become(sessionToken).then(function (user) {
+                // The current user is now set to user.
+            }, function (error) {
+                // The token could not be validated.
+            });
+            addTenant(tenants.concat(new UserModel(user)));
+            console.log('User signed up', user);
+        }).catch(error => {
+            console.error('Error while signing up user', error);
+        });
+        
         // 2) cleanup (clean all field + close the modal)
         closeModal();
     }
