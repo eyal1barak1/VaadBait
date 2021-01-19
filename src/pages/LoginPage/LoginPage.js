@@ -14,7 +14,6 @@ function LoginPage(props) {
 
 
     async function login() {
-
         try {
             const parseUser = await Parse.User.logIn(email, pwd);
             // Trigger onLogin event prop + update redirect state so we will redirect to recipes page

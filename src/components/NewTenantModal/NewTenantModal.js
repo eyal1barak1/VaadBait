@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button, Modal, Form, Col, Image, Row } from "react-bootstrap";
-
+import Parse from 'parse';
+import UserModel from "../../model/UserModel";
 
 function NewTenantModal(props) {
     const { show, handleClose, addTenant, userId, isUpdate, updateTenantContent } = props;
@@ -24,19 +25,32 @@ function NewTenantModal(props) {
     }
 
     function handleAddTennant() {
-        const newCommittee = {
-            id: Date.now(),
-            fname,
-            lname,
-            email,
-            pwd,
-            role: "tenant",
-            building,
-            img,
-        }
 
-        addTenant(newCommittee);
+        const user = new Parse.User()
+        user.set('username', fname);
+        user.set('email', email);
+        user.set('fname', fname);
+        user.set('lname', lname);
+        user.set('building', building);
+        user.set('img', img);
+        user.set('role', "tenant");
+        user.set('password', pwd);
+        var sessionToken = Parse.User.current();
 
+        user.signUp(null, {
+            success: function (user) {
+                //right now i have successfully signed up a new "tenant" and am actually logged in as that tenant
+                Parse.User.become(sessionToken).then(function (user) {
+                    // The current user is now set back to the comittee.
+                    // Continue doing what you want
+                }, function (error) {
+                    // The token could not be validated.
+                    alert('error');
+                });
+            },
+            error: function (user, error) {
+            }
+        });   
         // 2) cleanup (clean all field + close the modal)
         closeModal();
     }

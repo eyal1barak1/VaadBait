@@ -7,6 +7,7 @@ class MessageModel {
         this.priority = parseMessage.get("priority");
         this.building = parseMessage.get("building");
         this.isRead = parseMessage.get("isRead");
+        this.img = parseMessage.get("img");
         this.date = parseMessage.get("date");
     }
 }

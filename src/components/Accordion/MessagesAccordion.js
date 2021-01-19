@@ -22,7 +22,7 @@ function MessagesAccordion(props) {
                         as={Card.Header} eventKey={index.toString()} >
                         {panel.props.message.title}
                         <img alt="messageImg" className="readImage" width="20" height="20"          
-                            src={panel.props.message.isRead.includes(panel.props.activeUser.id) ? readMsgSrc : unReadMsgSrc} >
+                            src={typeof panel.props.message.isRead !== 'undefined' && panel.props.message.isRead.includes(panel.props.activeUser.id) ? readMsgSrc : unReadMsgSrc} >
                         </img>
                     </Accordion.Toggle>
                     <Accordion.Collapse eventKey={index.toString()}>

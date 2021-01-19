@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import './SignupPage.css'
+import Parse from 'parse';
+import UserModel from "../../model/UserModel";
 
 function SignupPage(props) {
     const [email, setEmail] = useState("eyal@barak.com");
@@ -12,30 +14,42 @@ function SignupPage(props) {
 
     const [redirectToMessages, setRedirectToMessages] = useState(false);
     const { users, onLogin, AddCommittee } = props;
+    let loggedInNewUser;
 
+    function logIn() {
+        // Create a new instance of the user class
+        var user = Parse.User.logIn(email, pwd).then(function (user) {
+            console.log('User created successful with name: ' + user.get("username") + ' and email: ' + user.get("email"));
+        }).catch(function (error) {
+            console.log("Error: " + error.code + " " + error.message);
+        });
+    }
     function SignUp() {
 
-        const newCommittee = {
-            id: Date.now(),
-            fname,
-            lname,
-            email,
-            pwd,
-            role: "committee",
-            building,
-        }
+        const newUser = new Parse.User();
+        newUser.set('username', fname);
+        newUser.set('email', email);
+        newUser.set('fname', fname);
+        newUser.set('lname', lname);
+        newUser.set('building', building);
+        newUser.set('img', "");
+        newUser.set('role', "committee");
+        newUser.set('password', pwd);
 
-        AddCommittee(newCommittee);
-        setRedirectToMessages(true);
-
+        newUser.signUp().then((newUser) => {
+            onLogin(new UserModel(newUser));
+            setRedirectToMessages(true);
+        }).catch(error => {
+            console.error('Error while signing up user', newUser);
+        });
     }
 
 
     if (redirectToMessages) {
-        const userFound = users.find(user => user.email.toLowerCase() === email.toLowerCase() && user.pwd === pwd);
-        onLogin(userFound);
-        return <Redirect to="/" />;
+        return <Redirect to="/messages" />;
     }
+
+
 
     return (
         <Container>

@@ -11,12 +11,14 @@ import MessagesPage from './pages/MessagesPage/MessagesPage';
 import VotingPage from './pages/VotingPage/VotingPage';
 import TenantsPage from './pages/TenantsPage/TenantsPage';
 import Parse from 'parse';
+import UserModel from './model/UserModel';
 
 
 
 function App() {
   const [users, setUsers] = useState(jsonUsers);        // HACK ALERT: holding all users as state only because this is a JSON based application (no server side)
-  const [activeUser, setActiveUser] = useState(jsonUsers[0]);   // During development it's conveient to be logged in by default
+  const [activeUser, setActiveUser] = useState(
+    Parse.User.current() ? new UserModel(Parse.User.current()) : null);   // During development it's conveient to be logged in by default
   const [messages, setMessages] = useState(jsonMessages);  // HACK ALERT: holding all messages as state only because this is a JSON based application (no server side)
   const [messageItems, setMessageItems] = useState([]);
   const [votings, setVotings] = useState(jsonVotings);
@@ -45,7 +47,7 @@ function App() {
       setUsers([...users]);
     }
   }
-  
+
 
   function updateTenantContent(fname, lname, email, building, pwd, userId) {
     const found = users.find(element => element.id === userId);
@@ -61,20 +63,20 @@ function App() {
   }
 
   //============== Messages ==================
-  function addMessage(title, details, priority, img) {
-    const newMessage = {
-      id: Date.now(),
-      title,
-      details,
-      priority,
-      img,
-      building: activeUser.building,
-      isRead: [],
-      date: new Date(),
-    }
+  // function addMessage(title, details, priority, img) {
+  //   const newMessage = {
+  //     id: Date.now(),
+  //     title,
+  //     details,
+  //     priority,
+  //     img,
+  //     building: activeUser.building,
+  //     isRead: [],
+  //     date: new Date(),
+  //   }
 
-    setMessages(messages.concat(newMessage));
-  }
+  //   setMessages(messages.concat(newMessage));
+  // }
 
   function updateMessage(messageId, activeUserId) {
     const found = messages.find(element => element.id === messageId);
@@ -198,14 +200,14 @@ function App() {
       <Switch>
         <Route exact path="/"><HomePage activeUser={activeUser} onLogout={handleLogout} /></Route>
         <Route exact path="/login"><LoginPage activeUser={activeUser} users={users} onLogin={handleLogin} /></Route>
-        <Route exact path="/signup"><SignupPage activeUser={activeUser} users={users} AddCommittee={AddUser} onLogin={handleLogin}/></Route>
+        <Route exact path="/signup"><SignupPage activeUser={activeUser} users={users} AddCommittee={AddUser} onLogin={handleLogin} /></Route>
         <Route exact path="/tenants"><TenantsPage activeUser={activeUser} tenants={users} onLogin={handleLogin}
-        removeTenant={removeTenant}  updateTenantContent={updateTenantContent} addTenant={AddUser} onLogout={handleLogout}/></Route>
+          removeTenant={removeTenant} updateTenantContent={updateTenantContent} addTenant={AddUser} onLogout={handleLogout} /></Route>
 
         <Route exact path="/messages">
           <MessagesPage activeUser={activeUser} onLogout={handleLogout}
             messages={activeUserMessages} updateMessage={updateMessage} SortMessages={SortMessages} removeMessage={removeMessage}
-            addMessage={addMessage} addMessageItems={addMessageItems}
+            addMessageItems={addMessageItems}
             message_items={messageItems} updateMessageContent={updateMessageContent} />
         </Route>
 

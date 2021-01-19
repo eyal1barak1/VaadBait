@@ -26,6 +26,7 @@ function MessagesPage(props) {
         async function fetchData() {
             const ParseMessage = Parse.Object.extend('Message');
             const query = new Parse.Query(ParseMessage);
+            // console.log(Parse.User.current().attributes.building);
             query.equalTo("userId", Parse.User.current());
             const parseMessages = await query.find();
             setMessages(parseMessages.map(parseMessage => new MessageModel(parseMessage)));
@@ -39,16 +40,32 @@ function MessagesPage(props) {
     async function addMessage(title, details, priority, img) {
         const ParseMessage = Parse.Object.extend('Message');
         const newMessage = new ParseMessage();
-        
+
         newMessage.set('title', title);
         newMessage.set('details', details);
         newMessage.set('img', img);
         newMessage.set('priority', priority);
-        newMessage.set('date', new Date());
-        newMessage.set('building', Parse.User.current());
+        newMessage.set('date', new Date().toString());
+        newMessage.set('isRead', []);
+        newMessage.set('building', Parse.User.current().attributes.building);
+
+        var user = Parse.User.current();
+        var relation = user.relation('userId');
+        relation.add(Parse.User.current()); // Post is a Parse Object
         
+        // newMessage.set('userId', relation);
+
         const parseMessage = await newMessage.save();
         setMessages(messages.concat(new MessageModel(parseMessage)));
+    }
+
+    function updateMessage2(messageId, activeUserId) {
+        const found = messages.find(element => element.id === messageId);
+        const index = messages.indexOf(found);
+        if (index > -1) {
+            messages[index].isRead.push(activeUserId);
+            setMessages([...messages]);
+        }
     }
 
     if (!activeUser) {
