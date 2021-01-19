@@ -115,31 +115,31 @@ function App() {
     setMessageItems(messageItems.concat(newItem));
   }
 
-  function SortMessages(sortBy) {
-    if (sortBy === "date") {
-      messages.sort(function (a, b) {
-        const firstDate = Date.parse(a.date);
-        const secondDate = Date.parse(b.date);
+  // function SortMessages(sortBy) {
+  //   if (sortBy === "date") {
+  //     messages.sort(function (a, b) {
+  //       const firstDate = Date.parse(a.date);
+  //       const secondDate = Date.parse(b.date);
 
-        return secondDate - firstDate;
-      });
-    }
-    else {
-      messages.sort(function (a, b) {
-        var nameA = a.priority.toUpperCase(); // ignore upper and lowercase
-        var nameB = b.priority.toUpperCase(); // ignore upper and lowercase
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-        // names must be equal
-        return 0;
-      });
-    }
-    setMessages([...messages]);
-  }
+  //       return secondDate - firstDate;
+  //     });
+  //   }
+  //   else {
+  //     messages.sort(function (a, b) {
+  //       var nameA = a.priority.toUpperCase(); // ignore upper and lowercase
+  //       var nameB = b.priority.toUpperCase(); // ignore upper and lowercase
+  //       if (nameA < nameB) {
+  //         return -1;
+  //       }
+  //       if (nameA > nameB) {
+  //         return 1;
+  //       }
+  //       // names must be equal
+  //       return 0;
+  //     });
+  //   }
+  //   setMessages([...messages]);
+  // }
 
 
   //============== Voting ==================
@@ -206,9 +206,8 @@ function App() {
 
         <Route exact path="/messages">
           <MessagesPage activeUser={activeUser} onLogout={handleLogout}
-            messages={activeUserMessages}  SortMessages={SortMessages} 
-            addMessageItems={addMessageItems}
-            message_items={messageItems} updateMessageContent={updateMessageContent} />
+            messages={activeUserMessages}  addMessageItems={addMessageItems}
+            message_items={messageItems} />
         </Route>
 
         <Route exact path="/voting">
