@@ -10,7 +10,7 @@ import jsonVotings from './data/votings.json';
 import MessagesPage from './pages/MessagesPage/MessagesPage';
 import VotingPage from './pages/VotingPage/VotingPage';
 import TenantsPage from './pages/TenantsPage/TenantsPage';
-
+import Parse from 'parse';
 
 
 
@@ -24,6 +24,7 @@ function App() {
   //============== loging/logout==================
   function handleLogout() {
     setActiveUser(null);
+    Parse.User.logOut();
   }
 
   function handleLogin(loggedinUser) {
