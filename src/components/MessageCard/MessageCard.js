@@ -8,7 +8,7 @@ import './MessageCard.css'
 function MessageCard(props) {
     const { message, addMessageItems, message_items, removeMessage, activeUser, updateMessageContent } = props;
     const [showModal, setShowModal] = useState(false);
-    const placeHolderImage = "https://cdn3.iconfinder.com/data/icons/ui-thick-outline-5-of-5/100/ui_09_of_10_-14-512.png";
+    // const placeHolderImage = "https://cdn3.iconfinder.com/data/icons/ui-thick-outline-5-of-5/100/ui_09_of_10_-14-512.png";
 
     function removeMessageById() {
         removeMessage(message.id);
@@ -20,7 +20,7 @@ function MessageCard(props) {
                     <Col sm={6}>
                         <Row>
                             <Col sm={5}>
-                                <img alt="messageImg" className="message-image" src={message.img === "" ? placeHolderImage : message.img} ></img>
+                                <img alt="messageImg" className="message-image" src={message.img} ></img>
                             </Col>
                             <Col sm={7}>
                                 <div className="message-details">
@@ -40,9 +40,7 @@ function MessageCard(props) {
                             addMessageItems={addMessageItems} activeUser={activeUser}></CommentsApp>
                     </Col>
                     <Col style={{ visibility: activeUser.role === "committee" ? "visible" : "hidden" }}
-                        className="message-card-buttons" sm={2}>
-                        {/* <Button>hello</Button>
-                        <Button>hello</Button> */}
+                        className="message-card-buttons" >
                         <Button className="b-update-button" variant="info" onClick={() => setShowModal(true)}>Update</Button>
                         <Button onClick={removeMessageById} className="b-delete-button" variant="danger">Delete</Button>
                     </Col>

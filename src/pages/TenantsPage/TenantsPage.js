@@ -9,6 +9,7 @@ import NewTenantModal from "../../components/NewTenantModal/NewTenantModal";
 import FilterContent from "../../components/FilterContent/FilterContent";
 import UserModel from "../../model/UserModel";
 import Parse from 'parse';
+import userPlaceHolder from '../../images/userPlaceholder.png';
 
 function TenantsPage(props) {
     const { activeUser, onLogout } = props;
@@ -71,7 +72,13 @@ function TenantsPage(props) {
             user.set('fname', fname);
             user.set('lname', lname);
             user.set('building', building);
-            user.set('img', img);
+            // user.set('img', img);
+            if (img) {
+                user.set('img', new Parse.File(img.name, img));
+            }
+            else {
+                user.set('img', new Parse.File("placeHolderImage", { base64: userPlaceHolder }));
+            }
 
             // Saves the user with the updated data
             user.save().then((response) => {

@@ -133,7 +133,7 @@ function VotingPage(props) {
             <HoaNavbr activeUser={activeUser} onLogout={onLogout} />
             <Container fluid>
                 <Row>
-                    <Col sm={6}>
+                    <Col className="block-example border-right border-dark" sm={6}>
                         <h1>Active Votings</h1>
                         <div className="b-new-vote" style={{ visibility: activeUser.role === "committee" ? "visible" : "hidden" }}>
                             <Button variant="link" onClick={() => setShowModal(true)}>New Vote</Button>

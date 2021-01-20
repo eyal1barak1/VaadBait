@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import CommentsList from '../CommentsList/CommentsList'
-import './CommentsApp.css';
 import Parse from 'parse';
 import CommentModel from "../../model/CommentModel";
 
@@ -53,13 +52,10 @@ function CommentsApp(props) {
   return (
     <div>
       <h3>Comments:</h3>
-
-      <div className="row">
         <div>
           <CommentsList items={items} activeUser={activeUser} />
         </div>
-      </div>
-      <form className="row">
+      <form>
         <div>
           <input type="text" placeholder="Add Comment" className="form-control" onChange={handleTextChange} value={text} />
         </div>

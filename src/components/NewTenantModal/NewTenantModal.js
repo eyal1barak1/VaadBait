@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button, Modal, Form, Col, Image, Row } from "react-bootstrap";
 import Parse from 'parse';
 import UserModel from "../../model/UserModel";
+import userPlaceHolder from '../../images/userPlaceholder.png';
 
 function NewTenantModal(props) {
     const { show, handleClose, addTenant, userId, tenants, isUpdate, updateTenantContent } = props;
@@ -32,7 +33,13 @@ function NewTenantModal(props) {
         user.set('fname', fname);
         user.set('lname', lname);
         user.set('building', building);
-        user.set('img', img);
+        // user.set('img', img);
+        if (img) {
+            user.set('img', new Parse.File(img.name, img));
+        }
+        else {
+            user.set('img', new Parse.File("placeHolderImage", { base64: userPlaceHolder }));
+        }
         user.set('role', "tenant");
         user.set('password', pwd);
         user.set('emailAddrr', email);
@@ -67,6 +74,15 @@ function NewTenantModal(props) {
         closeModal();
     }
 
+    function handleFileChange(e) {
+        if (e.target.files.length === 1) {
+            setImg(e.target.files[0]);
+        } else {
+            setImg(null);
+        }
+    }
+    const imgURL = img ? URL.createObjectURL(img) : "";
+
     return (
         <Modal show={show} onHide={closeModal} size="xl">
             <Modal.Header closeButton>
@@ -98,11 +114,12 @@ function NewTenantModal(props) {
                             Image URL
                         </Form.Label>
                         <Row>
-                            <Col sm={10}>
-                                <Form.Control type="text" placeholder="Image URL" value={img} onChange={e => setImg(e.target.value)} />
+                            <Col sm={5}>
+                                <Form.Control type="file" accept="image/*" onChange={handleFileChange} />
+                                {/* <Form.Control type="text" placeholder="Image URL" value={img} onChange={e => setImg(e.target.value)} /> */}
                             </Col>
-                            <Col sm={2}>
-                                <Image width="100" height="100" src={img === "" ? placeHolderImage : img} />
+                            <Col sm={5}>
+                                <Image width="200" height="200" src={imgURL === "" ? placeHolderImage : imgURL} />
                             </Col>
                         </Row>
                     </Form.Group>

@@ -1,3 +1,11 @@
+.c-message-card{
+    height: 100%;
+}
+.message-card-buttons{
+    display: flex;
+    align-items: flex-end;
+}
+
 
 .message-details>label {
     /* Other styling... */
@@ -8,7 +16,7 @@
 }
 
 .message-details>p {
-    max-width: 600px;
+    /* max-width: 600px; */
 }
 
 .message-priority>label {
@@ -20,21 +28,17 @@
 }
 
 .message-priority>p {
-    max-width: 600px;
+    /* max-width: 600px; */
 }
 
-.b-update-button {
-    margin-top: 100%;
-    margin-left: 20px;
+.message-card-buttons > .b-update-button {
+    margin-top: 5px;
+    margin-right: 20px;
 }
 
-.b-delete-button {
-    margin-top: 100%;
-    margin-left: 20px;
-}
 
 .message-image{
-    width: 250px;
-    height: 250px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, Button, Alert } from "react-bootstrap";
+import { Form, Button, Alert, Container } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
 import './LoginPage.css'
 import UserModel from "../../model/UserModel";
@@ -32,7 +32,7 @@ function LoginPage(props) {
     }
 
     return (
-        <div className="p-login">
+        <Container className="p-login">
             <h1>Login to HOA</h1>
             <p>or <Link to="/signup">create an account</Link></p>
             {showLoginError ? <Alert variant="danger">Invalid Credentials!</Alert> : null}
@@ -52,7 +52,7 @@ function LoginPage(props) {
                     Login
                 </Button>
             </Form>
-        </div>
+        </Container>
     )
 
 }

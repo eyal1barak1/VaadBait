@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Modal, Form, Col, Row, Image } from "react-bootstrap";
+// import messagePlaceHolder from '../../images/messagePlaceholder.png'
 
 
 function NewMessageModal(props) {
@@ -7,29 +8,39 @@ function NewMessageModal(props) {
     const [title, setTitle] = useState("");
     const [details, setDetails] = useState("");
     const [priority, SetPriority] = useState("Info");
-    const [imgURL, setImgURL] = useState("");
+    const [img, setImg] = useState("");
     const placeHolderImage = "https://www.arde.co.il/wp-content/uploads/2014/06/default-placeholder.png";
 
     function closeModal() {
         setTitle("");
         setDetails("");
-        setImgURL("");
+        setImg("");
         handleClose();
     }
 
     function handleAddMessage() {
         // 1) triggers addMessage at App that will then add this message to its messages state
-        addMessage(title, details, priority, imgURL);
+        addMessage(title, details, priority, img);
 
         // 2) cleanup (clean all field + close the modal)
         closeModal();
     }
 
     function handleUpdateMessage() {
-        updateMessageContent(title, details, priority, imgURL, messageId);
+        updateMessageContent(title, details, priority, img, messageId);
 
         closeModal();
     }
+
+    function handleFileChange(e) {
+        if (e.target.files.length === 1) {
+            setImg(e.target.files[0]);
+        } else {
+            setImg(null);
+        }
+    }
+
+    const imgURL = img ? URL.createObjectURL(img) : "";
 
     return (
         <Modal show={show} onHide={closeModal} size="xl">
@@ -71,11 +82,11 @@ function NewMessageModal(props) {
                         <Form.Label column sm={2}>
                             Image URL:
                         </Form.Label>
-                        <Col sm={8}>
-                            <Form.Control type="text" placeholder="Image URL" value={imgURL} onChange={e => setImgURL(e.target.value)} />
+                        <Col sm={5}>
+                            <Form.Control type="file" accept="image/*" onChange={handleFileChange} />
                         </Col>
-                        <Col sm={2}>
-                            <Image width="100" height="100" src={imgURL === "" ? placeHolderImage : imgURL} />
+                        <Col sm={5}>
+                            <Image width="200" height="200" src={imgURL === "" ? placeHolderImage : imgURL} />
                         </Col>
                     </Form.Group>
                 </Form>
