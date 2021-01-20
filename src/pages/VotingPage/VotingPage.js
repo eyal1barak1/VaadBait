@@ -133,14 +133,14 @@ function VotingPage(props) {
             <HoaNavbr activeUser={activeUser} onLogout={onLogout} />
             <Container fluid>
                 <Row>
-                    <Col className="block-example border-right border-dark">
+                    <Col sm={6}>
                         <h1>Active Votings</h1>
                         <div className="b-new-vote" style={{ visibility: activeUser.role === "committee" ? "visible" : "hidden" }}>
                             <Button variant="link" onClick={() => setShowModal(true)}>New Vote</Button>
                         </div>
                         <VotesAccordion panels={activeVoteView} isResaultAccordion="false" />
                     </Col>
-                    <Col>
+                    <Col sm={6}>
                         <h1>Voting Results</h1>
                         <FilterContent isMessagesPage={false} filteredText={filteredText} onFilterChange={e => setFilteredText(e.target.value)} />
                         <VotesAccordion panels={nonActiveVoteView} isResaultAccordion="true" />
