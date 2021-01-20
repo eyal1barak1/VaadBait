@@ -1,8 +1,9 @@
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, OverlayTrigger, Popover, Row } from "react-bootstrap";
 import { useState } from "react";
 import DateModal from "../DateModal/DateModal";
 import PieChart from "../PieChart/PieChart";
 import './ActiveVoteCard.css'
+
 
 
 function ActiveVoteCard(props) {
@@ -24,6 +25,16 @@ function ActiveVoteCard(props) {
     function handleVote() {
         AddUsersVote(chosenOption, vote.id, activeUser.id);
     }
+
+    const popover = (
+        <Popover id="popover-basic">
+            <Popover.Title as="h3">Thank you for your vote</Popover.Title>
+            <Popover.Content>
+                results will be available at <strong>{endDate}</strong>
+          </Popover.Content>
+        </Popover>
+    );
+
     return (
         <div className="c-vote-card">
             {activeUser.role === "committee" ?
@@ -45,7 +56,7 @@ function ActiveVoteCard(props) {
                             </Row>
                         </Col>
                         <Col sm={6}>
-                            <PieChart title="Results" vote={vote}/>
+                            <PieChart title="Results" vote={vote} />
                         </Col>
                     </Row>
                 </Container>
@@ -60,7 +71,9 @@ function ActiveVoteCard(props) {
                                 {options}
                             </Form.Control>
                             <div className="vote-button">
-                                <Button variant="warning" onClick={handleVote}>Submit Vote</Button>
+                                <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+                                    <Button variant="warning" onClick={handleVote}>Submit Vote</Button>
+                                </OverlayTrigger>
                                 <div className="vote-end-date">
                                     <label>Vote end at: </label>
                                     <p>{endDate}</p>
