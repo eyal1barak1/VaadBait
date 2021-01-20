@@ -18,7 +18,7 @@ function TenantsPage(props) {
     let filteredTenants = tenants.filter(tenant =>
         tenant.fname.toLowerCase().includes(filteredText.toLowerCase()) ||
         tenant.lname.toLowerCase().includes(filteredText.toLowerCase()) ||
-        tenant.username.toLowerCase().includes(filteredText.toLowerCase())
+        tenant.email.toLowerCase().includes(filteredText.toLowerCase())
     );
 
 

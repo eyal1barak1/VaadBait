@@ -35,6 +35,7 @@ function NewTenantModal(props) {
         user.set('img', img);
         user.set('role', "tenant");
         user.set('password', pwd);
+        user.set('emailAddrr', email);
         var sessionToken = Parse.User.current().get("sessionToken");
 
         user.signUp().then((user) => {

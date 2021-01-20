@@ -30,13 +30,8 @@ function SignupPage(props) {
         newUser.set('img', "");
         newUser.set('role', "committee");
         newUser.set('password', pwd);
-
+        newUser.set('emailAddrr', email);
         newUser.signUp().then((newUser) => {
-            // var userACL = new Parse.ACL(newUser);
-            // userACL.setPublicWriteAccess(true);
-            // userACL.setPublicReadAccess(true);
-            // newUser.setACL(userACL);
-            // newUser.save();
             onLogin(new UserModel(newUser));
             setRedirectToMessages(true);
         }).catch(error => {
