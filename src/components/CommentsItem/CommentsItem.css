@@ -44,3 +44,7 @@
  .todoitem .hover-button {
      visibility: hidden;
  }
+
+ .commentImg {
+     border-radius: 50%;
+ }

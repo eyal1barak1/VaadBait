@@ -11,7 +11,7 @@ function CommentsList(props) {
     <ul className="todolist">
       {items.map(item => (
         <CommentsItem key={item.id} id={item.id} text={item.text} completed={item.done}
-          activeUser={activeUser} fname={item.userFname} lname={item.userLname} />
+          activeUser={activeUser} fname={item.userFname} lname={item.userLname} img={item.img}/>
       ))}
     </ul>
   );

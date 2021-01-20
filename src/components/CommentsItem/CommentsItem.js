@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
+import { Image } from 'react-bootstrap';
 import './CommentsItem.css';
 
 function CommentsItem(props) {
 
-    const { completed, text, fname, lname } = props;
+    const { completed, text, fname, lname , img} = props;
     var itemClass = "form-check todoitem " + (completed ? "done" : "undone");
     const [added_item, SetAdded_item] = useState("");
 
@@ -24,6 +25,7 @@ function CommentsItem(props) {
 
     return (
         <li className={itemClass} ref={li => SetAdded_item(li)}>
+             <Image alt="Avatar" width="30" height="30" className="commentImg" src={img} />
             <label className="form-check-label">
                  {fname + " " + lname + ": " + text}
             </label>

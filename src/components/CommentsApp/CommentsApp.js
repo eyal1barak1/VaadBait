@@ -14,7 +14,7 @@ function CommentsApp(props) {
     async function fetchData() {
       const ParseComments = Parse.Object.extend('Comment');
       const query = new Parse.Query(ParseComments);
-      query.equalTo("messageId", {"__type":"Pointer","className":"Message","objectId":message.id});
+      query.equalTo("messageId", { "__type": "Pointer", "className": "Message", "objectId": message.id });
       const parseComments = await query.find();
       setItems(parseComments.map(parseComment => new CommentModel(parseComment)));
     }
@@ -35,7 +35,8 @@ function CommentsApp(props) {
     myNewObject.set('done', false);
     myNewObject.set('userFname', activeUser.fname);
     myNewObject.set('userLname', activeUser.lname);
-    myNewObject.set('messageId', {"__type":"Pointer","className":"Message","objectId":message.id});
+    myNewObject.set('messageId', { "__type": "Pointer", "className": "Message", "objectId": message.id });
+    myNewObject.set('img', activeUser.img);
     myNewObject.save().then(
       (result) => {
         setItems(items.concat(new CommentModel(myNewObject)));
@@ -52,9 +53,9 @@ function CommentsApp(props) {
   return (
     <div>
       <h3>Comments:</h3>
-        <div>
-          <CommentsList items={items} activeUser={activeUser} />
-        </div>
+      <div>
+        <CommentsList items={items} activeUser={activeUser} />
+      </div>
       <form>
         <div>
           <input type="text" placeholder="Add Comment" className="form-control" onChange={handleTextChange} value={text} />

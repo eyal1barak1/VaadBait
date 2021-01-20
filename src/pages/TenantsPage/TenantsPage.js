@@ -89,6 +89,7 @@ function TenantsPage(props) {
                 tenants[index].email = email;
                 tenants[index].building = building;
                 tenants[index].pwd = pwd;
+                tenants[index].img = img === "" ? img : response.get("img").url();
                 setTenants([...tenants]);
                 console.log('Updated user', response);
             }).catch((error) => {

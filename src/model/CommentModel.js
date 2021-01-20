@@ -7,6 +7,7 @@ class CommentModel {
         this.done = parseComment.get("done");
         this.userFname = parseComment.get("userFname");
         this.userLname = parseComment.get("userLname");
+        this.img = parseComment.get("img");
     }
 }
 
