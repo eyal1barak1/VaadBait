@@ -29,21 +29,6 @@ function App() {
   }
 
   //============== Voting ==================
-  function addVote(title, details, options, endDate) {
-    const newVote = {
-      id: Date.now(),
-      title,
-      details,
-      options,
-      endDate,
-      building: activeUser.building,
-      voteStatus: "active",
-      result: "",
-      votesPieData: {}
-    }
-
-    setVotings(votings.concat(newVote));
-  }
 
   // Check the end Date And Update Vote Status
   function CheckDateAndUpdateVoteStat(voteItem, index) {
@@ -68,17 +53,6 @@ function App() {
     }
   }
 
-  function AddUsersVote(chosenOption, voteId, userId) {
-    const found = votings.find(element => element.id === voteId);
-    const index = votings.indexOf(found);
-
-    if (index > -1) {
-      votings[index].votesPieData[userId] = chosenOption;
-      setVotings([...votings]);
-    }
-  }
-
-
   return (
 
 
@@ -87,12 +61,12 @@ function App() {
         <Route exact path="/"><HomePage activeUser={activeUser} onLogout={handleLogout} /></Route>
         <Route exact path="/login"><LoginPage activeUser={activeUser}  onLogin={handleLogin} /></Route>
         <Route exact path="/signup"><SignupPage activeUser={activeUser}  onLogin={handleLogin} /></Route>
-        <Route exact path="/tenants"><TenantsPage activeUser={activeUser} onLogin={handleLogin} onLogout={handleLogout} /></Route>
-        <Route exact path="/messages"> <MessagesPage activeUser={activeUser} onLogout={handleLogout}  /> </Route>
+        <Route exact path="/tenants"><TenantsPage activeUser={activeUser} onLogin={handleLogin} onLogout={handleLogout}/></Route>
+        <Route exact path="/messages"> <MessagesPage activeUser={activeUser} onLogout={handleLogout}/> </Route>
 
         <Route exact path="/voting">
-          <VotingPage activeUser={activeUser} onLogout={handleLogout} votings={activeUserVoting} addVote={addVote}
-            updateEndDate={updateEndDate} AddUsersVote={AddUsersVote} />
+          <VotingPage activeUser={activeUser} onLogout={handleLogout} votings={activeUserVoting}
+            updateEndDate={updateEndDate} />
         </Route>
       </Switch>
     </HashRouter>

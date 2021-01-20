@@ -13,8 +13,7 @@ import VoteModel from "../../model/VoteModel";
 import Parse from 'parse';
 
 function VotingPage(props) {
-    const { activeUser, onLogout,
-        addVoteItems, vote_items, updateEndDate, AddUsersVote } = props;
+    const { activeUser, onLogout, addVoteItems, vote_items, updateEndDate } = props;
     const [showModal, setShowModal] = useState(false);
     const [filteredText, setFilteredText] = useState("");
     const [votings, setVotings] = useState([]);
@@ -50,6 +49,26 @@ function VotingPage(props) {
         relation.add(Parse.User.current());
         const parsVote = await myNewVote.save();
         setVotings(votings.concat(new VoteModel(parsVote)));
+    }
+
+    function AddUsersVote(chosenOption, voteId, userId) {
+        const Vote = Parse.Object.extend('Vote');
+        const query = new Parse.Query(Vote);
+        // here you put the objectId that you want to update
+        query.get(voteId).then((object) => {
+            let pieObj = object.get("votesPieData");
+            pieObj[userId] = chosenOption;
+            object.set('votesPieData', pieObj);
+            object.save().then((response) => {
+                const found = votings.find(element => element.id === voteId);
+                const index = votings.indexOf(found);
+                votings[index].votesPieData[userId] = chosenOption;
+                setVotings([...votings]);
+                console.log('Updated Vote', response);
+            }, (error) => {
+                console.error('Error while updating Vote', error);
+            });
+        });
     }
 
     if (!activeUser) {
