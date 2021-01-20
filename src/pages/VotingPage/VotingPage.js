@@ -13,7 +13,7 @@ import VoteModel from "../../model/VoteModel";
 import Parse from 'parse';
 
 function VotingPage(props) {
-    const { activeUser, onLogout, addVoteItems, vote_items, updateEndDate } = props;
+    const { activeUser, onLogout } = props;
     const [showModal, setShowModal] = useState(false);
     const [filteredText, setFilteredText] = useState("");
     const [votings, setVotings] = useState([]);
@@ -30,7 +30,7 @@ function VotingPage(props) {
         if (activeUser) {
             fetchData()
         }
-    }, [activeUser])
+    }, [activeUser, votings])
 
     async function addVote(title, details, options, endDate) {
 
@@ -64,7 +64,44 @@ function VotingPage(props) {
                 const index = votings.indexOf(found);
                 votings[index].votesPieData[userId] = chosenOption;
                 setVotings([...votings]);
-                console.log('Updated Vote', response);
+            }, (error) => {
+                console.error('Error while updating Vote', error);
+            });
+        });
+    }
+
+    // Check the end Date And Update Vote Status
+    function CheckDateAndUpdateVoteStat(voteItem) {
+        const Vote = Parse.Object.extend('Vote');
+        const query = new Parse.Query(Vote);
+        // here you put the objectId that you want to update
+        query.get(voteItem.id).then((object) => {
+            var now = new Date();
+            let objEndDate = new Date(object.get("endDate"));
+            let voteStatus = now >= objEndDate ? "not active" : "active";
+            object.set('voteStatus', voteStatus);
+            object.save().then((response) => {
+                voteItem.voteStatus = voteStatus;
+            }, (error) => {
+                console.error('Error while updating Vote', error);
+            });
+        });
+    }
+
+    votings.forEach(CheckDateAndUpdateVoteStat);
+
+
+    function updateEndDate(voteId, updatedEndDate) {
+        const Vote = Parse.Object.extend('Vote');
+        const query = new Parse.Query(Vote);
+        // here you put the objectId that you want to update
+        query.get(voteId).then((object) => {
+            object.set('endDate', updatedEndDate);
+            object.save().then((response) => {
+                const found = votings.find(element => element.id === voteId);
+                const index = votings.indexOf(found);
+                votings[index].endDate = updatedEndDate;
+                setVotings([...votings]);
             }, (error) => {
                 console.error('Error while updating Vote', error);
             });
@@ -83,8 +120,8 @@ function VotingPage(props) {
 
     //Filter Only Active votes
     const activeVotes = votings.filter(vote => vote.voteStatus === "active");
-    const activeVoteView = activeVotes.map(vote => <ActiveVoteCard vote={vote} addVoteItems={addVoteItems}
-        vote_items={vote_items} activeUser={activeUser} updateEndDate={updateEndDate} AddUsersVote={AddUsersVote} />)
+    const activeVoteView = activeVotes.map(vote => <ActiveVoteCard vote={vote}
+        activeUser={activeUser} updateEndDate={updateEndDate} AddUsersVote={AddUsersVote} />)
 
     //Filter Only NonActive votes
     const nonActiveVotes = filteredVotes.filter(vote => vote.voteStatus !== "active");
