@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Jumbotron } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import NewMessageModal from "../../components/NewMessageModal/NewMessageModal";
 import MessageCard from "../../components/MessageCard/MessageCard";
@@ -19,7 +19,7 @@ function MessagesPage(props) {
     const [filteredText, setFilteredText] = useState("");
     const [priorityFilter, setPriorityFilter] = useState("");
     const [messages, setMessages] = useState([]);
-    
+
     let filteredMessages = messages.filter(message =>
         message.title.toLowerCase().includes(filteredText.toLowerCase()) ||
         message.details.toLowerCase().includes(filteredText.toLowerCase()));
@@ -182,7 +182,8 @@ function MessagesPage(props) {
     return (
         <div className="p-messages">
             <HoaNavbr activeUser={activeUser} onLogout={onLogout} />
-            <h1>Messages Page for bulding: {activeUser.building}</h1>
+            <h1>Messages for bulding: {activeUser.building.toUpperCase()}</h1>
+            {/* <h1>Messages Page for bulding: {activeUser.building}</h1> */}
             <FilterContent isMessagesPage={true} filteredText={filteredText} onFilterChange={e => setFilteredText(e.target.value)}
                 priorityFilter={priorityFilter} FilterPriority={FilterPriority} Sort={SortMessages} />
             <div className="b-new-message" style={{ visibility: activeUser.role === "committee" ? "visible" : "hidden" }}>

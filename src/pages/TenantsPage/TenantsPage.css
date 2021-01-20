@@ -1,8 +1,14 @@
-.b-new-message {
-    position: relative; 
+.b-new-tenants {
+    position: relative;
     height: 40px;
 }
-.b-new-message > button{
+
+.b-new-tenants>button {
     position: absolute;
     right: 0;
+}
+
+.p-tenants>h1 {
+    margin-top: 10px;
+    margin-bottom: 20px;
 }

@@ -6,3 +6,12 @@
     position: absolute;
     right: 0;
 }
+
+.jumbotron{
+    padding: 0;
+}
+
+.p-messages > h1{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}

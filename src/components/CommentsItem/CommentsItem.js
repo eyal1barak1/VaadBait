@@ -25,7 +25,7 @@ function CommentsItem(props) {
 
     return (
         <li className={itemClass} ref={li => SetAdded_item(li)}>
-             <Image alt="Avatar" width="30" height="30" className="commentImg" src={img} />
+             <Image alt="Avatar" width="30" height="30" roundedCircle src={img} />
             <label className="form-check-label">
                  {fname + " " + lname + ": " + text}
             </label>
