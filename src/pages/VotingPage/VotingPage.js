@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 
@@ -9,12 +9,48 @@ import VotesAccordion from "../../components/Accordion/VotesAccordion";
 import ActiveVoteCard from "../../components/ActiveVoteCard/ActiveVoteCard";
 import VoteResultCard from "../../components/VoteResultCard/VoteResultCard"
 import FilterContent from "../../components/FilterContent/FilterContent";
+import VoteModel from "../../model/VoteModel";
+import Parse from 'parse';
 
 function VotingPage(props) {
-    const { activeUser, onLogout, votings, addVote,
+    const { activeUser, onLogout,
         addVoteItems, vote_items, updateEndDate, AddUsersVote } = props;
     const [showModal, setShowModal] = useState(false);
     const [filteredText, setFilteredText] = useState("");
+    const [votings, setVotings] = useState([]);
+
+    useEffect(() => {
+        async function fetchData() {
+            const ParseVote = Parse.Object.extend('Vote');
+            const query = new Parse.Query(ParseVote);
+            query.equalTo("userId", Parse.User.current());
+            const parseVotes = await query.find();
+            setVotings(parseVotes.map(parseVote => new VoteModel(parseVote)));
+        }
+
+        if (activeUser) {
+            fetchData()
+        }
+    }, [activeUser])
+
+    async function addVote(title, details, options, endDate) {
+
+        const Vote = Parse.Object.extend('Vote');
+        const myNewVote = new Vote();
+
+        myNewVote.set('title', title);
+        myNewVote.set('details', details);
+        myNewVote.set('building', Parse.User.current().attributes.building);
+        myNewVote.set('options', options);
+        myNewVote.set('voteStatus', 'active');
+        myNewVote.set('endDate', endDate);
+        myNewVote.set('result', '');
+        myNewVote.set('votesPieData', {});
+        var relation = myNewVote.relation("userId");
+        relation.add(Parse.User.current());
+        const parsVote = await myNewVote.save();
+        setVotings(votings.concat(new VoteModel(parsVote)));
+    }
 
     if (!activeUser) {
         return <Redirect to="/" />
