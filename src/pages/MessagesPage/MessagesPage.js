@@ -25,7 +25,6 @@ function MessagesPage(props) {
         async function fetchData() {
             const ParseMessage = Parse.Object.extend('Message');
             const query = new Parse.Query(ParseMessage);
-            // console.log(Parse.User.current().attributes.building);
             query.equalTo("userId", Parse.User.current());
             const parseMessages = await query.find();
             setMessages(parseMessages.map(parseMessage => new MessageModel(parseMessage)));
@@ -46,9 +45,9 @@ function MessagesPage(props) {
         newMessage.set('priority', priority);
         newMessage.set('date', new Date().toString());
         newMessage.set('isRead', []);
-        newMessage.set('building', Parse.User.current().attributes.building);        
+        newMessage.set('building', Parse.User.current().attributes.building);
         var relation = newMessage.relation("userId");
-        relation.add(Parse.User.current()); 
+        relation.add(Parse.User.current());
         const parseMessage = await newMessage.save();
         setMessages(messages.concat(new MessageModel(parseMessage)));
     }
@@ -58,7 +57,11 @@ function MessagesPage(props) {
         const query = new Parse.Query(Message);
 
         query.get(messageId).then((object) => {
-            object.set('isRead', [1, activeUserId]);
+            let arr = object.get('isRead');
+            if (!arr.includes(activeUserId)) {
+                arr.push(activeUserId);
+            }
+            object.set('isRead', arr);
             object.save().then((response) => {
                 const found = messages.find(element => element.id === messageId);
                 const index = messages.indexOf(found);
@@ -115,29 +118,29 @@ function MessagesPage(props) {
 
     function SortMessages(sortBy) {
         if (sortBy === "date") {
-          messages.sort(function (a, b) {
-            const firstDate = Date.parse(a.date);
-            const secondDate = Date.parse(b.date);
-    
-            return secondDate - firstDate;
-          });
+            messages.sort(function (a, b) {
+                const firstDate = Date.parse(a.date);
+                const secondDate = Date.parse(b.date);
+
+                return secondDate - firstDate;
+            });
         }
         else {
-          messages.sort(function (a, b) {
-            var nameA = a.priority.toUpperCase(); // ignore upper and lowercase
-            var nameB = b.priority.toUpperCase(); // ignore upper and lowercase
-            if (nameA < nameB) {
-              return -1;
-            }
-            if (nameA > nameB) {
-              return 1;
-            }
-            // names must be equal
-            return 0;
-          });
+            messages.sort(function (a, b) {
+                var nameA = a.priority.toUpperCase(); // ignore upper and lowercase
+                var nameB = b.priority.toUpperCase(); // ignore upper and lowercase
+                if (nameA < nameB) {
+                    return -1;
+                }
+                if (nameA > nameB) {
+                    return 1;
+                }
+                // names must be equal
+                return 0;
+            });
         }
         setMessages([...messages]);
-      }
+    }
 
     if (!activeUser) {
         return <Redirect to="/" />
@@ -165,6 +168,7 @@ function MessagesPage(props) {
     return (
         <div className="p-messages">
             <HoaNavbr activeUser={activeUser} onLogout={onLogout} />
+            <h1>Messages Page for bulding: {activeUser.building}</h1>
             <FilterContent isMessagesPage={true} filteredText={filteredText} onFilterChange={e => setFilteredText(e.target.value)}
                 priorityFilter={priorityFilter} FilterPriority={FilterPriority} Sort={SortMessages} />
             <div className="b-new-message" style={{ visibility: activeUser.role === "committee" ? "visible" : "hidden" }}>

@@ -26,21 +26,6 @@ function LoginPage(props) {
         }
     }
 
-    // function login() {
-
-    //     // Check if the login is value (if a user with the same
-    //     // email and pws exists in the users array)
-    //     const userFound = users.find(user => user.email.toLowerCase() === email.toLowerCase() && user.pwd === pwd);
-    //     if (userFound) {
-    //         // Trigger onLogin event prop + update redirect state so we will redirect to messages page
-    //         onLogin(userFound);
-    //         setRedirectToMessages(true);
-    //     } else {
-    //         // show an error alert
-    //         setShowLoginError(true);
-    //     }
-    // }
-
 
     if (redirectToMessages) {
         return <Redirect to="/messages" />;
@@ -59,12 +44,10 @@ function LoginPage(props) {
                         We'll never share your email with anyone else.
                     </Form.Text>
                 </Form.Group>
-
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password" value={pwd} onChange={e => setPwd(e.target.value)} />
                 </Form.Group>
-
                 <Button variant="success" type="button" block onClick={login}>
                     Login
                 </Button>

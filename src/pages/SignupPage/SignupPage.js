@@ -13,7 +13,7 @@ function SignupPage(props) {
     const [building, setBuilding] = useState("Einstein");
 
     const [redirectToMessages, setRedirectToMessages] = useState(false);
-    const { users, onLogin, AddCommittee } = props;
+    const { onLogin } = props;
 
 
 
@@ -32,7 +32,11 @@ function SignupPage(props) {
         newUser.set('password', pwd);
 
         newUser.signUp().then((newUser) => {
-            acl.setWriteAccess(Parse.User.current().id, true);
+            // var userACL = new Parse.ACL(newUser);
+            // userACL.setPublicWriteAccess(true);
+            // userACL.setPublicReadAccess(true);
+            // newUser.setACL(userACL);
+            // newUser.save();
             onLogin(new UserModel(newUser));
             setRedirectToMessages(true);
         }).catch(error => {

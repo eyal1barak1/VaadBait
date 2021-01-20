@@ -16,7 +16,6 @@ import UserModel from './model/UserModel';
 function App() {
   const [activeUser, setActiveUser] = useState(
     Parse.User.current() ? new UserModel(Parse.User.current()) : null);   // During development it's conveient to be logged in by default
-  const [messageItems, setMessageItems] = useState([]);
   const [votings, setVotings] = useState(jsonVotings);
 
   //============== loging/logout==================
@@ -27,10 +26,6 @@ function App() {
 
   function handleLogin(loggedinUser) {
     setActiveUser(loggedinUser);
-  }
-
-  function addMessageItems(newItem) {
-    setMessageItems(messageItems.concat(newItem));
   }
 
   //============== Voting ==================
@@ -93,11 +88,7 @@ function App() {
         <Route exact path="/login"><LoginPage activeUser={activeUser}  onLogin={handleLogin} /></Route>
         <Route exact path="/signup"><SignupPage activeUser={activeUser}  onLogin={handleLogin} /></Route>
         <Route exact path="/tenants"><TenantsPage activeUser={activeUser} onLogin={handleLogin} onLogout={handleLogout} /></Route>
-
-        <Route exact path="/messages">
-          <MessagesPage activeUser={activeUser} onLogout={handleLogout} addMessageItems={addMessageItems}
-            message_items={messageItems} />
-        </Route>
+        <Route exact path="/messages"> <MessagesPage activeUser={activeUser} onLogout={handleLogout}  /> </Route>
 
         <Route exact path="/voting">
           <VotingPage activeUser={activeUser} onLogout={handleLogout} votings={activeUserVoting} addVote={addVote}

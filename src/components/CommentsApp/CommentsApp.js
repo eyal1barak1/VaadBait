@@ -6,7 +6,7 @@ import Parse from 'parse';
 import CommentModel from "../../model/CommentModel";
 
 function CommentsApp(props) {
-  const { message, message_items, addMessageItems, activeUser } = props;
+  const { message, activeUser } = props;
   const [text, setText] = useState("");
   const [items, setItems] = useState([]);
 
@@ -15,8 +15,7 @@ function CommentsApp(props) {
     async function fetchData() {
       const ParseComments = Parse.Object.extend('Comment');
       const query = new Parse.Query(ParseComments);
-      //console.log(Parse.User.current().attributes.building);
-      //query.equalTo("messageid", new Parse.Object("Message"));
+      query.equalTo("messageId", {"__type":"Pointer","className":"Message","objectId":message.id});
       const parseComments = await query.find();
       setItems(parseComments.map(parseComment => new CommentModel(parseComment)));
     }
@@ -24,7 +23,7 @@ function CommentsApp(props) {
     if (activeUser) {
       fetchData()
     }
-  }, [activeUser])
+  }, [activeUser, message])
 
   function handleTextChange(event) {
     setText(event.target.value);
@@ -37,8 +36,7 @@ function CommentsApp(props) {
     myNewObject.set('done', false);
     myNewObject.set('userFname', activeUser.fname);
     myNewObject.set('userLname', activeUser.lname);
-    myNewObject.set('messageid', new Parse.Object("Message"));
-
+    myNewObject.set('messageId', {"__type":"Pointer","className":"Message","objectId":message.id});
     myNewObject.save().then(
       (result) => {
         setItems(items.concat(new CommentModel(myNewObject)));
@@ -51,9 +49,6 @@ function CommentsApp(props) {
     );
 
   }
-
-
-  const activeMessageComments = message_items.filter(message_item => message_item.messageid === message.id);
 
   return (
     <div>

@@ -18,7 +18,7 @@ function TenantsPage(props) {
     let filteredTenants = tenants.filter(tenant =>
         tenant.fname.toLowerCase().includes(filteredText.toLowerCase()) ||
         tenant.lname.toLowerCase().includes(filteredText.toLowerCase()) ||
-        tenant.email.toLowerCase().includes(filteredText.toLowerCase())
+        tenant.username.toLowerCase().includes(filteredText.toLowerCase())
     );
 
 
@@ -26,7 +26,6 @@ function TenantsPage(props) {
         async function fetchData() {
             const ParseTenants = Parse.Object.extend('User');
             const query = new Parse.Query(ParseTenants);
-            // console.log(Parse.User.current().attributes.building);
             query.equalTo("role", "tenant");
             const parseTenants = await query.find();
             setTenants(parseTenants.map(parseTenants => new UserModel(parseTenants)));
@@ -101,7 +100,9 @@ function TenantsPage(props) {
 
     return (
         <div className="p-messages">
+            
             <HoaNavbr activeUser={activeUser} onLogout={onLogout} />
+            <h1>Tenants Page for bulding: {activeUser.building}</h1>
             <FilterContent isMessagesPage={false} filteredText={filteredText} onFilterChange={e => setFilteredText(e.target.value)} />
             <div className="b-new-message">
                 <Button variant="link" onClick={() => setShowModal(true)}>New Tenant</Button>

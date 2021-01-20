@@ -36,14 +36,14 @@ function NewTenantModal(props) {
         user.set('role', "tenant");
         user.set('password', pwd);
         var sessionToken = Parse.User.current().get("sessionToken");
-        
+
         user.signUp().then((user) => {
             // This lines enable read and write for the added tenat
             var userACL = new Parse.ACL(user);
-               userACL.setPublicWriteAccess(true);
-               userACL.setPublicReadAccess(true);
-               user.setACL(userACL);
-               user.save();
+            userACL.setPublicWriteAccess(true);
+            userACL.setPublicReadAccess(true);
+            user.setACL(userACL);
+            user.save();
             Parse.User.become(sessionToken).then(function (user) {
                 // The current user is now set to user.
             }, function (error) {
@@ -54,7 +54,7 @@ function NewTenantModal(props) {
         }).catch(error => {
             console.error('Error while signing up user', error);
         });
-        
+
         // 2) cleanup (clean all field + close the modal)
         closeModal();
     }
