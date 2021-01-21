@@ -33,7 +33,7 @@ function App() {
         <Route exact path="/"><HomePage activeUser={activeUser} onLogout={handleLogout} /></Route>
         <Route exact path="/login"><LoginPage activeUser={activeUser}  onLogin={handleLogin} /></Route>
         <Route exact path="/signup"><SignupPage activeUser={activeUser}  onLogin={handleLogin} /></Route>
-        <Route exact path="/tenants"><TenantsPage activeUser={activeUser} onLogin={handleLogin} onLogout={handleLogout}/></Route>
+        <Route exact path="/tenants"><TenantsPage activeUser={activeUser}  onLogout={handleLogout}/></Route>
         <Route exact path="/messages"> <MessagesPage activeUser={activeUser} onLogout={handleLogout}/> </Route>
         <Route exact path="/voting"> <VotingPage activeUser={activeUser} onLogout={handleLogout} /></Route>
       </Switch>

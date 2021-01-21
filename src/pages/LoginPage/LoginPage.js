@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { Form, Button, Alert, Container } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
 import './LoginPage.css'
@@ -33,7 +35,8 @@ function LoginPage(props) {
 
     return (
         <Container className="p-login">
-            <h1>Login to HOA</h1>
+            <Link className="goBackLink" to="/"><FontAwesomeIcon icon={faArrowLeft} />Back</Link>
+            <h1>Login to HOA and make a difference</h1>
             <p>or <Link to="/signup">create an account</Link></p>
             {showLoginError ? <Alert variant="danger">Invalid Credentials!</Alert> : null}
             <Form>

@@ -22,12 +22,13 @@ function VotingPage(props) {
         async function fetchData() {
             const ParseVote = Parse.Object.extend('Vote');
             const query = new Parse.Query(ParseVote);
-            query.equalTo("userId", Parse.User.current());
-            const parseVotes = await query.find();
-            setVotings(parseVotes.map(parseVote => new VoteModel(parseVote)));
+            query.equalTo("building", Parse.User.current().attributes.building);
+            await query.find().then((results) => {
+                setVotings(results.map(parseVote => new VoteModel(parseVote)));
+            }, (error) => {
+                console.error('Error while fetching Vote', error);
+            });
         }
-
-
         if (activeUser) {
             fetchData()
         }
@@ -79,7 +80,7 @@ function VotingPage(props) {
         if (voteStatus !== voteItem.voteStatus) {
             const Vote = Parse.Object.extend('Vote');
             const query = new Parse.Query(Vote);
-            query.get(voteItem.id).then((object) => {    
+            query.get(voteItem.id).then((object) => {
                 object.set('voteStatus', voteStatus);
                 object.save().then((response) => {
                     voteItem.voteStatus = voteStatus;

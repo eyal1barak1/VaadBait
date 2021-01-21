@@ -1,9 +1,16 @@
-.p-signup {
-    width: 500px;
-    margin: 50px auto;
-}
+
 
 h1 {
     text-align: center;
+    margin-top: 10px;
+}
+
+.p-signup {
+    width: fit-content;
+   
+}
+
+.p-login > .goBackLink{
+    display: block;
     margin-top: 20px;
 }

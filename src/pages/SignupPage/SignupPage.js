@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { Form, Button, Container } from "react-bootstrap";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import './SignupPage.css'
 import Parse from 'parse';
 import UserModel from "../../model/UserModel";
@@ -47,9 +49,11 @@ function SignupPage(props) {
 
 
     return (
-        <Container>
+        <Container className="p-signup">
+            <Link className="goBackLink" to="/"> <FontAwesomeIcon icon={faArrowLeft} />Back</Link>
             <h1>Create a Committee Member Account</h1>
-            <div className="p-signup">
+            <div >
+            
                 <Form>
                     <Form.Group controlId="formBasicfname">
                         <Form.Label>First Name</Form.Label>
