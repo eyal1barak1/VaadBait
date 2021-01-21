@@ -1,4 +1,5 @@
 import React from "react";
+import { Container } from "react-bootstrap";
 import './Timer.css'
 
 export default class Timer extends React.Component {
@@ -83,26 +84,26 @@ export default class Timer extends React.Component {
         const convertedSeconds = this.getTwoDigitValue(seconds);
 
         return (
-            <div>
-                <div className="counter">
-                    <div className="time">
-                        <div className="time-value">{convertedDays}</div>
-                        <div className="time-label">Days</div>
-                    </div>
-                    <div className="time">
-                        <div className="time-value">{convertedHours}</div>
-                        <div className="time-label">Hours</div>
-                    </div>
-                    <div className="time">
-                        <div className="time-value">{convertedMins}</div>
-                        <div className="time-label">Minutes</div>
-                    </div>
-                    <div className="time">
-                        <div className="time-value">{convertedSeconds}</div>
-                        <div className="time-label">Seconds</div>
-                    </div>
+
+            <Container className="counter">
+                <div className="time">
+                    <div className="time-value">{convertedDays}</div>
+                    <div className="time-label">Days</div>
                 </div>
-            </div>
+                <div className="time">
+                    <div className="time-value">{convertedHours}</div>
+                    <div className="time-label">Hours</div>
+                </div>
+                <div className="time">
+                    <div className="time-value">{convertedMins}</div>
+                    <div className="time-label">Minutes</div>
+                </div>
+                <div className="time">
+                    <div className="time-value">{convertedSeconds}</div>
+                    <div className="time-label">Seconds</div>
+                </div>
+            </Container>
+
         );
     }
 }

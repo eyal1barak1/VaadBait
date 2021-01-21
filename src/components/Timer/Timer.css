@@ -1,41 +1,6 @@
-/* * {
-    box-sizing: border-box;
-  }
 
-  body {
-    padding: 10px;
-    font-family: sans-serif;
-    background-color: #ccc;
-  } */
 
-/* .form-label {
-    font-weight: bold;
-    letter-spacing: 1px;
-} */
 
-/* .btn-primary {
-    letter-spacing: 1px;
-}
-
-.date-time-form {
-    text-align: center;
-} */
-
-/* h1 {
-    text-transform: uppercase;
-    margin-bottom: 50px;
-} */
-
-/* .error-msg {
-    color: #ff0000;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 1px;
-} */
-
-/* .react-datetime-picker {
-    padding-left: 10px;
-} */
 
 .counter {
     display: flex;
@@ -44,12 +9,12 @@
     /* width: 60%; */
     /* margin: 100px auto; */
     /* padding: 10px; */
-    background: linear-gradient(25deg, #95e2ff, #5f79ff, #8ed5ff);
+    background: linear-gradient(25deg, #e8ff95, #5fffc2, #ff8e97);
     border-radius: 20%;
 }
 
 .counter .time {
-    margin-right: 30px;
+    margin-right: 2%;
 }
 
 .counter .time:last-child{
@@ -60,11 +25,12 @@
     /* padding: 1px; */
     text-align: center;
     font-size: 120%;
-    color: #fff;
+    color: rgb(151, 28, 28);
     line-height: 1;
 }
 
 .time-label {
     text-align: center;
+    font-size: 80%;
     /* font-size: 20px; */
 }
