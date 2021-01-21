@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Jumbotron } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import NewMessageModal from "../../components/NewMessageModal/NewMessageModal";
 import MessageCard from "../../components/MessageCard/MessageCard";

@@ -46,7 +46,7 @@ function PieChart(props) {
     const optionsChartData = React.useMemo(getVoteOptionsChartData, [vote]);
 
     function getVoteOptionsChartData() {
-        console.log("calculating chart data");
+        // console.log("calculating chart data");
 
         let colors = getPieColors(vote.options.length);
 

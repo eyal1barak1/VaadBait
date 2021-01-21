@@ -6,7 +6,7 @@ class VoteModel {
         this.details = parseVote.get("details");
         this.options = parseVote.get("options");
         this.building = parseVote.get("building");
-        this.endDate = parseVote.get("endDate");
+        this.endDate = parseVote.get("voteEndDate").toString();
         this.voteStatus = parseVote.get("voteStatus");
         this.result = parseVote.get("result");
         this.votesPieData = parseVote.get("votesPieData");

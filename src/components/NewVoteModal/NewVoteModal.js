@@ -24,11 +24,8 @@ function NewVoteModal(props) {
 
     function handleAddVote() {
         // 1) triggers addVote at App that will then add this vote to its votes state
-        let date = new Date(endDate);
-        let jsonStr = JSON.stringify(date);
-        var dateStr = JSON.parse(jsonStr);  
-        addVote(title, details, options, dateStr);
-
+        let voteEndDate = endDate === "" ? new Date() : new Date(endDate); 
+        addVote(title, details, options, voteEndDate);
         // 2) cleanup (clean all field + close the modal)
         closeModal();
     }

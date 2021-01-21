@@ -6,8 +6,9 @@ import './VoteResultCard.css'
 function VoteResultCard(props) {
     const { vote } = props;
 
-    var endDate = vote.endDate.substring(0, 16);
-    endDate = endDate.replace("T", " ");
+    // var endDate = vote.endDate.substring(0, 16);
+    // endDate = endDate.replace("T", " ");
+    var endDate = vote.endDate;
 
     return (
         <div className="c-vote-card">

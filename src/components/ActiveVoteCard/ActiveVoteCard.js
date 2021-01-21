@@ -3,6 +3,7 @@ import { useState } from "react";
 import DateModal from "../DateModal/DateModal";
 import PieChart from "../PieChart/PieChart";
 import './ActiveVoteCard.css'
+import Timer from '../Timer/Timer'
 
 
 
@@ -12,9 +13,9 @@ function ActiveVoteCard(props) {
     const [chosenOption, setChosenOption] = useState(vote.options[0]);
     let i = 0;
 
-    var endDate = vote.endDate.substring(0, 16);
-    endDate = endDate.replace("T", " ");
-
+    // var endDate = vote.endDate.substring(0, 16);
+    // endDate = endDate.replace("T", " ");
+    var endDate = vote.endDate;
 
     let options = vote.options.map(option => <option key={i++}>{option}</option>)
 
@@ -31,7 +32,7 @@ function ActiveVoteCard(props) {
             <Popover.Title as="h3">Thank you for your vote</Popover.Title>
             <Popover.Content>
                 results will be available at <strong>{endDate}</strong>
-          </Popover.Content>
+            </Popover.Content>
         </Popover>
     );
 
@@ -75,7 +76,9 @@ function ActiveVoteCard(props) {
                                     <Button variant="warning" onClick={handleVote}>Submit Vote</Button>
                                 </OverlayTrigger>
                                 <div className="vote-end-date">
-                                    <label>Vote end at: </label>
+                                    <label>Vote ends in: </label>
+                                    <Timer endDate={new Date(endDate)} />
+                                    <label> Ends date: </label>
                                     <p>{endDate}</p>
                                 </div>
                             </div>

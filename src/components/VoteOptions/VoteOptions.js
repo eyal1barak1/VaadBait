@@ -12,7 +12,7 @@ function VoteOptions(props) {
         setNewOption("");
         updateOptions(options.concat(newOption));
     }
-    const optionsView = options.map(option => <div className="option-added"><Form.Control type="text" value={option} /></div>);
+    const optionsView = options.map(option => <div key={option} className="option-added"><Form.Control type="text" value={option} /></div>);
 
     return (
         <div>

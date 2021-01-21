@@ -6,11 +6,8 @@ function DateModal(props) {
     const [endDate, setEndDate] = useState(new Date());
 
     function UpdateEndDate() {
-
-        let date = new Date(endDate);
-        let jsonStr = JSON.stringify(date);
-        var dateStr = JSON.parse(jsonStr);  
-        handleUpdateEndDate(dateStr);
+        let voteEndDate = typeof endDate === 'string' ? new Date(endDate) : endDate ; 
+        handleUpdateEndDate(voteEndDate);
         handleClose();
     }
 

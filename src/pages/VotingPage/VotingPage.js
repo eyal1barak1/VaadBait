@@ -27,6 +27,7 @@ function VotingPage(props) {
             setVotings(parseVotes.map(parseVote => new VoteModel(parseVote)));
         }
 
+
         if (activeUser) {
             fetchData()
         }
@@ -42,7 +43,7 @@ function VotingPage(props) {
         myNewVote.set('building', Parse.User.current().attributes.building);
         myNewVote.set('options', options);
         myNewVote.set('voteStatus', 'active');
-        myNewVote.set('endDate', endDate);
+        myNewVote.set('voteEndDate', endDate);
         myNewVote.set('result', '');
         myNewVote.set('votesPieData', {});
         var relation = myNewVote.relation("userId");
@@ -72,20 +73,21 @@ function VotingPage(props) {
 
     // Check the end Date And Update Vote Status
     function CheckDateAndUpdateVoteStat(voteItem) {
-        const Vote = Parse.Object.extend('Vote');
-        const query = new Parse.Query(Vote);
-        // here you put the objectId that you want to update
-        query.get(voteItem.id).then((object) => {
-            var now = new Date();
-            let objEndDate = new Date(object.get("endDate"));
-            let voteStatus = now >= objEndDate ? "not active" : "active";
-            object.set('voteStatus', voteStatus);
-            object.save().then((response) => {
-                voteItem.voteStatus = voteStatus;
-            }, (error) => {
-                console.error('Error while updating Vote', error);
+        var now = new Date();
+        let objEndDate = new Date(voteItem.endDate);
+        let voteStatus = now >= objEndDate ? "not active" : "active";
+        if (voteStatus !== voteItem.voteStatus) {
+            const Vote = Parse.Object.extend('Vote');
+            const query = new Parse.Query(Vote);
+            query.get(voteItem.id).then((object) => {    
+                object.set('voteStatus', voteStatus);
+                object.save().then((response) => {
+                    voteItem.voteStatus = voteStatus;
+                }, (error) => {
+                    console.error('Error while updating Vote', error);
+                });
             });
-        });
+        }
     }
 
     votings.forEach(CheckDateAndUpdateVoteStat);
@@ -96,11 +98,11 @@ function VotingPage(props) {
         const query = new Parse.Query(Vote);
         // here you put the objectId that you want to update
         query.get(voteId).then((object) => {
-            object.set('endDate', updatedEndDate);
+            object.set('voteEndDate', updatedEndDate);
             object.save().then((response) => {
                 const found = votings.find(element => element.id === voteId);
                 const index = votings.indexOf(found);
-                votings[index].endDate = updatedEndDate;
+                votings[index].endDate = updatedEndDate.toString();
                 setVotings([...votings]);
             }, (error) => {
                 console.error('Error while updating Vote', error);
