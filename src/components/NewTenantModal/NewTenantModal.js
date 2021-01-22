@@ -86,7 +86,7 @@ function NewTenantModal(props) {
     return (
         <Modal show={show} onHide={closeModal} size="xl">
             <Modal.Header closeButton>
-                <Modal.Title>{isUpdate ? "Update tenats details" : "Create new tenant"} </Modal.Title>
+                <Modal.Title>{isUpdate ? "Update Tenats Details" : "Create New Tenant"} </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>

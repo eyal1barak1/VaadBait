@@ -45,7 +45,7 @@ function MessageCard(props) {
                     </Col>
                 </Row>
             </Container>
-            <NewMessageModal isUpdate="true" show={showModal} handleClose={() => setShowModal(false)}
+            <NewMessageModal isUpdate={true} show={showModal} handleClose={() => setShowModal(false)}
                 updateMessageContent={updateMessageContent} messageId={message.id} />
 
         </div >

@@ -45,7 +45,7 @@ function NewMessageModal(props) {
     return (
         <Modal show={show} onHide={closeModal} size="xl">
             <Modal.Header closeButton>
-                <Modal.Title>New Message</Modal.Title>
+                <Modal.Title>{isUpdate ? "Update Message" : "Create New Message"}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
@@ -93,7 +93,7 @@ function NewMessageModal(props) {
 
             </Modal.Body>
             <div>
-                {isUpdate === "true" ?
+                {isUpdate ?
                     <Modal.Footer>
                         <Button variant="primary" onClick={handleUpdateMessage}>
                             Update Message
