@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { Modal, Form, Button, Col, Row } from "react-bootstrap";
-import DateTimePicker from "react-datetime-picker";
 
 function DateModal(props) {
     const { show, handleClose, handleUpdateEndDate } = props;
     const [endDate, setEndDate] = useState(new Date());
     const [dateString, setDateString] = useState(formatDate());
-    var tt = 6;
 
     function UpdateEndDate() {
         let voteEndDate = typeof endDate === 'string' ? new Date(endDate) : endDate;
@@ -50,13 +48,7 @@ function DateModal(props) {
                             Choose End Date:
                         </Form.Label>
                         <Col>
-                            {/* <DateTimePicker
-                                // format="DD/MM/YYY h:mm:ss"
-                                onChange={e => setEndDate(e.target.value)}
-                                value={endDate} 
-                            /> */}
-                            <Form.Control type="date" value={dateString} onChange={e => setDates(e.target.value)}>
-                            </Form.Control>
+                            <Form.Control type="date" value={dateString} onChange={e => setDates(e.target.value)}/>
                         </Col>
                     </Form.Group>
                 </Modal.Body>
