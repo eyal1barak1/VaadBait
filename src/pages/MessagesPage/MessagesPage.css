@@ -1,17 +1,18 @@
 .b-new-message {
-    position: relative; 
+    position: relative;
     height: 40px;
 }
-.b-new-message > button{
+
+.b-new-message>button {
     position: absolute;
     right: 0;
 }
 
-.jumbotron{
+.jumbotron {
     padding: 0;
 }
 
-.p-messages > h1{
+.p-messages>h1 {
     margin-top: 10px;
     margin-bottom: 20px;
 }

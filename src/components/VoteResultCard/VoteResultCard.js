@@ -1,14 +1,10 @@
-import {   Container,Col, Row } from "react-bootstrap";
+import { Container, Col, Row } from "react-bootstrap";
 import PieChart from "../PieChart/PieChart";
 import './VoteResultCard.css'
 
 
 function VoteResultCard(props) {
     const { vote } = props;
-
-    // var endDate = vote.endDate.substring(0, 16);
-    // endDate = endDate.replace("T", " ");
-    var endDate = vote.endDate;
 
     return (
         <div className="c-vote-card">
@@ -24,7 +20,7 @@ function VoteResultCard(props) {
                         <Row>
                             <div className="vote-end-date">
                                 <label>End date: </label>
-                                <p>{endDate}</p>
+                                <p>{vote.endDate}</p>
                             </div>
                         </Row>
                     </Col>

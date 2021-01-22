@@ -1,5 +1,3 @@
-
-
 h1 {
     text-align: center;
     margin-top: 10px;
@@ -7,10 +5,9 @@ h1 {
 
 .p-signup {
     width: fit-content;
-   
 }
 
-.p-login > .goBackLink{
+.p-login>.goBackLink {
     display: block;
     margin-top: 20px;
 }

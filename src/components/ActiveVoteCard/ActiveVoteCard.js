@@ -14,8 +14,7 @@ function ActiveVoteCard(props) {
     const [showPopover, setShowpopover] = useState(false);
     let i = 0;
 
-    // var endDate = vote.endDate.substring(0, 16);
-    // endDate = endDate.replace("T", " ");
+
     var endDate = vote.endDate;
 
     let options = vote.options.map(option => <option key={i++}>{option}</option>)
@@ -26,7 +25,7 @@ function ActiveVoteCard(props) {
 
     function handleVote() {
         setShowpopover(true);
-        setTimeout(function(){ setShowpopover(false);; }, 2000);
+        setTimeout(function () { setShowpopover(false);; }, 2000);
         AddUsersVote(chosenOption, vote.id, activeUser.id);
     }
 
@@ -75,7 +74,7 @@ function ActiveVoteCard(props) {
                                 {options}
                             </Form.Control>
                             <div className="vote-button">
-                                <OverlayTrigger trigger="click" placement="right"  show={showPopover} overlay={popover}>
+                                <OverlayTrigger trigger="click" placement="right" show={showPopover} overlay={popover}>
                                     <Button variant="warning" onClick={handleVote}>Submit Vote</Button>
                                 </OverlayTrigger>
                                 <div className="vote-end-date">

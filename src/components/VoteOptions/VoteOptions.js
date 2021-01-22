@@ -3,11 +3,11 @@ import { Button, Form } from 'react-bootstrap';
 
 function VoteOptions(props) {
 
-    const {updateOptions} = props;
+    const { updateOptions } = props;
     const [options, setOptions] = useState([]);
     const [newOption, setNewOption] = useState("");
 
-    function handleAddOption(){
+    function handleAddOption() {
         setOptions(options.concat(newOption));
         setNewOption("");
         updateOptions(options.concat(newOption));
@@ -17,7 +17,7 @@ function VoteOptions(props) {
     return (
         <div>
             {optionsView}
-            <div><Form.Control type="text" placeholder="New Option" value={newOption} onChange={e => setNewOption(e.target.value)}/></div>
+            <div><Form.Control type="text" placeholder="New Option" value={newOption} onChange={e => setNewOption(e.target.value)} /></div>
             <div className="option-add-button"><Button onClick={handleAddOption}>Add Option</Button></div>
         </div>
     );

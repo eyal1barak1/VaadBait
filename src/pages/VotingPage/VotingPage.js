@@ -125,20 +125,20 @@ function VotingPage(props) {
 
         for (const [key, value] of Object.entries(voteRecords)) {
             votesCommited.push(`${value}`);
-            let userId =`${key}`;
-            console.log("the vote for user id" + {userId} + " registerd");
+            let userId = `${key}`;
+            console.log("the vote for user id" + { userId } + " registerd");
         }
 
         var resultArr = getArraysNumOfOccurencesAndVariables(votesCommited);
         var indexOfMaxvar = indexOfMax(resultArr[1]);
-        if (isTie(resultArr[1], indexOfMaxvar)){
+        if (isTie(resultArr[1], indexOfMaxvar)) {
             return "It's a Tie";
         }
 
         return resultArr[0][indexOfMaxvar];
     }
 
-    // Check the end Date And Update Vote Status
+    // Check the end Date And Update Vote Status and final result
     function CheckDateAndUpdateVoteStatAndresult(voteItem) {
         var now = new Date();
         let objEndDate = new Date(voteItem.endDate);

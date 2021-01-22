@@ -1,11 +1,10 @@
 import { Navbar, Nav } from "react-bootstrap";
 
 
-
 function HoaNavbr(props) {
     const { activeUser, onLogout } = props;
     let tenantLink = null;
-    
+
     if (activeUser) {
         if (activeUser.role === "committee") {
             tenantLink = <Nav.Link href="#/tenants">Tenants</Nav.Link>;

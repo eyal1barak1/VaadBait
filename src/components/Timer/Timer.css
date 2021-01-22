@@ -1,14 +1,7 @@
-
-
-
-
 .counter {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    /* width: 60%; */
-    /* margin: 100px auto; */
-    /* padding: 10px; */
     background: linear-gradient(25deg, #e8ff95, #5fffc2, #ff8e97);
     border-radius: 20%;
 }
@@ -17,12 +10,11 @@
     margin-right: 2%;
 }
 
-.counter .time:last-child{
+.counter .time:last-child {
     margin-right: 0;
 }
 
 .counter .time-value {
-    /* padding: 1px; */
     text-align: center;
     font-size: 120%;
     color: rgb(151, 28, 28);
@@ -32,5 +24,4 @@
 .time-label {
     text-align: center;
     font-size: 80%;
-    /* font-size: 20px; */
 }

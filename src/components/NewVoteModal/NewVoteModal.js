@@ -24,7 +24,7 @@ function NewVoteModal(props) {
 
     function handleAddVote() {
         // 1) triggers addVote at App that will then add this vote to its votes state
-        let voteEndDate = endDate === "" ? new Date() : new Date(endDate); 
+        let voteEndDate = endDate === "" ? new Date() : new Date(endDate);
         addVote(title, details, options, voteEndDate);
         // 2) cleanup (clean all field + close the modal)
         closeModal();
@@ -54,7 +54,6 @@ function NewVoteModal(props) {
                             <Form.Control as="textarea" rows={3} type="text" placeholder="Vote Details" value={details} onChange={e => setDetails(e.target.value)} />
                         </Col>
                     </Form.Group>
-
                     <Form.Group as={Row} controlId="formHorizontalOptions">
                         <Form.Label column sm={2}>
                             Options:
@@ -63,7 +62,6 @@ function NewVoteModal(props) {
                             <VoteOptions updateOptions={updateOptions}></VoteOptions>
                         </Col>
                     </Form.Group>
-
                     <Form.Group as={Row} controlId="formHorizontalEndDate">
                         <Form.Label column sm={2}>
                             End Date:
@@ -74,7 +72,6 @@ function NewVoteModal(props) {
                         </Col>
                     </Form.Group>
                 </Form>
-
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={closeModal}>
