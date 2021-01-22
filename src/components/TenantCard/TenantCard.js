@@ -12,7 +12,7 @@ function TenantCard(props) {
     function removeTenantById() {
         removeTenant(tenant.id);
     }
- 
+
     return (
         <div className="c-tenant-card">
             <Container fluid>
@@ -44,8 +44,8 @@ function TenantCard(props) {
                     </Col>
                 </Row>
             </Container>
-            <NewTenantModal isUpdate="true" show={showModal} handleClose={() => setShowModal(false)}
-                updateTenantContent={updateTenantContent} userId={tenant.id} />
+            {showModal ? <NewTenantModal isUpdate={true} show={showModal} handleClose={() => setShowModal(false)}
+                updateTenantContent={updateTenantContent} userId={tenant.id} /> : null}
         </div >
     );
 }

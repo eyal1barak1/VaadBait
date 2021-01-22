@@ -86,7 +86,7 @@ function NewTenantModal(props) {
     return (
         <Modal show={show} onHide={closeModal} size="xl">
             <Modal.Header closeButton>
-                <Modal.Title>Create a Committee Member Account</Modal.Title>
+                <Modal.Title>{isUpdate ? "Update tenats details" : "Create new tenant"} </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
@@ -116,7 +116,6 @@ function NewTenantModal(props) {
                         <Row>
                             <Col sm={5}>
                                 <Form.Control type="file" accept="image/*" onChange={handleFileChange} />
-                                {/* <Form.Control type="text" placeholder="Image URL" value={img} onChange={e => setImg(e.target.value)} /> */}
                             </Col>
                             <Col sm={5}>
                                 <Image width="200" height="200" src={imgURL === "" ? placeHolderImage : imgURL} />
@@ -130,7 +129,7 @@ function NewTenantModal(props) {
                 </Form>
             </Modal.Body>
             <div>
-                {isUpdate === "true" ?
+                {isUpdate ?
                     <Modal.Footer>
                         <Button variant="primary" onClick={handleUpdateTenant}>
                             Update Tenant

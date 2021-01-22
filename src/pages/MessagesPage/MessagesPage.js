@@ -190,7 +190,7 @@ function MessagesPage(props) {
                 <Button variant="link" onClick={() => setShowModal(true)}>New Message</Button>
             </div>
             <MessagesAccordion panels={messagesView} updateMessage={updateMessage} />
-            <NewMessageModal isUpdate="false" show={showModal} handleClose={() => setShowModal(false)} addMessage={addMessage} />
+            {showModal ? <NewMessageModal isUpdate="false" show={showModal} handleClose={() => setShowModal(false)} addMessage={addMessage} /> : null}
         </div>
     )
 

@@ -115,8 +115,8 @@ function TenantsPage(props) {
                 <Button variant="link" onClick={() => setShowModal(true)}>New Tenant</Button>
             </div>
             <TenantsAccordion panels={TenantView} />
-            <NewTenantModal isUpdate="false" show={showModal} handleClose={() => setShowModal(false)} tenants={tenants}
-                addTenant={setTenants} />
+            {showModal ? <NewTenantModal isUpdate={false} show={showModal} handleClose={() => setShowModal(false)} tenants={tenants}
+                addTenant={setTenants} /> : null}
         </div>
     )
 

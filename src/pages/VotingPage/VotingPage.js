@@ -221,7 +221,7 @@ function VotingPage(props) {
                     </Col>
                 </Row>
             </Container>
-            <NewVoteModal show={showModal} handleClose={() => setShowModal(false)} addVote={addVote} />
+            {showModal ? <NewVoteModal show={showModal} handleClose={() => setShowModal(false)} addVote={addVote} /> : null}
         </div>
     )
 
