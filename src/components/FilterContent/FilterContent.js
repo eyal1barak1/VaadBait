@@ -35,7 +35,7 @@ function FilterContent(props) {
                         </Col>
                         <Col>
                             <Form.Group onChange={e => Sort(e.target.id)} className="sort-radio" controlId="formBasicCheckboxFirst">
-                                <div className="sortByLabel"><Form.Label >Sort By:</Form.Label></div>
+                                <div className="sortByLabel"><Form.Label >{"Sort By:  "}</Form.Label></div>
                                 <Form.Check inline id="date" type="radio" label="Date" name="sort" />
                                 <Form.Check inline id="priority" type="radio" label="Priority" name="sort" />
                             </Form.Group>
