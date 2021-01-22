@@ -89,7 +89,7 @@ function ActiveVoteCard(props) {
                     </Form.Group>
                 </Form>
             }
-            <DateModal show={showDateModal} handleClose={() => setShowDateModal(false)} handleUpdateEndDate={handleUpdateEndDate} />
+            {showDateModal ? <DateModal show={showDateModal} handleClose={() => setShowDateModal(false)} handleUpdateEndDate={handleUpdateEndDate} /> : null}
         </div >
     );
 }

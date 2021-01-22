@@ -13,8 +13,8 @@ function VotesAccordion(props) {
                     <Accordion.Toggle className="accordionHeader" as={Card.Header} eventKey={index.toString()} >
                         {isResaultAccordion === "true" ?
                             <Row>
-                                <Col sm={9} className="accordion-header-title">{panel.props.vote.title}</Col>
-                                <Col sm={3} className="accordion-header-result">{"Result: " + panel.props.vote.result}</Col>
+                                <Col sm={8} className="accordion-header-title">{panel.props.vote.title}</Col>
+                                <Col sm={4} className="accordion-header-result">{"Result: " + panel.props.vote.result}</Col>
                             </Row>
                             :
                             <div>{panel.props.vote.title}</div>

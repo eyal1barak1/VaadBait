@@ -72,18 +72,89 @@ function VotingPage(props) {
         });
     }
 
+    function getArraysNumOfOccurencesAndVariables(arr) {
+        var a = [],
+            b = [],
+            prev;
+
+        arr.sort();
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] !== prev) {
+                a.push(arr[i]);
+                b.push(1);
+            } else {
+                b[b.length - 1]++;
+            }
+            prev = arr[i];
+        }
+
+        return [a, b];
+    }
+
+    function indexOfMax(arr) {
+        if (arr.length === 0) {
+            return -1;
+        }
+
+        var max = arr[0];
+        var maxIndex = 0;
+
+        for (var i = 1; i < arr.length; i++) {
+            if (arr[i] > max) {
+                maxIndex = i;
+                max = arr[i];
+            }
+        }
+
+        return maxIndex;
+    }
+
+    function isTie(arr, indexOfMaxVar) {
+        let maxVar = arr[indexOfMaxVar];
+        let counter = 0;
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] === maxVar) {
+                ++counter;
+            }
+        }
+        return counter > 1 ? true : false;
+    }
+
+    function getOptionChosen(voteRecords) {
+        let votesCommited = [];
+
+        for (const [key, value] of Object.entries(voteRecords)) {
+            votesCommited.push(`${value}`);
+            let userId =`${key}`;
+            console.log("the vote for user id" + {userId} + " registerd");
+        }
+
+        var resultArr = getArraysNumOfOccurencesAndVariables(votesCommited);
+        var indexOfMaxvar = indexOfMax(resultArr[1]);
+        if (isTie(resultArr[1], indexOfMaxvar)){
+            return "It's a Tie";
+        }
+
+        return resultArr[0][indexOfMaxvar];
+    }
+
     // Check the end Date And Update Vote Status
-    function CheckDateAndUpdateVoteStat(voteItem) {
+    function CheckDateAndUpdateVoteStatAndresult(voteItem) {
         var now = new Date();
         let objEndDate = new Date(voteItem.endDate);
         let voteStatus = now >= objEndDate ? "not active" : "active";
+
         if (voteStatus !== voteItem.voteStatus) {
             const Vote = Parse.Object.extend('Vote');
             const query = new Parse.Query(Vote);
             query.get(voteItem.id).then((object) => {
+                let voteRecords = object.get("votesPieData");
+                let voteResult = getOptionChosen(voteRecords);
                 object.set('voteStatus', voteStatus);
-                object.save().then((response) => {
+                object.set('result', voteResult);
+                object.save().then(() => {
                     voteItem.voteStatus = voteStatus;
+                    voteItem.results = voteResult;
                 }, (error) => {
                     console.error('Error while updating Vote', error);
                 });
@@ -91,7 +162,7 @@ function VotingPage(props) {
         }
     }
 
-    votings.forEach(CheckDateAndUpdateVoteStat);
+    votings.forEach(CheckDateAndUpdateVoteStatAndresult);
 
 
     function updateEndDate(voteId, updatedEndDate) {
