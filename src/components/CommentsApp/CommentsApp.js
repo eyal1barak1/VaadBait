@@ -37,11 +37,9 @@ function CommentsApp(props) {
     myNewObject.set('userLname', activeUser.lname);
     myNewObject.set('messageId', { "__type": "Pointer", "className": "Message", "objectId": message.id });
     myNewObject.set('img', activeUser.img);
-    myNewObject.save().then(
-      (result) => {
+    myNewObject.save().then(() => {
         setItems(items.concat(new CommentModel(myNewObject)));
         setText("");
-        console.log('Comment created', result);
       },
       (error) => {
         console.error('Error while creating Comment: ', error);

@@ -69,23 +69,41 @@ function MessagesPage(props) {
                 arr.push(activeUserId);
             }
             object.set('isRead', arr);
-            object.save().then((response) => {
+            object.save().then(() => {
                 const found = messages.find(element => element.id === messageId);
                 const index = messages.indexOf(found);
                 messages[index].isRead.push(activeUserId);
                 setMessages([...messages]);
-                console.log('Updated Message Read status', response);
             }, (error) => {
                 console.error('Error while updating Message', error);
             });
         });
     }
 
+    function removeRelatedComments(commentObj) {
+        const Comment = Parse.Object.extend('Comment');
+        const query = new Parse.Query(Comment);
+        query.get(commentObj.id).then((object) => {
+            object.destroy().then(() => {
+            }, (error) => {
+                console.error('Error while deleting Comment', error);
+            });
+        });
+    }
     function removeMessage(messageId) {
         const Message = Parse.Object.extend('Message');
         const query = new Parse.Query(Message);
         query.get(messageId).then((object) => {
             object.destroy().then((response) => {
+                const Comment = Parse.Object.extend('Comment');
+                const query = new Parse.Query(Comment);
+                query.equalTo('messageId', { "__type": "Pointer", "className": "Message", "objectId": messageId });
+                query.find().then((results) => {
+                    results.forEach(removeRelatedComments);
+                }, (error) => {
+                    console.error('Error while fetching Comment', error);
+                });
+
                 const found = messages.find(element => element.id === messageId);
                 const index = messages.indexOf(found);
                 messages.splice(index, 1);
@@ -188,8 +206,8 @@ function MessagesPage(props) {
                 <Button variant="link" onClick={() => setShowModal(true)}>New Message</Button>
             </div>
             <MessagesAccordion panels={messagesView} updateMessage={updateMessage} />
-            {showModal ? <NewMessageModal isUpdate={false} show={showModal} 
-            handleClose={() => setShowModal(false)} addMessage={addMessage} phImg={phImg}/> : null}
+            {showModal ? <NewMessageModal isUpdate={false} show={showModal}
+                handleClose={() => setShowModal(false)} addMessage={addMessage} phImg={phImg} /> : null}
         </div>
     )
 
