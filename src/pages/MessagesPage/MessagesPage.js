@@ -9,12 +9,10 @@ import MessagesAccordion from "../../components/Accordion/MessagesAccordion";
 import FilterContent from "../../components/FilterContent/FilterContent";
 import Parse from 'parse';
 import MessageModel from "../../model/MessageModel";
-// import messagePlaceHolder from '../../images/messagePlaceholder.jpg';
-import userPlaceHolder from '../../images/userPlaceholder.png';
 
 
 function MessagesPage(props) {
-    const { activeUser, onLogout, message_items, addMessageItems } = props;
+    const { activeUser, onLogout, message_items, addMessageItems, phImg } = props;
     const [showModal, setShowModal] = useState(false);
     const [filteredText, setFilteredText] = useState("");
     const [priorityFilter, setPriorityFilter] = useState("");
@@ -49,7 +47,7 @@ function MessagesPage(props) {
             newMessage.set('img', new Parse.File(img.name, img));
         }
         else {
-            newMessage.set('img', new Parse.File("placeHolderImage", { base64: userPlaceHolder }));
+            newMessage.set('img', phImg.img);
         }
         newMessage.set('priority', priority);
         newMessage.set('date', new Date().toString());
@@ -111,7 +109,7 @@ function MessagesPage(props) {
             if (img) {
                 object.set('img', new Parse.File(img.name, img));
             } else {
-                object.set('img', new Parse.File("placeHolderImage", { base64: userPlaceHolder }));
+                object.set('img', phImg.img);
             }
 
 
@@ -190,7 +188,8 @@ function MessagesPage(props) {
                 <Button variant="link" onClick={() => setShowModal(true)}>New Message</Button>
             </div>
             <MessagesAccordion panels={messagesView} updateMessage={updateMessage} />
-            {showModal ? <NewMessageModal isUpdate={false} show={showModal} handleClose={() => setShowModal(false)} addMessage={addMessage} /> : null}
+            {showModal ? <NewMessageModal isUpdate={false} show={showModal} 
+            handleClose={() => setShowModal(false)} addMessage={addMessage} phImg={phImg}/> : null}
         </div>
     )
 

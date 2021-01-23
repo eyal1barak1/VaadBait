@@ -1,18 +1,16 @@
 import { useState } from "react";
 import { Button, Modal, Form, Col, Image, Row } from "react-bootstrap";
-import Parse from 'parse';
-import UserModel from "../../model/UserModel";
-import userPlaceHolder from '../../images/userPlaceholder.png';
+import './NewTenantModal.css'
 
 function NewTenantModal(props) {
-    const { show, handleClose, addTenant, userId, tenants, isUpdate, updateTenantContent } = props;
+    const { show, handleClose, addTenant, userId, isUpdate, updateTenantContent, phImg } = props;
     const [email, setEmail] = useState("eyal@barak.com");
     const [pwd, setPwd] = useState("123");
     const [fname, setfname] = useState("Eyal");
     const [lname, setlname] = useState("Barak");
     const [building, setBuilding] = useState("Einstein");
     const [img, setImg] = useState("");
-    const placeHolderImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4tJDcJYnlhTCuciLukYiHdpeS9XL5wGGHSg&usqp=CAU";
+    const placeHolderImage = typeof phImg === 'undefined' ? "" : phImg.img.url();
 
 
     function closeModal() {
@@ -27,43 +25,8 @@ function NewTenantModal(props) {
 
     function handleAddTennant() {
 
-        const user = new Parse.User();
-        user.set('username', fname);
-        user.set('email', email);
-        user.set('fname', fname);
-        user.set('lname', lname);
-        user.set('building', building);
-        // user.set('img', img);
-        if (img) {
-            user.set('img', new Parse.File(img.name, img));
-        }
-        else {
-            user.set('img', new Parse.File("placeHolderImage", { base64: userPlaceHolder }));
-        }
-        user.set('role', "tenant");
-        user.set('password', pwd);
-        user.set('emailAddrr', email);
-        var sessionToken = Parse.User.current().get("sessionToken");
-
-        user.signUp().then((user) => {
-            // This lines enable read and write for the added tenat
-            var userACL = new Parse.ACL(user);
-            userACL.setPublicWriteAccess(true);
-            userACL.setPublicReadAccess(true);
-            user.setACL(userACL);
-            user.save();
-            Parse.User.become(sessionToken).then(function (user) {
-                // The current user is now set to user.
-            }, function (error) {
-                // The token could not be validated.
-            });
-            addTenant(tenants.concat(new UserModel(user)));
-            console.log('User signed up', user);
-        }).catch(error => {
-            console.error('Error while signing up user', error);
-        });
-
         // 2) cleanup (clean all field + close the modal)
+        addTenant(fname, email, lname, building, img, pwd);
         closeModal();
     }
 
@@ -90,42 +53,52 @@ function NewTenantModal(props) {
             </Modal.Header>
             <Modal.Body>
                 <Form>
-                    <Form.Group controlId="formBasicfname">
-                        <Form.Label>First Name</Form.Label>
-                        <Form.Control type="text" placeholder="Enter first name" value={fname} onChange={e => setfname(e.target.value)} />
+                    <Form.Group as={Row} controlId="formBasicfname">
+                        <Form.Label column sm={2}>
+                            First Name:
+                            </Form.Label>
+                        <Col sm={10}>
+                            <Form.Control type="text" placeholder="Enter first name" value={fname} onChange={e => setfname(e.target.value)} />
+                        </Col>
                     </Form.Group>
-                    <Form.Group controlId="formBasiclname">
-                        <Form.Label>Last Name</Form.Label>
-                        <Form.Control type="text" placeholder="Enter last name" value={lname} onChange={e => setlname(e.target.value)} />
+
+                    <Form.Group as={Row} controlId="formBasiclname">
+                        <Form.Label column sm={2}>Last Name:</Form.Label>
+                        <Col sm={10}>
+                            <Form.Control type="text" placeholder="Enter last name" value={lname} onChange={e => setlname(e.target.value)} />
+                        </Col>
                     </Form.Group>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)} />
-                        <Form.Text className="text-muted">
-                            We'll never share your email with anyone else.
-                    </Form.Text>
+                    <Form.Group as={Row} controlId="formBasicEmail">
+                        <Form.Label column sm={2}>Email address:</Form.Label>
+                        <Col sm={10}>
+                            <Form.Control type="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)} />
+                            <Form.Text className="text-muted">We'll never share your email with anyone else.</Form.Text>
+                        </Col>
                     </Form.Group>
-                    <Form.Group controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" value={pwd} onChange={e => setPwd(e.target.value)} />
+                    <Form.Group as={Row} controlId="formBasicPassword">
+                        <Form.Label column sm={2}>Password:</Form.Label>
+                        <Col sm={10}>
+                            <Form.Control type="password" placeholder="Password" value={pwd} onChange={e => setPwd(e.target.value)} />
+                        </Col>
                     </Form.Group>
-                    <Form.Group controlId="formHorizontalImage">
-                        <Form.Label>
-                            Image URL
+                    <Form.Group as={Row} controlId="formBasicbuilding">
+                        <Form.Label column sm={2}>Building Name:</Form.Label>
+                        <Col sm={10}>
+                            <Form.Control type="text" placeholder="Building/Condomium Community Name" value={building} onChange={e => setBuilding(e.target.value)} />
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Row} controlId="formHorizontalImage">
+                        <Form.Label column sm={2}>
+                            Image URL:
                         </Form.Label>
-                        <Row>
-                            <Col sm={5}>
-                                <Form.Control type="file" accept="image/*" onChange={handleFileChange} />
-                            </Col>
-                            <Col sm={5}>
-                                <Image width="200" height="200" src={imgURL === "" ? placeHolderImage : imgURL} />
-                            </Col>
-                        </Row>
+                        <Col sm={5}>
+                            <Form.Control className="chooseFile" type="file" accept="image/*" onChange={handleFileChange} />
+                        </Col>
+                        <Col sm={5}>
+                            <Image width="200" height="200" src={imgURL === "" ? placeHolderImage : imgURL} />
+                        </Col>
                     </Form.Group>
-                    <Form.Group controlId="formBasicbuilding">
-                        <Form.Label>Building/Condomium Community Name</Form.Label>
-                        <Form.Control type="text" placeholder="Building/Condomium Community Name" value={building} onChange={e => setBuilding(e.target.value)} />
-                    </Form.Group>
+                    
                 </Form>
             </Modal.Body>
             <div>

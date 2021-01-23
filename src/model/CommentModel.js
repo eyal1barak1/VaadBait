@@ -1,6 +1,5 @@
 
 class CommentModel {
-    debugger;
     constructor(parseComment) {
         this.id = parseComment.id;
         this.text = parseComment.get("text");

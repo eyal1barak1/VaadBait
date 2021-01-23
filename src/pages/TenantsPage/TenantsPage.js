@@ -9,10 +9,10 @@ import NewTenantModal from "../../components/NewTenantModal/NewTenantModal";
 import FilterContent from "../../components/FilterContent/FilterContent";
 import UserModel from "../../model/UserModel";
 import Parse from 'parse';
-import userPlaceHolder from '../../images/userPlaceholder.png';
+
 
 function TenantsPage(props) {
-    const { activeUser, onLogout } = props;
+    const { activeUser, onLogout, phImg } = props;
     const [showModal, setShowModal] = useState(false);
     const [filteredText, setFilteredText] = useState("");
     const [tenants, setTenants] = useState([]);
@@ -39,6 +39,46 @@ function TenantsPage(props) {
 
     if (!activeUser) {
         return <Redirect to="/" />
+    }
+
+    function addTenant(fname, email, lname, building, img, pwd) {
+
+        const user = new Parse.User();
+        user.set('username', fname);
+        user.set('email', email);
+        user.set('fname', fname);
+        user.set('lname', lname);
+        user.set('building', building);
+        if (img) {
+            user.set('img', new Parse.File(img.name, img));
+        }
+        else {
+            user.set('img', phImg.img);
+        }
+        user.set('role', "tenant");
+        user.set('password', pwd);
+        user.set('emailAddrr', email);
+        var sessionToken = Parse.User.current().get("sessionToken");
+
+        user.signUp().then((user) => {
+            // This lines enable read and write for the added tenat
+            var userACL = new Parse.ACL(user);
+            userACL.setPublicWriteAccess(true);
+            userACL.setPublicReadAccess(true);
+            user.setACL(userACL);
+            user.save();
+            Parse.User.become(sessionToken).then(function (user) {
+                // The current user is now set to user.
+            }, function (error) {
+                // The token could not be validated.
+            });
+            setTenants(tenants.concat(new UserModel(user)));
+            console.log('User signed up', user);
+        }).catch(error => {
+            console.error('Error while signing up user', error);
+        });
+
+
     }
 
     function removeTenant(userId) {
@@ -71,13 +111,14 @@ function TenantsPage(props) {
             user.set('email', email);
             user.set('fname', fname);
             user.set('lname', lname);
+            user.set('emailAddrr', email);
+
             user.set('building', building);
-            // user.set('img', img);
             if (img) {
                 user.set('img', new Parse.File(img.name, img));
             }
             else {
-                user.set('img', new Parse.File("placeHolderImage", { base64: userPlaceHolder }));
+                user.set('img', phImg.img);
             }
 
             // Saves the user with the updated data
@@ -115,8 +156,8 @@ function TenantsPage(props) {
                 <Button variant="link" onClick={() => setShowModal(true)}>New Tenant</Button>
             </div>
             <TenantsAccordion panels={TenantView} />
-            {showModal ? <NewTenantModal isUpdate={false} show={showModal} handleClose={() => setShowModal(false)} tenants={tenants}
-                addTenant={setTenants} /> : null}
+            {showModal ? <NewTenantModal isUpdate={false} show={showModal} handleClose={() => setShowModal(false)}
+                addTenant={addTenant} phImg={phImg} /> : null}
         </div>
     )
 

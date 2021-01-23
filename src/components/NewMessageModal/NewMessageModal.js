@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { Button, Modal, Form, Col, Row, Image } from "react-bootstrap";
-// import messagePlaceHolder from '../../images/messagePlaceholder.png'
-
+import './NewMessageModal.css'
 
 function NewMessageModal(props) {
-    const { show, handleClose, addMessage, isUpdate, messageId, updateMessageContent } = props;
+    const { show, handleClose, addMessage, isUpdate, messageId, updateMessageContent, phImg } = props;
     const [title, setTitle] = useState("");
     const [details, setDetails] = useState("");
     const [priority, SetPriority] = useState("Info");
     const [img, setImg] = useState("");
-    const placeHolderImage = "https://www.arde.co.il/wp-content/uploads/2014/06/default-placeholder.png";
+    const placeHolderImage = typeof phImg === 'undefined' ? "" : phImg.img.url();
 
     function closeModal() {
         setTitle("");
@@ -83,7 +82,7 @@ function NewMessageModal(props) {
                             Image URL:
                         </Form.Label>
                         <Col sm={5}>
-                            <Form.Control type="file" accept="image/*" onChange={handleFileChange} />
+                            <Form.Control className="chooseFile" type="file" accept="image/*" onChange={handleFileChange} />
                         </Col>
                         <Col sm={5}>
                             <Image width="200" height="200" src={imgURL === "" ? placeHolderImage : imgURL} />
