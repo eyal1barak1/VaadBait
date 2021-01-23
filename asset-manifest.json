@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/VaadBait/static/css/main.344b9aa6.chunk.css",
-    "main.js": "/VaadBait/static/js/main.13060237.chunk.js",
-    "main.js.map": "/VaadBait/static/js/main.13060237.chunk.js.map",
+    "main.js": "/VaadBait/static/js/main.9d3a5ab0.chunk.js",
+    "main.js.map": "/VaadBait/static/js/main.9d3a5ab0.chunk.js.map",
     "runtime-main.js": "/VaadBait/static/js/runtime-main.584912ec.js",
     "runtime-main.js.map": "/VaadBait/static/js/runtime-main.584912ec.js.map",
     "static/css/2.ae9f1eb3.chunk.css": "/VaadBait/static/css/2.ae9f1eb3.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.ae9f1eb3.chunk.css",
     "static/js/2.0ff62441.chunk.js",
     "static/css/main.344b9aa6.chunk.css",
-    "static/js/main.13060237.chunk.js"
+    "static/js/main.9d3a5ab0.chunk.js"
   ]
 }
