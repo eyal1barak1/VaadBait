@@ -36,27 +36,30 @@
     margin-right: 20px;
 }
 
+.message-image{
+    width: 100%;
+}
 
 /* On screens that are 992px or more, set the background color to blue */
-@media screen and (min-width: 992px) {
+/* @media screen and (min-width: 992px) {
     .message-image {
         width: 270px;
         height: 270px;
         object-fit: cover;
     }
-  }
+  } */
 
 /* On screens that are 992px or less, set the background color to blue */
-@media screen and (max-width: 992px) {
+/* @media screen and (max-width: 992px) {
     .message-image {
         width: 170px;
         height: 170px;
         object-fit: cover;
     }
-  }
+  } */
   
   /* On screens that are 600px or less, set the background color to olive */
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 666px) {
     .message-image {
         width: 100px;
         height: 100px;

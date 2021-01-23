@@ -17,7 +17,7 @@ function MessageCard(props) {
         <div className="c-message-card">
             <Container fluid>
                 <Row>
-                    <Col sm={6}>
+                    <Col md={6}>
                         <Row>
                             <Col sm={5}>
                                 <img alt="messageImg" className="message-image" src={message.img === "" ? placeHolderImage : message.img} ></img>
@@ -35,7 +35,7 @@ function MessageCard(props) {
                             </Col>
                         </Row>
                     </Col>
-                    <Col sm={4}>
+                    <Col md={4}>
                         <CommentsApp message={message} activeUser={activeUser}></CommentsApp>
                     </Col>
                     <Col style={{ visibility: activeUser.role === "committee" ? "visible" : "hidden" }}

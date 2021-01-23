@@ -12,12 +12,11 @@ function ActiveVoteCard(props) {
     const [showDateModal, setShowDateModal] = useState(false);
     const [chosenOption, setChosenOption] = useState(vote.options[0]);
     const [showPopover, setShowpopover] = useState(false);
-    let i = 0;
 
 
-    var endDate = vote.endDate;
+    var endDate = formatDate(vote.endDate);
 
-    let options = vote.options.map(option => <option key={i++}>{option}</option>)
+    let options = vote.options.map(option => <option>{option}</option>)
 
     function handleUpdateEndDate(updatedEndDate) {
         updateEndDate(vote.id, updatedEndDate);
@@ -27,6 +26,26 @@ function ActiveVoteCard(props) {
         setShowpopover(true);
         setTimeout(function () { setShowpopover(false);; }, 2000);
         AddUsersVote(chosenOption, vote.id, activeUser.id);
+    }
+
+    function formatDate(endDate) {
+        var d = new Date(endDate),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear(),
+            hour = '' + d.getHours(),
+            minutes = '' + d.getMinutes();
+
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+        if (hour.length < 2)
+            hour = '0' + hour;
+        if (minutes.length < 2)
+            minutes = '0' + minutes;
+
+        return `${day}-${month}-${year}  ${hour}:${minutes}`;
     }
 
     const popover = (
@@ -43,7 +62,7 @@ function ActiveVoteCard(props) {
             {activeUser.role === "committee" ?
                 <Container fluid>
                     <Row>
-                        <Col >
+                        <Col lg={7}>
                             <Row>
                                 <div className="vote-details">
                                     <label>Details: </label>
@@ -58,18 +77,17 @@ function ActiveVoteCard(props) {
                                 <Button className="b-update" variant="warning" onClick={() => setShowDateModal(true)}>Update End Date</Button>
                             </Row>
                         </Col>
-                        <Col sm={6}>
+                        <Col lg={5}>
                             <PieChart title="Results" vote={vote} />
                         </Col>
                     </Row>
                 </Container>
                 :
                 <Form>
-                    <Form.Group as={Row} controlId={"formHorizontalVote" + i + vote.title}>
-                        <Form.Label column sm={2}>
-                            Your Vote:
+                    <Container>
+                            <Form.Label >
+                                Your Vote:
                         </Form.Label>
-                        <Col sm={10}>
                             <Form.Control as="select" onChange={e => setChosenOption(e.target.value)}>
                                 {options}
                             </Form.Control>
@@ -79,13 +97,12 @@ function ActiveVoteCard(props) {
                                 </OverlayTrigger>
                                 <div className="vote-end-date">
                                     <label>Vote ends in: </label>
-                                    <Timer endDate={new Date(endDate)} />
+                                    <Timer endDate={new Date(vote.endDate)} />
                                     <label> Ends date: </label>
                                     <p>{endDate}</p>
                                 </div>
                             </div>
-                        </Col>
-                    </Form.Group>
+                    </Container>
                 </Form>
             }
             {showDateModal ? <DateModal show={showDateModal} handleClose={() => setShowDateModal(false)} handleUpdateEndDate={handleUpdateEndDate} /> : null}

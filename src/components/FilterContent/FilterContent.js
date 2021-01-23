@@ -13,7 +13,7 @@ function FilterContent(props) {
     return (
         <Container>
             <Row>
-                <Col xs={isMessagesPage ? 7 : 12}>
+                <Col md={isMessagesPage ? 6 : 12}>
                     <InputGroup size="sm" className="mb-3" onChange={e => onFilterChange(e)} value={filteredText}>
                         <InputGroup.Prepend>
                             <InputGroup.Text>
@@ -26,16 +26,16 @@ function FilterContent(props) {
                 </Col>
                 {isMessagesPage ?
                     <>
-                        <Col>
+                        <Col >
                             <DropdownButton onSelect={FilterPriority} size="sm" variant="warning" id="dropdown-basic-button" title="Filter by Priority">
                                 <Dropdown.Item >No Filter</Dropdown.Item>
                                 <Dropdown.Item >Info</Dropdown.Item>
                                 <Dropdown.Item >Important</Dropdown.Item>
                             </DropdownButton>
                         </Col>
-                        <Col>
+                        <Col >
                             <Form.Group onChange={e => Sort(e.target.id)} className="sort-radio" controlId="formBasicCheckboxFirst">
-                                <div className="sortByLabel"><Form.Label >{"Sort By:  "}</Form.Label></div>
+                                <div className="sortByLabel"><Form.Label >Sort By:</Form.Label></div>
                                 <Form.Check inline id="date" type="radio" label="Date" name="sort" />
                                 <Form.Check inline id="priority" type="radio" label="Priority" name="sort" />
                             </Form.Group>
@@ -43,7 +43,7 @@ function FilterContent(props) {
                     </>
                     : null}
             </Row>
-            {isMessagesPage ? <br /> :<> </>}
+            {isMessagesPage ? <br /> : <> </>}
         </Container>
     );
 }
