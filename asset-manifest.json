@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/VaadBait/static/css/main.344b9aa6.chunk.css",
-    "main.js": "/VaadBait/static/js/main.9d3a5ab0.chunk.js",
-    "main.js.map": "/VaadBait/static/js/main.9d3a5ab0.chunk.js.map",
+    "main.css": "/VaadBait/static/css/main.aacfdbd3.chunk.css",
+    "main.js": "/VaadBait/static/js/main.f470732f.chunk.js",
+    "main.js.map": "/VaadBait/static/js/main.f470732f.chunk.js.map",
     "runtime-main.js": "/VaadBait/static/js/runtime-main.584912ec.js",
     "runtime-main.js.map": "/VaadBait/static/js/runtime-main.584912ec.js.map",
     "static/css/2.ae9f1eb3.chunk.css": "/VaadBait/static/css/2.ae9f1eb3.chunk.css",
@@ -12,14 +12,14 @@
     "static/js/3.66c02bf8.chunk.js.map": "/VaadBait/static/js/3.66c02bf8.chunk.js.map",
     "index.html": "/VaadBait/index.html",
     "static/css/2.ae9f1eb3.chunk.css.map": "/VaadBait/static/css/2.ae9f1eb3.chunk.css.map",
-    "static/css/main.344b9aa6.chunk.css.map": "/VaadBait/static/css/main.344b9aa6.chunk.css.map",
+    "static/css/main.aacfdbd3.chunk.css.map": "/VaadBait/static/css/main.aacfdbd3.chunk.css.map",
     "static/js/2.0ff62441.chunk.js.LICENSE.txt": "/VaadBait/static/js/2.0ff62441.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.584912ec.js",
     "static/css/2.ae9f1eb3.chunk.css",
     "static/js/2.0ff62441.chunk.js",
-    "static/css/main.344b9aa6.chunk.css",
-    "static/js/main.9d3a5ab0.chunk.js"
+    "static/css/main.aacfdbd3.chunk.css",
+    "static/js/main.f470732f.chunk.js"
   ]
 }
