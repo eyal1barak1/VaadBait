@@ -150,7 +150,7 @@ function TenantsPage(props) {
     return (
         <div className="p-tenants">
             <HoaNavbr activeUser={activeUser} onLogout={onLogout} />
-            <h1>Tenants for bulding: {activeUser.building.toUpperCase()}</h1>
+            <div className="PageHeader"><h1>Tenants for bulding: {activeUser.building.toUpperCase()}</h1></div>
             <FilterContent isMessagesPage={false} filteredText={filteredText} onFilterChange={e => setFilteredText(e.target.value)} />
             <div className="b-new-tenants">
                 <Button variant="link" onClick={() => setShowModal(true)}>New Tenant</Button>

@@ -205,6 +205,7 @@ function VotingPage(props) {
     return (
         <div className="p-votes">
             <HoaNavbr activeUser={activeUser} onLogout={onLogout} />
+            <div className="PageHeader"><h1>Votings for bulding: {activeUser.building.toUpperCase()}</h1></div>
             <Container fluid>
                 <Row>
                     <Col md={6}>
