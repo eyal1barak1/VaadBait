@@ -18,7 +18,6 @@ function NewTenantModal(props) {
         setPwd("");
         setfname([]);
         setlname("");
-        setBuilding("");
         setImg("");
         handleClose();
     }
@@ -26,13 +25,13 @@ function NewTenantModal(props) {
     function handleAddTennant() {
 
         // 2) cleanup (clean all field + close the modal)
-        addTenant(fname, email, lname, building, img, pwd);
+        addTenant(fname, email, lname, buildingName, img, pwd);
         closeModal();
     }
 
 
     function handleUpdateTenant() {
-        updateTenantContent(fname, lname, email, building, pwd, img, userId);
+        updateTenantContent(fname, lname, email, buildingName, pwd, img, userId);
 
         closeModal();
     }
@@ -84,7 +83,7 @@ function NewTenantModal(props) {
                     <Form.Group as={Row} controlId="formBasicbuilding">
                         <Form.Label column sm={2}>Building Name:</Form.Label>
                         <Col sm={10}>
-                            <Form.Control type="text" placeholder="Building/Condomium Community Name" value={building} onChange={e => setBuilding(e.target.value)} />
+                            <Form.Control type="text" placeholder="Building/Condomium Community Name" value={buildingName} />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} controlId="formHorizontalImage">
