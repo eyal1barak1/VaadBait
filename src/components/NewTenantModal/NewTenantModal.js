@@ -3,12 +3,12 @@ import { Button, Modal, Form, Col, Image, Row } from "react-bootstrap";
 import './NewTenantModal.css'
 
 function NewTenantModal(props) {
-    const { show, handleClose, addTenant, userId, isUpdate, updateTenantContent, phImg } = props;
+    const { show, handleClose, addTenant, userId, isUpdate, updateTenantContent, phImg, buildingName } = props;
     const [email, setEmail] = useState("eyal@barak.com");
     const [pwd, setPwd] = useState("123");
     const [fname, setfname] = useState("Eyal");
     const [lname, setlname] = useState("Barak");
-    const [building, setBuilding] = useState("Einstein");
+    const [building, setBuilding] = useState(buildingName);
     const [img, setImg] = useState("");
     const placeHolderImage = typeof phImg === 'undefined' ? "" : phImg.img.url();
 

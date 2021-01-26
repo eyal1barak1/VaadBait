@@ -157,7 +157,7 @@ function TenantsPage(props) {
             </div>
             <TenantsAccordion panels={TenantView} />
             {showModal ? <NewTenantModal isUpdate={false} show={showModal} handleClose={() => setShowModal(false)}
-                addTenant={addTenant} phImg={phImg} /> : null}
+                addTenant={addTenant} phImg={phImg} buildingName={activeUser.building} /> : null}
         </div>
     )
 

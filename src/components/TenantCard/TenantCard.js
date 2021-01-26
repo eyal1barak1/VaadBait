@@ -45,7 +45,7 @@ function TenantCard(props) {
                 </Row>
             </Container>
             {showModal ? <NewTenantModal isUpdate={true} show={showModal} handleClose={() => setShowModal(false)}
-                updateTenantContent={updateTenantContent} userId={tenant.id} /> : null}
+                updateTenantContent={updateTenantContent} userId={tenant.id} buildingName={tenant.building}/> : null}
         </div >
     );
 }
